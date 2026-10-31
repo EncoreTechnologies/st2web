@@ -15,17 +15,17 @@
 import { describe, it } from '@rstest/core';
 import { expect } from 'chai';
 
-import { ReactTester } from '@stackstorm/module-test-utils';
+import { renderNode } from '@stackstorm/module-test-utils';
 
 import '@stackstorm/module-test-utils/bootstrap/storage';
 import reporter from '../reporters/http';
 
 describe(`ActionReporter: ${reporter.name}`, () => {
   it('works with empty object', () => {
-    const instance = ReactTester.create(
+    const instance = renderNode(
       reporter({})
     );
 
-    expect(instance.node).to.equal(undefined);
+    expect(instance).to.equal(null); // renders nothing
   });
 });

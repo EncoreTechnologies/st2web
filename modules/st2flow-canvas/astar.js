@@ -447,7 +447,7 @@ class BinaryHeap {
     const elemScore = this.scoreFunction(element);
 
     // This is used to store the new position of the element, if any.
-    let swap = null;
+    let swap;
     do {
       swap = null;
       // Compute the indices of the child elements.

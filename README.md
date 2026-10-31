@@ -115,13 +115,34 @@ be edited in place after deployment.
 
 Testing
 -------
-We're using [zombie](https://github.com/assaf/zombie) as our headless browser for integration testing. It is a simulated environment (virtual DOM) so there's no need in WebDriver or a real browser to be present.
+`npm test` runs ESLint and the unit tests.
 
-First of all, you need to make sure you have a running copy of st2 to run tests against. We're using [official docker images](https://github.com/stackstorm/st2-docker) for our automated tests, but the [AIO](https://docs.stackstorm.com/install/index.html) deployment will work just as good (though will take more time to deploy).
+### Unit tests
 
-To let test runner know the details of your st2 installation, you need to set ST2_PROTOCOL, ST2_HOST, ST2_USERNAME and ST2_PASSWORD env variables, then call `gulp test`.
+    $ npm run test-unit                  # every package
+    $ npx rstest run modules/st2-panel   # one package
+    $ npx rstest run --coverage          # with a coverage summary (HTML report in coverage/)
 
-    $ ST2_PROTOCOL=http ST2_HOST=localhost ST2_USERNAME=admin ST2_PASSWORD=123 gulp test
+Unit tests live next to the code they test, in `apps/*/tests/test-*.js` and `modules/*/tests/test-*.js`.
+They run with [Rstest](https://rstest.rs) in jsdom, compiled by the same Rsbuild config as the app
+(`rstest.config.mjs`). Components are tested through the DOM with
+[Testing Library](https://testing-library.com/docs/react-testing-library/intro/): `renderNode()` from
+`@stackstorm/module-test-utils` renders an element and returns its outermost DOM node, and the setup file
+`modules/st2-test-utils/bootstrap/react.js` cleans up after every test. API calls are mocked with
+[axios-mock-adapter](https://github.com/ctimmerm/axios-mock-adapter); a unit test never needs a server.
+
+### Functional tests
+
+The [Playwright](https://playwright.dev) specs in `tests/` drive a real browser against a running st2web
+that is connected to a real StackStorm. Point them at it with `ST2WEB_URL` (the UI, with `/api`, `/auth`
+and `/stream` reachable through it) and a user to log in as:
+
+    $ ST2WEB_URL=http://localhost:3000 ST2_USERNAME=st2admin ST2_PASSWORD=... npm run test-functional
+
+The specs only change what they create themselves: they run `core.noop` and `core.ask`, and create,
+edit and delete one disabled rule in the `core` pack. The workflow designer spec opens a workflow
+read-only and fails if the page tries to save anything. Playwright needs its browsers; the
+`mcr.microsoft.com/playwright` image that matches the `@playwright/test` version has them.
 
 Copyright, License, and Contributors Agreement
 ----------------------------------------------

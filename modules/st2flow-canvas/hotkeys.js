@@ -18,13 +18,13 @@ import { useHotkeys } from 'react-hotkeys-hook';
 
 // One document-wide shortcut. Keys typed into inputs and textareas are left alone.
 function HotKey({ keys, handler }) {
-  const latest = useRef(handler);
+  const handlerRef = useRef(handler);
 
   useEffect(() => {
-    latest.current = handler;
+    handlerRef.current = handler;
   });
 
-  useHotkeys(keys, (event) => latest.current(event));
+  useHotkeys(keys, (event) => handlerRef.current(event));
 
   return null;
 }

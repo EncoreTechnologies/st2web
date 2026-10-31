@@ -142,12 +142,6 @@ class ActionsDetails extends React.Component {
     this._source.removeEventListener('st2.execution__delete', this._executionDeleteListener);
   }
 
-  refresh() {
-    const { id } = this.props;
-
-    this.fetchAction(id);
-  }
-
   fetchAction(id) {
     store.dispatch({
       type: 'FETCH_ACTION',
@@ -237,12 +231,12 @@ class ActionsDetails extends React.Component {
   }
 
   handleToggleExecution(id) {
-    this.setState({
+    this.setState(({ executionsVisible }) => ({
       executionsVisible: {
-        ...this.state.executionsVisible,
-        [id]: !this.state.executionsVisible[id],
+        ...executionsVisible,
+        [id]: !executionsVisible[id],
       },
-    });
+    }));
   }
 
   setWindowName(e) {

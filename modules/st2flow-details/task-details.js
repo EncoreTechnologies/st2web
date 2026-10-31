@@ -96,17 +96,6 @@ class TaskDetails extends Component {
     issueModelCommand('updateTask', { name: selected }, { [field]: value });
   }
 
-  handleTaskProperty(name, value) {
-    const { selected, issueModelCommand } = this.props;
-
-    if (value) {
-      issueModelCommand('setTaskProperty', { name: selected }, name, value);
-    }
-    else {
-      issueModelCommand('deleteTaskProperty', { name: selected }, name);
-    }
-  }
-
   handleSectionSwitch(section) {
     this.props.navigate({ section });
   }

@@ -111,6 +111,33 @@ Changed
 
   Contributed by @bishopbm1
 
+* Moved the tests to Testing Library and Playwright, replaced the YAML parser and linted with
+  ESLint 10:
+
+  - ``react-test-renderer`` (deprecated) is gone: every component test renders into the DOM with
+    ``@testing-library/react`` (``renderNode()`` in ``@stackstorm/module-test-utils``) and drives
+    real events. Added unit tests for every package that had none (all eight apps, st2-store,
+    st2-forms, st2-flow-link, st2-notification, st2flow-details/editor/palette/notifications/perf);
+    791 tests, about 81% of lines covered (was 28%).
+  - The zombie functional tests are replaced by Playwright specs in ``tests/`` (``npm run
+    test-functional``): login, actions, history, rules, packs, triggers, inquiries and the workflow
+    designer, against a running st2web and StackStorm. They only change what they create.
+  - ``yaml-ast-parser`` (unmaintained since 2018) is replaced by ``yaml`` 2.9 behind an adapter
+    (``modules/st2flow-yaml/parser.js``) that produces the same node tree, positions and scalar
+    types. Checked against 8,854 real workflow and action files: the designer's YAML output is
+    identical for all of them; data differs only where the old parser was wrong (``''`` before a
+    line break, a leading blank line in ``|`` blocks, ``+`` chomping), now matching PyYAML.
+    A multi-line quoted scalar whose closing line is indented no deeper than its key (invalid
+    YAML that PyYAML accepts, e.g. st2's ``examples.orquesta-test-jinja-data-functions``) is now
+    reported as a YAML error in the designer.
+  - ESLint 10 with ``@eslint-react/eslint-plugin`` in place of ``eslint-plugin-react`` and
+    ``eslint-plugin-react-hooks`` (neither supports ESLint 10), and a local license-header rule in
+    place of ``eslint-plugin-notice``. Fixed what the new rules found: ``setState`` reading
+    ``this.state``, a key placed after a spread, ``<Context.Provider>``, unused class members.
+  - Removed the unused ``st2flow-header`` package.
+
+  Contributed by @bishopbm1
+
 Fixed
 ~~~~~
 * Fixed the UI failing to load ("process is not defined") without browserify's ``process``
@@ -120,6 +147,9 @@ Fixed
   ``() => this.props.onClick``); clicks were already handled through React's ``onClick``.
 * Moved the task badge ``composes`` in ``st2flow-canvas`` to top-level classes, which CSS modules
   require when nesting isn't flattened first.
+* The workflow designer could not place a YAML error on the first line of the file in the editor.
+* Workflow metadata errors in the designer were listed without keys (React warning, and the list
+  could mix up entries when it changed).
 
   Contributed by @bishopbm1
 

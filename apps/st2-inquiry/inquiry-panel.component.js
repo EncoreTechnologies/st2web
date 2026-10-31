@@ -264,7 +264,6 @@ class InquiryPanel extends React.Component {
         </PanelView>
 
         <InquiryDetails
-          ref={(ref) => this._details = ref}
           handleNavigate={(...args) => this.navigate(...args)}
 
           id={id}

@@ -63,8 +63,6 @@ class Notifications extends Component {
     position: 'top',
   };
 
-  style = style;
-
   render() {
     return (
       <div className={cx(this.props.className, style.component, style[this.props.position])}>

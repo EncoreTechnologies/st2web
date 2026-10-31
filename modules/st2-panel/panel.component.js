@@ -182,9 +182,9 @@ export class Content extends React.Component {
     return (
       <div {...props} className={cx('st2-panel__content', className)}>
         <div className='st2-panel__scroller' ref={(ref) => this._scroller = ref}>
-          <ScrollIntoViewContext.Provider value={this.scrollContext}>
+          <ScrollIntoViewContext value={this.scrollContext}>
             { children }
-          </ScrollIntoViewContext.Provider>
+          </ScrollIntoViewContext>
         </div>
       </div>
     );

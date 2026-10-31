@@ -49,12 +49,12 @@ class Workflows extends Component {
     if(!data) {
       data = {};
     }
-    this.setState({
+    this.setState(({ runFormData }) => ({
       runFormData: {
-        ...this.state.runFormData,
+        ...runFormData,
         ...data,
       },
-    });
+    }));
   }
 
   openForm() {

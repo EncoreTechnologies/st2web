@@ -13,7 +13,8 @@
     "eslint": "eslint .",
     "lint": "eslint .",
     "test": "npm run lint && npm run test-unit",
-    "test-unit": "rstest run"
+    "test-unit": "rstest run",
+    "test-functional": "playwright test"
   },
   "repository": "stackstorm/st2web",
   "engines": {
@@ -42,7 +43,9 @@
     "react-redux": "9.3.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.5",
+    "@eslint-react/eslint-plugin": "5.28.0",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
     "@rsbuild/core": "2.2.13",
     "@rsbuild/plugin-react": "2.1.1",
     "@rstest/adapter-rsbuild": "0.12.3",
@@ -54,10 +57,7 @@
     "@testing-library/react": "16.3.3",
     "axios-mock-adapter": "2.1.0",
     "chai": "6.3.0",
-    "eslint": "9.39.5",
-    "eslint-plugin-notice": "1.0.0",
-    "eslint-plugin-react": "7.37.5",
-    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint": "10.13.0",
     "globals": "17.13.0",
     "jsdom": "30.1.3",
     "postcss": "8.5.30",
@@ -65,7 +65,8 @@
     "postcss-nested": "9.0.0",
     "postcss-preset-env": "11.6.1",
     "sinon": "22.1.0",
-    "sinon-chai": "4.0.1"
+    "sinon-chai": "4.0.1",
+    "typescript": "6.0.3"
   },
   "overrides": {
     "fast-uri": "3.1.9",

@@ -23,7 +23,6 @@ import style from './style.module.css';
 
 class MistralTransition extends Component {
   style = style;
-  cache = {}; // used to cache togglable data
 
   handleConditionChange(condition) {
     const { transition, onChange } = this.props;

@@ -158,10 +158,11 @@ describe('Token Set Crawler', () => {
     expect(obj.scalar).to.equal('firstline secondline');
     expect(obj.angle_clip).to.equal('line 1 line 2\n');
     expect(obj.angle_strip).to.equal('line 3 line 4');
-    expect(obj.angle_keep).to.equal('line 5 line 6\n\n');
+    // keep chomping (+) preserves the trailing blank lines (the old parser dropped one; PyYAML agrees)
+    expect(obj.angle_keep).to.equal('line 5 line 6\n\n\n');
     expect(obj.pipe_clip).to.equal('line 1\nline 2\n');
     expect(obj.pipe_strip).to.equal('line 3\nline 4');
-    expect(obj.pipe_keep).to.equal('line 5\nline 6\n\n');
+    expect(obj.pipe_keep).to.equal('line 5\nline 6\n\n\n');
   });
 
   it('returns array with expected value types', () => {

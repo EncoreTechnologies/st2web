@@ -73,10 +73,10 @@ class RulesDetails extends React.Component {
 
   handleChange(path, value) {
     if (!path) {
-      return this.setState({ editing: {
-        ...this.state.editing,
+      return this.setState(({ editing }) => ({ editing: {
+        ...editing,
         ...value,
-      } });
+      } }));
     }
 
     let source = this.state.editing;

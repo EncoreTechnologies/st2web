@@ -16,7 +16,7 @@ import { describe, it, beforeAll, afterAll } from '@rstest/core';
 import { expect } from 'chai';
 
 import { act } from 'react';
-import { ReactTester } from '@stackstorm/module-test-utils';
+import { renderNode } from '@stackstorm/module-test-utils';
 
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -45,25 +45,25 @@ describe(`${PackIcon.name} Component`, () => {
   describe('common functionality', () => {
 
     it('proxies className', async () => {
-      const instance = ReactTester.create(
+      const instance = renderNode(
         <PackIcon
           className="foobar"
         />
       );
       await iconsLoaded();
 
-      expect(instance.node.classList).to.contain('foobar');
+      expect(instance.classList.contains('foobar')).to.be.true;
     });
 
     it('proxies extra props', async () => {
-      const instance = ReactTester.create(
+      const instance = renderNode(
         <PackIcon
           foo="bar"
         />
       );
       await iconsLoaded();
 
-      expect(instance.node.props.foo).to.equal('bar');
+      expect(instance.getAttribute('foo')).to.equal('bar');
     });
   });
 });

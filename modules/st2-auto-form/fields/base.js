@@ -88,7 +88,7 @@ export class BaseTextField extends React.Component {
   }
 
   visibilityToggle() {
-    this.setState({visible: !this.state.visible});
+    this.setState(({ visible }) => ({ visible: !visible }));
   }
 
   emitChange() {

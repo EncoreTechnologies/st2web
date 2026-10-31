@@ -72,7 +72,7 @@ function metaModelGetter(model) {
 
   return {
     metaSource,
-    notifications: errors.map(e => ({ type: 'error', message: e.message, source: 'meta-yaml-error' })),
+    notifications: errors.map(e => ({ type: 'error', message: e.message, source: 'meta-yaml-error', id: uniqueId() })),
     meta: model.tokenSet.toObject(),
   };
 }

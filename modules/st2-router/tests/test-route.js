@@ -13,12 +13,12 @@
 // limitations under the License.
 
 
-import { describe, it, afterEach } from '@rstest/core';
+import { describe, it } from '@rstest/core';
 import { expect } from 'chai';
 
 import { Provider } from 'react-redux';
 import { legacy_createStore as createStore } from 'redux';
-import { render, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import Route from '../route.component';
 
@@ -43,8 +43,6 @@ function matchAt(path, pathname) {
 }
 
 describe('st2-router Route', () => {
-  afterEach(cleanup);
-
   const path = '/actions/:ref?/:section?';
 
   it('matches the bare app path with no params', () => {

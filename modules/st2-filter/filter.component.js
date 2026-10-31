@@ -45,9 +45,9 @@ export default class Filter extends React.Component {
   }
 
   toggleVisible() {
-    this.setState({
-      visible: !this.state.visible,
-    });
+    this.setState(({ visible }) => ({
+      visible: !visible,
+    }));
   }
 
   get visibleItems() {

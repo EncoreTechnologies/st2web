@@ -69,7 +69,8 @@ describe('AutoForm EnumField', () => {
 
     expect(onChange.withArgs('invalid')).to.not.be.called;
 
-    expect(c.fieldValue()).to.be.equal('invalid');
+    // a select can't show a value it has no option for
+    expect(c.fieldValue()).to.be.equal('');
 
     expect(c.fieldClass()).to.have.string('st2-auto-form__field--invalid');
   });

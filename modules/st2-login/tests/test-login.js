@@ -15,35 +15,37 @@
 import { describe, it } from '@rstest/core';
 import { expect } from 'chai';
 
-import { ReactTester } from '@stackstorm/module-test-utils';
+import { renderNode } from '@stackstorm/module-test-utils';
 
 import '@stackstorm/module-test-utils/bootstrap/st2constants';
 import '@stackstorm/module-test-utils/bootstrap/storage';
 import '@stackstorm/module-test-utils/bootstrap/location';
 import Login from '..';
 
+const loginForm = (node) => node.querySelector('[data-test="login"]');
+
 describe(`${Login.name} Component`, () => {
   describe('common functionality', () => {
     it('proxies className', () => {
-      const instance = ReactTester.create(
+      const instance = renderNode(
         <Login
           className="foobar"
           onConnect={() => {}}
         />
       );
 
-      expect(instance.node.classList).to.contain('foobar');
+      expect(instance.classList.contains('foobar')).to.be.true;
     });
 
     it('proxies extra props', () => {
-      const instance = ReactTester.create(
+      const instance = renderNode(
         <Login
           foo="bar"
           onConnect={() => {}}
         />
       );
 
-      expect(instance.node.props.foo).to.equal('bar');
+      expect(instance.getAttribute('foo')).to.equal('bar');
     });
   });
 
@@ -52,18 +54,17 @@ describe(`${Login.name} Component`, () => {
       hosts: undefined,
     };
 
-    const instance = ReactTester.create(
+    const instance = renderNode(
       <Login
         onConnect={() => {}}
       />
     );
 
-    expect(instance.node.children[0].type.name).to.equal('LoginForm');
-    expect(instance.node.children[0].props.children[1]).to.equal(null);
-    expect(instance.node.children[0].props.children[2]).to.equal(null);
-    expect(instance.node.children[0].props.children[3].type.name).to.equal('LoginRow');
-    expect(instance.node.children[0].props.children[3].props.children.type).to.equal('input');
-    expect(instance.node.children[0].props.children[3].props.children.props.name).to.equal('username');
+    const form = loginForm(instance);
+    expect(form.tagName).to.equal('FORM');
+    // no server picker for a single (or default) server
+    expect(form.querySelector('select')).to.be.null;
+    expect(form.querySelector('input[name="username"]')).to.exist;
 
     window.st2constants.st2Config = {};
   });
@@ -79,18 +80,17 @@ describe(`${Login.name} Component`, () => {
       ],
     };
 
-    const instance = ReactTester.create(
+    const instance = renderNode(
       <Login
         onConnect={() => {}}
       />
     );
 
-    expect(instance.node.children[0].type.name).to.equal('LoginForm');
-    expect(instance.node.children[0].props.children[1]).to.equal(null);
-    expect(instance.node.children[0].props.children[2]).to.equal(null);
-    expect(instance.node.children[0].props.children[3].type.name).to.equal('LoginRow');
-    expect(instance.node.children[0].props.children[3].props.children.type).to.equal('input');
-    expect(instance.node.children[0].props.children[3].props.children.props.name).to.equal('username');
+    const form = loginForm(instance);
+    expect(form.tagName).to.equal('FORM');
+    // no server picker for a single (or default) server
+    expect(form.querySelector('select')).to.be.null;
+    expect(form.querySelector('input[name="username"]')).to.exist;
 
     window.st2constants.st2Config = {};
   });
@@ -111,20 +111,19 @@ describe(`${Login.name} Component`, () => {
       ],
     };
 
-    const instance = ReactTester.create(
+    const instance = renderNode(
       <Login
         onConnect={() => {}}
       />
     );
 
-    expect(instance.node.children[0].type.name).to.equal('LoginForm');
-    expect(instance.node.children[0].props.children[1]).to.equal(null);
-    expect(instance.node.children[0].props.children[2].type.name).to.equal('LoginRow');
-    expect(instance.node.children[0].props.children[2].props.children.type).to.equal('select');
-    expect(instance.node.children[0].props.children[2].props.children.props.children).to.be.an('array').with.lengthOf(2);
-    expect(instance.node.children[0].props.children[3].type.name).to.equal('LoginRow');
-    expect(instance.node.children[0].props.children[3].props.children.type).to.equal('input');
-    expect(instance.node.children[0].props.children[3].props.children.props.name).to.equal('username');
+    const form = loginForm(instance);
+    expect(form.tagName).to.equal('FORM');
+    // a server picker listing both servers, then the credentials
+    const select = form.querySelector('select');
+    expect([ ...select.options ].map(o => o.textContent)).to.deep.equal([ '* Dev Env', '* Express' ]);
+    const [ first, second ] = form.querySelectorAll('select, input[name="username"]');
+    expect([ first, second ].map(e => e.tagName)).to.deep.equal([ 'SELECT', 'INPUT' ]);
 
     window.st2constants.st2Config = {};
   });

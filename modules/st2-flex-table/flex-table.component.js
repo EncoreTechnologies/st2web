@@ -92,7 +92,7 @@ export class FlexTableRow extends React.Component {
     return (
       <div {...props} className={cx('st2-flex-table__row', className)}>
         { columns.map(({ Component = 'div', className, children, ...props }, key) => (
-          <Component {...props} key={key} className={cx('st2-flex-table__column', className)}>
+          <Component key={key} {...props} className={cx('st2-flex-table__column', className)}>
             { children }
           </Component>
         )) }

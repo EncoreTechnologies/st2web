@@ -21,7 +21,6 @@ chaiUse(sinonChai);
 
 import { TestComponent } from './utils';
 import ObjectField from '../fields/object';
-import { Textarea } from '../fields/base';
 
 describe('AutoForm ObjectField', () => {
   it('produces an element with textarea as a child', () => {
@@ -32,7 +31,7 @@ describe('AutoForm ObjectField', () => {
 
     const c = new TestComponent(<ObjectField {...props} />);
 
-    expect(c.fieldType()).to.be.equal(Textarea);
+    expect(c.fieldType()).to.be.equal('textarea');
   });
 
   it('calls the callback if value is valid', () => {
@@ -82,7 +81,7 @@ describe('AutoForm ObjectField', () => {
 
     const c = new TestComponent(<ObjectField {...props} />);
 
-    expect(c.field().props.placeholder).to.be.equal('{}');
+    expect(c.field().placeholder).to.be.equal('{}');
   });
 
   it('allows you to put a jinja template in the field', () => {

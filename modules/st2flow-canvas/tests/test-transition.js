@@ -13,11 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { describe, it, afterEach } from '@rstest/core';
+import { describe, it } from '@rstest/core';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import TransitionGroup from '../transition';
 
@@ -36,8 +36,6 @@ const renderGroup = (props) => render(
 );
 
 describe('st2flow-canvas TransitionGroup', () => {
-  afterEach(cleanup);
-
   it('draws a border, an active and a base path per transition', () => {
     const { container } = renderGroup();
 

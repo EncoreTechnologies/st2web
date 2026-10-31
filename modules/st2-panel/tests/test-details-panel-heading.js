@@ -15,32 +15,32 @@
 import { describe, it } from '@rstest/core';
 import { expect } from 'chai';
 
-import { ReactTester } from '@stackstorm/module-test-utils';
+import { renderNode } from '@stackstorm/module-test-utils';
 
 import { DetailsPanelHeading } from '..';
 
 describe(`${DetailsPanelHeading.name} Component`, () => {
   describe('common functionality', () => {
     it('proxies className', () => {
-      const instance = ReactTester.create(
+      const instance = renderNode(
         <DetailsPanelHeading
           className="foobar"
           title="Title"
         />
       );
 
-      expect(instance.node.classList).to.contain('foobar');
+      expect(instance.classList.contains('foobar')).to.be.true;
     });
 
     it('proxies extra props', () => {
-      const instance = ReactTester.create(
+      const instance = renderNode(
         <DetailsPanelHeading
           foo="bar"
           title="Title"
         />
       );
 
-      expect(instance.node.props.foo).to.equal('bar');
+      expect(instance.getAttribute('foo')).to.equal('bar');
     });
   });
 });

@@ -54,23 +54,14 @@ class RulesPopup extends React.Component {
     },
   };
 
-  cacheMethod(key, method) {
-    this.methodCache = this.methodCache || {};
-    if (!this.methodCache[key]) {
-      this.methodCache[key] = method;
-    }
-
-    return this.methodCache[key];
-  }
-
   handleChange(path, value) {
     if (!path) {
-      return this.setState({
+      return this.setState(({ payload }) => ({
         payload: {
-          ...this.state.payload,
+          ...payload,
           ...value,
         },
-      });
+      }));
     }
 
     let source = this.state.payload;

@@ -46,7 +46,7 @@ export default class HistoryPopup extends React.Component {
   }
 
   togglePreview() {
-    this.setState({ preview: !this.state.preview });
+    this.setState(({ preview }) => ({ preview: !preview }));
   }
 
   handleChange(payload) {

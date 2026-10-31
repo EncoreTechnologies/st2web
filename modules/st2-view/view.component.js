@@ -50,9 +50,9 @@ export default class View extends React.Component {
   }
 
   toggleVisible() {
-    this.setState({
-      visible: !this.state.visible,
-    });
+    this.setState(({ visible }) => ({
+      visible: !visible,
+    }));
   }
 
   render() {

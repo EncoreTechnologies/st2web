@@ -62,12 +62,6 @@ class PacksPanel extends React.Component {
     }
   }
 
-  refresh() {
-    const { id } = this.props;
-
-    this.fetchPack(id);
-  }
-
   fetchPack(id) {
     store.dispatch({
       type: 'FETCH_PACK',

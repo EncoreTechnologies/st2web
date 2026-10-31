@@ -265,7 +265,6 @@ class PacksPanel extends React.Component {
 
         { groups && groups.length > 0 ? (
           <PacksDetails
-            ref={(ref) => this._details = ref}
             handleInstall={(...args) => this.handleInstall(...args)}
             handleRemove={(...args) => this.handleRemove(...args)}
             handleSave={(...args) => this.handleSave(...args)}

@@ -124,7 +124,7 @@ export default class ComboboxModule extends React.Component {
     const suggestions = this.getSuggestions(spec, value);
 
     return (
-      <div className={cx('st2-auto-form-combobox', className)} ref={(ref) => this.ref = ref}>
+      <div className={cx('st2-auto-form-combobox', className)}>
         <Label spec={spec}>
           <Title name={name} spec={spec} />
 

@@ -15,7 +15,7 @@
 import { describe, it, beforeAll } from '@rstest/core';
 import { expect } from 'chai';
 
-import { ReactTester } from '@stackstorm/module-test-utils';
+import { renderNode } from '@stackstorm/module-test-utils';
 
 import '@stackstorm/module-test-utils/bootstrap/st2constants';
 import '@stackstorm/module-test-utils/bootstrap/location';
@@ -30,7 +30,7 @@ describe(`${Menu.name} Component`, () => {
 
   describe('common functionality', () => {
     it('proxies className', () => {
-      const instance = ReactTester.create(
+      const instance = renderNode(
         <Menu
           className="foobar"
           routes={[]}
@@ -38,11 +38,11 @@ describe(`${Menu.name} Component`, () => {
         />
       );
 
-      expect(instance.node.classList).to.contain('foobar');
+      expect(instance.classList.contains('foobar')).to.be.true;
     });
 
     it('proxies extra props', () => {
-      const instance = ReactTester.create(
+      const instance = renderNode(
         <Menu
           foo="bar"
           routes={[]}
@@ -50,7 +50,7 @@ describe(`${Menu.name} Component`, () => {
         />
       );
 
-      expect(instance.node.props.foo).to.equal('bar');
+      expect(instance.getAttribute('foo')).to.equal('bar');
     });
   });
 });

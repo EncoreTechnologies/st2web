@@ -91,7 +91,7 @@ describe('AutoForm ArrayField', () => {
     };
 
     const c = new TestComponent(<ArrayField {...props} />);
-    expect(c.field().props.placeholder).to.be.equal('1, 2, 3');
+    expect(c.field().placeholder).to.be.equal('1, 2, 3');
     
   });
 

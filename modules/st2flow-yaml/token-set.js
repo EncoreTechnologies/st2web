@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { load } from 'yaml-ast-parser';
+import { load } from './parser';
 import { pick, omit, get } from './util';
 import Objectifier from './objectifier';
 import stringifier from './stringifier';
@@ -373,7 +373,7 @@ function createToken(str, startPos) {
 
 /**
  * Parses special values that [appear to be] standard YAML but
- * not supported by the yaml-ast-parser for some reason.
+ * that the parser leaves as strings (YAML 1.1 booleans, numbers with separators).
  *   - If the value is quoted, ignore it - it's a deliberate string
  *   - If the value uses a !!tag, we ignore it.
  *   - If the value has the `valueObject` property, the parser

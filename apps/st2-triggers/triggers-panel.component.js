@@ -192,7 +192,6 @@ class TriggersPanel extends React.Component {
         </PanelView>
 
         <TriggersDetails
-          ref={(ref) => this._details = ref}
           handleNavigate={(...args) => this.navigate(...args)}
 
           id={id}

@@ -105,6 +105,8 @@ export default class AutoForm extends React.Component {
         { fields.map((field) => {
           const name = field._name;
 
+          // One of the field classes imported above, looked up rather than created here.
+          /* eslint-disable @eslint-react/static-components */
           const FieldElement = this.getElementByField(field);
 
           return (
@@ -118,6 +120,7 @@ export default class AutoForm extends React.Component {
               data-test={`field:${name}`}
             />
           );
+          /* eslint-enable @eslint-react/static-components */
         }) }
       </div>
     );

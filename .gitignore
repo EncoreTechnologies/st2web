@@ -17,3 +17,7 @@ debian/files
 
 # local stuff
 config.local.js
+
+# Playwright output
+test-results/
+playwright-report/

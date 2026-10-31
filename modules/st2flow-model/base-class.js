@@ -66,13 +66,11 @@ class BaseClass {
       // just grab the relevant parts. Also normalize it to an array.
       const exception = Array.isArray(ex) ? (ex.length > 2 ? ex.slice(0, 2) : ex) : [ ex ];
       // Ensure every mark uses "row" instead of "line".
-      // Replace "JS-YAML" with something more friendly.
       exception.forEach(err => {
-        if(err.mark && err.mark.line) {
+        if(err.mark && err.mark.line !== undefined) {
           err.mark = { row: err.mark.line, column: err.mark.column };
         }
 
-        err.message = err.message.replace('JS-YAML:', 'YAML Parser:');
         notification.error(err.message);
       });
 

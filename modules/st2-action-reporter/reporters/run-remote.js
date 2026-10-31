@@ -49,6 +49,8 @@ export default function runRemote(execution) {
       ] : null,
 
       !result || (!result.result && !result.stderr &&  !result.stdout && !result.error  && !result.traceback) ? (
+        // no other element in this list uses the key; the rule misreads the conditional
+        // eslint-disable-next-line @eslint-react/no-duplicate-key
         <Highlight well className={style.highlight} key="none" code="// Action produced no data" />
       ) : null,
     ];

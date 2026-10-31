@@ -52,6 +52,7 @@ export default defineConfig({
         options: { url: 'https://example.com/' },
       },
       setupFiles: [
+        './modules/st2-test-utils/bootstrap/react.js',
         './modules/st2-test-utils/bootstrap/st2constants.js',
         './modules/st2-test-utils/bootstrap/title.js',
       ],
