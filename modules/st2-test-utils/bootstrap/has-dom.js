@@ -1,5 +1,4 @@
-// Copyright 2021 The StackStorm Authors.
-// Copyright 2019 Extreme Networks, Inc.
+// Copyright 2026 The StackStorm Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
-
-const gulp = require('gulp');
-
-gulp.task('build', gulp.series([ 'lint', 'browserify' ]));
+// True when the test runs in a real DOM implementation (jsdom). The other bootstrap
+// files then only fill in what the DOM lacks instead of replacing window/document.
+export default typeof window !== 'undefined' && typeof Element !== 'undefined';

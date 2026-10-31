@@ -53,7 +53,7 @@ class TriggersDetails extends React.Component {
 
     onComponentUpdate: PropTypes.func,
     onToggleEnable: PropTypes.func,
-  }
+  };
 
   componentDidMount() {
     this.props.onComponentUpdate && this.props.onComponentUpdate();

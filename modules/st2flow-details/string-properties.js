@@ -22,7 +22,7 @@ import { BaseTextField } from '@stackstorm/module-auto-form/fields/base';
 import style from './style.module.css';
 
 class OneLineStringField extends BaseTextField {
-  static icon = ''
+  static icon = '';
 
   fromStateValue(v) {
     return v !== '' ? v : void 0;
@@ -59,7 +59,7 @@ export class StringPropertiesPanel extends React.Component {
     const val = items ? items.concat(newVal) : [ newVal ];
 
     onChange && onChange(val);
-  }
+  };
 
   removeField = (index) => {
     const { items, onChange } = this.props;
@@ -68,7 +68,7 @@ export class StringPropertiesPanel extends React.Component {
     // make sure to splice the copy!
     val.splice(index, 1);
     onChange && onChange(val);
-  }
+  };
   render() {
     const { items, inlineAddButton = false } = this.props;
 

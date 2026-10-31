@@ -26,7 +26,7 @@ export default class ArrayModule extends React.Component {
     spec: PropTypes.object,
     data: PropTypes.arrayOf(PropTypes.string),
     onChange: PropTypes.func,
-  }
+  };
 
   onChange(value) {
     value = value.split(',').map((v) => v.trim()).filter((v) => v);

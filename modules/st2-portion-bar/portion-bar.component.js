@@ -23,7 +23,7 @@ export default class PortionBar extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     content: PropTypes.objectOf(PropTypes.node).isRequired,
-  }
+  };
 
   render() {
     const { className, content, ...props } = this.props;

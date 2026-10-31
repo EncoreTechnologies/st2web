@@ -28,9 +28,9 @@ class TaskList extends Component {
     tasks: PropTypes.array,
 
     navigate: PropTypes.func,
-  }
+  };
 
-  style = style
+  style = style;
 
   render() {
     const { tasks, navigate } = this.props;

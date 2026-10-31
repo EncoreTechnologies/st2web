@@ -32,11 +32,11 @@ class TriggersFlexCard extends React.Component {
     sensor: PropTypes.object,
     selected: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     selected: false,
-  }
+  };
 
   render() {
     const { trigger, sensor, selected, onClick } = this.props;

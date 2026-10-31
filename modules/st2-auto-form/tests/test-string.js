@@ -12,12 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import { describe, it } from '@rstest/core';
 import React from 'react';
-import chai, { expect } from 'chai';
+import { expect, use as chaiUse } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-chai.use(sinonChai);
+chaiUse(sinonChai);
 
 import { TestComponent } from './utils';
 import StringField from '../fields/string';

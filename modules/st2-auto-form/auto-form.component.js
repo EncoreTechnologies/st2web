@@ -35,11 +35,11 @@ export default class AutoForm extends React.Component {
     disabled: PropTypes.bool.isRequired,
     onChange: PropTypes.func,
     flat: PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     disabled: false,
-  }
+  };
 
   getElementByField(field) {
     if (field.enum) {

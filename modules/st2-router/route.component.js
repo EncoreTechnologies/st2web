@@ -23,7 +23,7 @@ class Route extends React.Component {
     location: PropTypes.object,
     path: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired,
-  }
+  };
 
   render() {
     const { location, path, render } = this.props;

@@ -24,9 +24,9 @@ export class Toggle extends React.Component {
     title: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.bool,
-  }
+  };
 
-  _id = uniqueId('st2toggle')
+  _id = uniqueId('st2toggle');
   
   handleChange(value) {
     return this.props.onChange && this.props.onChange(value);
@@ -52,14 +52,14 @@ export default class Button extends React.Component {
     flat: PropTypes.bool.isRequired,
     red: PropTypes.bool.isRequired,
     submit: PropTypes.bool.isRequired,
-  }
+  };
 
   static defaultProps = {
     small: false,
     flat: false,
     red: false,
     submit: false,
-  }
+  };
 
   render() {
     const { className, small, flat, red, submit, ...props } = this.props;

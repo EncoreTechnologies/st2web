@@ -31,7 +31,7 @@ class Router extends React.Component {
     routes: PropTypes.array,
     location: PropTypes.object,
     updateLocation: PropTypes.func,
-  }
+  };
 
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.handleStateLocationChange());

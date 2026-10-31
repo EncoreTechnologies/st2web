@@ -36,11 +36,11 @@ export default class RemoteForm extends React.Component {
     data: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     flat: PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     disabled: false,
-  }
+  };
 
   onChangeValue(value) {
     const { spec: { name } } = this.props;

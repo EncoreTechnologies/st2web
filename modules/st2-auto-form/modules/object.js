@@ -26,7 +26,7 @@ export default class ObjectModule extends React.Component {
     spec: PropTypes.object,
     data: PropTypes.string,
     onChange: PropTypes.func,
-  }
+  };
 
   onChange(value) {
     try {

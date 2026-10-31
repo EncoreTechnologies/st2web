@@ -25,11 +25,11 @@ class LoginForm extends React.Component {
     className: PropTypes.string,
     children: PropTypes.node,
     style: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     style: componentStyle,
-  }
+  };
 
   render() {
     const { className, children, style, ...props } = this.props;
@@ -47,11 +47,11 @@ class LoginLogo extends React.Component {
     className: PropTypes.string,
     children: PropTypes.node,
     style: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     style: componentStyle,
-  }
+  };
 
   render() {
     const { className, children, style, ...props } = this.props;
@@ -69,11 +69,11 @@ class LoginError extends React.Component {
     className: PropTypes.string,
     message: PropTypes.string,
     style: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     style: componentStyle,
-  }
+  };
 
   render() {
     const { className, message, style, ...props } = this.props;
@@ -91,11 +91,11 @@ class LoginRow extends React.Component {
     className: PropTypes.string,
     children: PropTypes.node,
     style: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     style: componentStyle,
-  }
+  };
 
   render() {
     const { className, children, style, ...props } = this.props;
@@ -113,11 +113,11 @@ class LoginBottomRow extends React.Component {
     className: PropTypes.string,
     children: PropTypes.node,
     style: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     style: componentStyle,
-  }
+  };
 
   render() {
     const { className, children, style, ...props } = this.props;
@@ -135,14 +135,14 @@ export default class Login extends React.Component {
     className: PropTypes.string,
     onConnect: PropTypes.func.isRequired,
     style: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     style: {
       ...componentStyle,
       logo: menuStyle.logo,
     },
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -164,8 +164,8 @@ export default class Login extends React.Component {
     };
   }
 
-  docsLink = 'https://docs.stackstorm.com/'
-  supportLink = 'https://github.com/StackStorm/st2/discussions'
+  docsLink = 'https://docs.stackstorm.com/';
+  supportLink = 'https://github.com/StackStorm/st2/discussions';
 
   connect(e) {
     e.preventDefault();

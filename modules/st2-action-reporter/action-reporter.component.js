@@ -89,12 +89,12 @@ export default class ActionReporter extends React.Component {
     runner: PropTypes.string.isRequired,
     execution: PropTypes.object.isRequired,
     api: PropTypes.object.isRequired,
-  }
+  };
 
   static utils = {
     getMaxExecutionResultSizeForRender: getMaxExecutionResultSizeForRender,
     getBaseAPIUrl: getBaseAPIUrl,
-  }
+  };
 
   render() {
     const { className, runner, execution, api, ...props } = this.props;

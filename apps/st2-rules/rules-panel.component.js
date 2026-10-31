@@ -82,7 +82,7 @@ class RulesPanel extends React.Component {
     filter: PropTypes.string,
 
     collapsed: PropTypes.bool,
-  }
+  };
 
   componentDidMount() {
     this.fetchGroups();

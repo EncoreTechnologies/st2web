@@ -51,14 +51,14 @@ class HistoryDetails extends React.Component {
 
     id: PropTypes.string,
     section: PropTypes.string,
-    execution: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+    execution: PropTypes.object,
     displayUTC: PropTypes.bool.isRequired,
     handleToggleUTC: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     displayUTC: false,
-  }
+  };
 
   componentDidMount() {
     const { id } = this.props;

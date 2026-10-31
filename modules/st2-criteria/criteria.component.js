@@ -69,11 +69,11 @@ export default class Criteria extends React.Component {
     disabled: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
     flat: PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     disabled: false,
-  }
+  };
 
   handleChangeSearchCondition(key, condition) {
     const { data, onChange } = this.props;

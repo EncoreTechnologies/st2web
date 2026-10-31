@@ -72,7 +72,7 @@ module.exports = function (browser) {
     if (url.host() === process.env.ST2_HOST) {
       // All the tests expect https:// so we just hack that and replace http with https in case
       // https is not used
-      response._url = url.host('example.com').toString().replace("http://", "https://");
+      response._url = url.host('example.com').toString().replace('http://', 'https://');
       request.url = response.url;
     }
 
@@ -109,7 +109,7 @@ module.exports = function (browser) {
           auth: `${process.env.ST2_PROTOCOL}://${process.env.ST2_HOST}/auth`,
         }, process.env.ST2_USERNAME, process.env.ST2_PASSWORD)
           .then(() => api);
-        }
+      }
 
       return client;
     },

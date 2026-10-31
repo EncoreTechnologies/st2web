@@ -46,7 +46,7 @@ class Meta extends Component {
     setVars: PropTypes.func,
 
     onChange: PropTypes.func,
-  }
+  };
 
   componentDidUpdate(prevProps) {
     const { meta, setMeta } = this.props;

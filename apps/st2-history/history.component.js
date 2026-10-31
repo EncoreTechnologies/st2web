@@ -31,7 +31,7 @@ export default class History extends React.Component {
       target: PropTypes.string,
       icon: PropTypes.string,
     })).isRequired,
-  }
+  };
 
   render() {
     return (

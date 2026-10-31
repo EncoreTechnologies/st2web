@@ -24,15 +24,15 @@ export default class ActionsFlexCard extends React.Component {
     selected: PropTypes.bool.isRequired,
     view: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
-  }
+  };
 
   static contextTypes = {
     scrollIntoView: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     selected: false,
-  }
+  };
 
   render() {
     const { action, selected, view, onClick } = this.props;

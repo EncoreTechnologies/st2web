@@ -22,7 +22,7 @@ export class PopupTitle extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -41,7 +41,7 @@ export class Popup extends React.Component {
     title: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
     children: PropTypes.node,
-  }
+  };
 
   componentDidMount() {
     this._listener = (event) => {

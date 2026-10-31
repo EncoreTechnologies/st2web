@@ -27,11 +27,11 @@ class Palette extends Component {
   static propTypes = {
     className: PropTypes.string,
     actions: PropTypes.array,
-  }
+  };
 
   state = {
     search: '',
-  }
+  };
 
   handleSearch(e) {
     if (e.target instanceof window.HTMLInputElement) {
@@ -39,7 +39,7 @@ class Palette extends Component {
     }
   }
 
-  style = style
+  style = style;
 
   render() {
     const { actions } = this.props;

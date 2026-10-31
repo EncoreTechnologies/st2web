@@ -40,18 +40,18 @@ function makePanels(runnerType) {
   switch (model) {
     case models.mistral:
       return {
-        properties: MistralProperties,
-        transition: MistralTransition,
+        Properties: MistralProperties,
+        Transition: MistralTransition,
       };
     case models.orquesta:
       return {
-        properties: OrquestaProperties,
-        transition: OrquestaTransition,
+        Properties: OrquestaProperties,
+        Transition: OrquestaTransition,
       };
     default:
       return {
-        properties: EmptyPanel,
-        transition: EmptyPanel,
+        Properties: EmptyPanel,
+        Transition: EmptyPanel,
       };
   }
 }
@@ -77,7 +77,7 @@ class TaskDetails extends Component {
 
     selected: PropTypes.string,
     onBack: PropTypes.func.isRequired,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -128,7 +128,7 @@ class TaskDetails extends Component {
     this.props.navigate({ section });
   }
 
-  style = style
+  style = style;
 
   render() {
     const { selected, onBack, actions, navigation, tasks, transitions, meta } = this.props;
@@ -195,7 +195,7 @@ class TaskDetails extends Component {
       ),
       section === 'properties' && (
         <Panel key="properties">
-          <Panels.properties task={task} />
+          <Panels.Properties task={task} />
         </Panel>
       ),
       section === 'transitions' && (
@@ -204,7 +204,7 @@ class TaskDetails extends Component {
             (trans || []).map((transition, index) => {
               // TODO: this logic could result in false positives - we need to compare conidtions too
               const selected = toTasks && toTasks.length === transition.to.length && transition.to.every((t, i) => toTasks[i] === t.name);
-              return <Panels.transition key={index} selected={selected} transition={transition} taskNames={taskNames} />;
+              return <Panels.Transition key={index} selected={selected} transition={transition} taskNames={taskNames} />;
             })
           }
           <div className={this.style.transitionInfo}>

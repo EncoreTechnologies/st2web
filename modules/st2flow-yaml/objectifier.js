@@ -35,7 +35,7 @@ class Objectifier {
         return raw === true ? token.rawValue :
           // The valueObject (if present) always contains the most primitive form
           // of the value (boolean, number, etc) - so use it first.
-          token.hasOwnProperty('valueObject') ?
+          Object.hasOwn(token, 'valueObject') ?
             token.valueObject : token.value;
 
       case 2:

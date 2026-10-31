@@ -24,9 +24,9 @@ export default class Task extends Component {
     task: PropTypes.object.isRequired,
     onClick: PropTypes.func,
     onDoubleClick: PropTypes.func,
-  }
+  };
 
-  style = style
+  style = style;
 
   handleClick = (e) => {
     const { onClick } = this.props;
@@ -38,7 +38,7 @@ export default class Task extends Component {
     e.stopPropagation();
 
     onClick(e);
-  }
+  };
 
   handleDoubleClick = (e) => {
     const { onDoubleClick } = this.props;
@@ -50,7 +50,7 @@ export default class Task extends Component {
     e.stopPropagation();
 
     onDoubleClick(e);
-  }
+  };
 
   render() {
     const { task } = this.props;

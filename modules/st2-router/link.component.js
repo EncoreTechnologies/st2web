@@ -31,7 +31,7 @@ class Link extends React.Component {
     target: PropTypes.string,
     to: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]).isRequired,
     innerRef: PropTypes.oneOfType([ PropTypes.string, PropTypes.func ]),
-  }
+  };
 
   handleClick = event => {
     if (this.props.onClick) {

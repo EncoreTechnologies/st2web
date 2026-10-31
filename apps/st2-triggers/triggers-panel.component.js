@@ -84,7 +84,7 @@ class TriggersPanel extends React.Component {
     criteriaSpecs: PropTypes.object,
     actionSpec: PropTypes.object,
     packSpec: PropTypes.object,
-  }
+  };
 
   componentDidMount() {
     this.fetchGroups();

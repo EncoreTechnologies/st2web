@@ -380,7 +380,7 @@ function createToken(str, startPos) {
  *     already recognized it - no need to process it.
  */
 function parseSpecialValue(token) {
-  if(!token.singleQuoted && !token.doubleQuoted && !token.isTag && !token.hasOwnProperty('valueObject')) {
+  if(!token.singleQuoted && !token.doubleQuoted && !token.isTag && !Object.hasOwn(token, 'valueObject')) {
     if(REG_BOOL_TRUE.test(token.value)) {
       return true;
     }

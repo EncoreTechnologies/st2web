@@ -31,13 +31,13 @@ export default class ComboboxModule extends React.Component {
     spec: PropTypes.object,
     data: PropTypes.string,
     onChange: PropTypes.func,
-  }
+  };
 
   state = {
     value: null,
     error: null,
     selected: null,
-  }
+  };
 
   componentDidMount() {
     this._listener = (event) => {

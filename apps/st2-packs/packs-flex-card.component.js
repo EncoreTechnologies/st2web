@@ -21,15 +21,15 @@ export default class PacksFlexCard extends React.Component {
     pack: PropTypes.object.isRequired,
     selected: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
-  }
+  };
 
   static contextTypes = {
     scrollIntoView: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     selected: false,
-  }
+  };
 
   render() {
     const { pack, selected, onClick } = this.props;

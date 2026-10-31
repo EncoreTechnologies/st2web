@@ -57,16 +57,16 @@ class InquiryDetails extends React.Component {
     id: PropTypes.string,
     section: PropTypes.string,
     inquiry: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     displayUTC: false,
-  }
+  };
 
   state = {
     responsePreview: false,
     responseValue: {},
-  }
+  };
 
   componentDidMount() {
     const { id } = this.props;

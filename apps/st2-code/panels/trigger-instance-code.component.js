@@ -24,7 +24,7 @@ export default class TriggerInstanceCode extends BaseCode {
   static propTypes = {
     id: PropTypes.string,
     back: PropTypes.string,
-  }
+  };
 
   async fetch({ id }) {
     try {

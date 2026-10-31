@@ -50,11 +50,11 @@ import Highlight from '@stackstorm/module-highlight';
 class EnforcementPanel extends DetailsPanel {
   static propTypes = {
     enforcements: PropTypes.array,
-  }
+  };
 
   state = {
     visible: {},
-  }
+  };
 
   handleToggle(id) {
     const { visible } = this.state;

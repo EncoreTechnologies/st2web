@@ -22,7 +22,7 @@ import BaseCode from './base.component';
 export default class LiveFeed extends BaseCode {
   static propTypes = {
     id: PropTypes.string,
-  }
+  };
 
   async fetchLive({ id }) {
     const def = {

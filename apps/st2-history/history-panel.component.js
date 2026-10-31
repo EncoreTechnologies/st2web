@@ -22,7 +22,6 @@ import isEqual from 'lodash/fp/isEqual';
 import mapValues from 'lodash/fp/mapValues';
 
 import cx from 'classnames';
-import qs from 'querystring';
 import api from '@stackstorm/module-api';
 import {
   actions as flexActions,
@@ -93,13 +92,13 @@ class HistoryPanel extends React.Component {
     childExecutions: PropTypes.object,
     groups: PropTypes.array,
     collapsed: PropTypes.bool,
-  }
+  };
 
   state = {
     maxPages: 0,
     displayUTC: false,
     advanced: false,
-  }
+  };
 
   componentDidMount() {
     api.listen().then((source) => {
@@ -546,7 +545,7 @@ export default connect((state) => {
 })(HistoryPanel);
 
 function parseSearch(search='') {
-  const { page, ...activeFilters } = qs.parse(search.slice(1));
+  const { page, ...activeFilters } = Object.fromEntries(new URLSearchParams(search.slice(1)));
 
   for (const key in activeFilters) {
     activeFilters[key] = activeFilters[key].split(',').map(v => v.trim()).filter(v => v);
@@ -580,5 +579,5 @@ function stringifySearch(page, activeFilters) {
     return undefined;
   }
 
-  return qs.stringify(query);
+  return new URLSearchParams(query).toString();
 }

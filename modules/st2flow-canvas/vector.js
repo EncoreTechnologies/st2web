@@ -37,9 +37,9 @@
 // functions, which return new vectors, or static functions, which reuse
 // existing vectors to avoid generating garbage.
 export default class Vector {
-  x
-  y
-  z
+  x;
+  y;
+  z;
 
   constructor(px, py, pz) {
     const { x = px, y = py, z = pz } = px;

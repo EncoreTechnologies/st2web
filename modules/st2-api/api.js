@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import _ from 'lodash';
-import url from 'url';
 import axios from 'axios';
 import buildURL from 'axios/lib/helpers/buildURL';
 
@@ -28,16 +27,13 @@ function toBase64(str) {
   }
 }
 
+// Fill in the current hostname for URLs that only name a port, e.g. "https://:443/api".
+// Anything else (including protocol-relative "//host:port/api") is returned unchanged.
 function localize(urlString) {
-  const { hostname, port, ...rest } = url.parse(urlString);
-
-  delete rest.host;
-
-  return url.format({
-    hostname: hostname || port && window.location.hostname,
-    port,
-    ...rest,
-  });
+  return urlString.replace(
+    /^([a-z][a-z0-9+.-]*:)\/\/:(\d+)/i,
+    (match, protocol, port) => `${protocol}//${window.location.hostname}:${port}`
+  );
 }
 
 export class API {

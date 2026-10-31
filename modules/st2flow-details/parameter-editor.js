@@ -32,7 +32,7 @@ export default class ParameterEditor extends Component {
     parameter: PropTypes.object,
     onChange: PropTypes.func,
     onCancel: PropTypes.func,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ export default class ParameterEditor extends Component {
     this.setState({ parameter });
   }
 
-  style = style
+  style = style;
 
   render() {
     const { onChange, onCancel } = this.props;

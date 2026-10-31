@@ -22,7 +22,6 @@ import get from 'lodash/fp/get';
 import isEqual from 'lodash/fp/isEqual';
 
 import cx from 'classnames';
-import qs from 'querystring';
 import api from '@stackstorm/module-api';
 import {
   actions as flexActions,
@@ -85,11 +84,11 @@ class InquiryPanel extends React.Component {
 
     inquiries: PropTypes.array,
     collapsed: PropTypes.bool,
-  }
+  };
 
   state = {
     maxPages: 0,
-  }
+  };
 
   componentDidMount() {
     const { page } = this.urlParams;
@@ -299,7 +298,7 @@ export default connect((state) => {
 })(InquiryPanel);
 
 function parseSearch(search='') {
-  const { page, ...activeFilters } = qs.parse(search.slice(1));
+  const { page, ...activeFilters } = Object.fromEntries(new URLSearchParams(search.slice(1)));
 
   for (const key in activeFilters) {
     activeFilters[key] = activeFilters[key].split(',').map(v => v.trim()).filter(v => v);
@@ -333,5 +332,5 @@ function stringifySearch(page, activeFilters) {
     return undefined;
   }
 
-  return qs.stringify(query);
+  return new URLSearchParams(query).toString();
 }

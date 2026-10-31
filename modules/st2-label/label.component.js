@@ -44,11 +44,11 @@ export default class Label extends React.Component {
     className: PropTypes.string,
     status: PropTypes.string.isRequired,
     short: PropTypes.bool.isRequired,
-  }
+  };
 
   static defaultProps = {
     short: false,
-  }
+  };
 
   render() {
     const { className, status, short, ...props } = this.props;

@@ -30,7 +30,7 @@ export default class MistralModel extends BaseModel {
   static runner_types = [
     'mistral',
     'mistral-v2',
-  ]
+  ];
 
   static minimum = 'version: \'2.0\'\nmain:\n  tasks: {}\n';
 
@@ -226,7 +226,7 @@ export default class MistralModel extends BaseModel {
       // remove any deletions from params.
       deletions.forEach(del => {
         const matchingOldVals = oldVal.map((ov, idx) => {
-          if(ov === del || typeof ov === 'object' && ov.hasOwnProperty(del)) {
+          if(ov === del || typeof ov === 'object' && Object.hasOwn(ov, del)) {
             return idx;
           }
           else {
@@ -427,7 +427,7 @@ export default class MistralModel extends BaseModel {
       newKey.unshift('workflows');
     }
 
-    if(newData.hasOwnProperty('type')) {
+    if(Object.hasOwn(newData, 'type')) {
       if(newType !== oldType) {
         crawler.spliceCollection(this.tokenSet, oldKey, oldIndex, 1);
       }
@@ -449,7 +449,7 @@ export default class MistralModel extends BaseModel {
     }
 
     let next;
-    if(newData.hasOwnProperty('condition')) {
+    if(Object.hasOwn(newData, 'condition')) {
       next = newCondition ? { [newToTaskName]: newCondition } : newToTaskName;
     }
     else {
@@ -485,7 +485,7 @@ export default class MistralModel extends BaseModel {
     key.push(fromTaskName, typeKey);
 
     const transitionIndex = task[typeKey].findIndex(tr =>
-      (typeof tr === 'string' && tr === toTaskName) || tr.hasOwnProperty(toTaskName) && tr[toTaskName] === condition
+      (typeof tr === 'string' && tr === toTaskName) || Object.hasOwn(tr, toTaskName) && tr[toTaskName] === condition
     );
 
     if (transitionIndex === -1) {

@@ -190,12 +190,12 @@ class Canvas extends Component {
     undo: PropTypes.func,
     redo: PropTypes.func,
     save: PropTypes.func,
-  }
+  };
 
   state = {
     scale: 0,
     copiedTask: null,
-  }
+  };
 
   componentDidMount() {
     const el = this.canvasRef.current;
@@ -237,10 +237,10 @@ class Canvas extends Component {
     el.removeEventListener('drop', this.handleDrop);
   }
 
-  size
-  drag
-  startx
-  starty
+  size;
+  drag;
+  startx;
+  starty;
 
   handleUpdate = () => {
     const canvasEl = this.canvasRef.current;
@@ -350,7 +350,7 @@ class Canvas extends Component {
         this.handleTaskMove(task, sampler.getNext(task.name, transitionsTo));
       });
     }
-  }
+  };
 
   handleAutoSaveUpdates(prevProps) {
     const {saveData, transitions, tasks} = this.props;
@@ -457,7 +457,7 @@ class Canvas extends Component {
     else {
       return undefined;
     }
-  }
+  };
 
   handleMouseDown = (e) => {
     if (e.target !== this.surfaceRef.current) {
@@ -479,7 +479,7 @@ class Canvas extends Component {
     this.starty = e.clientY + el.scrollTop;
 
     return false;
-  }
+  };
 
   handleMouseUp = (e) => {
     if (!this.drag) {
@@ -492,7 +492,7 @@ class Canvas extends Component {
     this.drag = false;
 
     return false;
-  }
+  };
 
   handleMouseMove = (e) => {
     if (!this.drag) {
@@ -512,7 +512,7 @@ class Canvas extends Component {
     el.scrollTop += (this.starty - (e.clientY + el.scrollTop));
 
     return false;
-  }
+  };
 
   handleDragOver = (e) => {
     if (e.target !== this.surfaceRef.current) {
@@ -528,7 +528,7 @@ class Canvas extends Component {
     }
 
     return false;
-  }
+  };
 
   handleDrop = (e) => {
     if (e.stopPropagation) {
@@ -549,7 +549,7 @@ class Canvas extends Component {
     });
 
     return false;
-  }
+  };
 
   handleTaskMove = async (task, points) => {
     const x = points.x;
@@ -564,37 +564,37 @@ class Canvas extends Component {
       await this.props.fetchActionscalled();
     }
 
-  }
+  };
 
   handleTaskSelect = (task) => {
     this.props.navigate({ task: task.name, toTasks: undefined, type: 'execution', section: 'input' });
-  }
+  };
 
   handleTransitionSelect = (e, transition) => {
     e.stopPropagation();
     this.props.navigate({ task: transition.from.name, toTasks: transition.to.map(t => t.name), type: 'execution', section: 'transitions' });
-  }
+  };
 
   handleCanvasClick = (e) => {
     e.stopPropagation();
     this.props.navigate({ task: undefined, toTasks: undefined, section: undefined, type: 'metadata' });
-  }
+  };
 
   handleTaskEdit = (task) => {
     this.props.navigate({ toTasks: undefined, task: task.name });
-  }
+  };
 
   handleTaskDelete = (task) => {
     this.props.issueModelCommand('deleteTask', task);
-  }
+  };
 
   handleTaskConnect = (to, from) => {
     this.props.issueModelCommand('addTransition', { from, to: [ to ] });
-  }
+  };
 
   handleTransitionDelete = (transition) => {
     this.props.issueModelCommand('deleteTransition', transition);
-  }
+  };
 
   get notifications() {
     return this.props.notifications;
@@ -603,7 +603,7 @@ class Canvas extends Component {
     return this.props.notifications.filter(n => n.type === 'error');
   }
 
-  style = style
+  style = style;
   canvasRef = React.createRef();
   surfaceRef = React.createRef();
   taskRefs = {};

@@ -23,15 +23,15 @@ export default class RulesFlexCard extends React.Component {
     rule: PropTypes.object.isRequired,
     selected: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
-  }
+  };
 
   static contextTypes = {
     scrollIntoView: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     selected: false,
-  }
+  };
 
   render() {
     const { rule, selected, onClick } = this.props;

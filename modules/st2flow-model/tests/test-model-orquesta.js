@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import { describe, it, beforeAll, beforeEach } from '@rstest/core';
 import { expect } from 'chai';
 import fs from 'fs';
 import path from 'path';
@@ -25,7 +26,7 @@ describe('st2flow-model: Orquesta Model', () => {
   let model = null;
 
   describe('basic.yaml', () => {
-    before(() => {
+    beforeAll(() => {
       raw = fs.readFileSync(path.join(__dirname, 'data', 'orquesta-basic.yaml'), 'utf-8');
     });
 

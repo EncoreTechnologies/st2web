@@ -24,11 +24,11 @@ export default class View extends React.Component {
     name: PropTypes.string.isRequired,
     spec: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     visible: false,
-  }
+  };
 
   get value() {
     const { name, spec } = this.props;

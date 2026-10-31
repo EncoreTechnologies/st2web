@@ -30,11 +30,11 @@ export default class CheckboxModule extends React.Component {
     spec: PropTypes.object,
     data: PropTypes.bool,
     onChange: PropTypes.func,
-  }
+  };
 
   state = {
     error: null,
-  }
+  };
 
   onChange(value) {
     this.props.onChange(value);

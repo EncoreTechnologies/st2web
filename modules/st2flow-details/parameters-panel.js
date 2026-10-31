@@ -51,11 +51,11 @@ class Parameters extends Component {
   static propTypes = {
     meta: PropTypes.object,
     setMeta: PropTypes.func,
-  }
+  };
 
   state = {
     edit: false,
-  }
+  };
 
   handleAdd({ name, ...properties }) {
     const parameters = this.props.meta.parameters;

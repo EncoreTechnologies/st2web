@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import { describe, it, beforeAll, afterAll } from '@rstest/core';
 import { expect } from 'chai';
 
 import React from 'react';
@@ -19,20 +20,26 @@ import { ReactTester } from '@stackstorm/module-test-utils';
 
 import moxios from 'moxios';
 
-import '@stackstorm/module-test-utils/bootstrap/st2constants';
-import '@stackstorm/module-test-utils/bootstrap/location';
+import api from '@stackstorm/module-api';
 
 import PackIcon from '..';
 
 describe(`${PackIcon.name} Component`, () => {
-  before(() => moxios.install());
-  after(() => moxios.uninstall());
-
-  describe('common functionality', () => {
-    moxios.stubRequest('https://example.com/api/v1/packs', {
+  beforeAll(async () => {
+    moxios.install();
+    moxios.stubRequest(/^https:\/\/example\.com\/api\/v1\/packs/, {
       status: 200,
       response: [],
     });
+    // the component loads pack icons from the API on mount
+    await api.connect();
+  });
+  afterAll(() => {
+    moxios.uninstall();
+    api.disconnect();
+  });
+
+  describe('common functionality', () => {
 
     it('proxies className', () => {
       const instance = ReactTester.create(

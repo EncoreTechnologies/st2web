@@ -69,7 +69,7 @@ class OrquestaModel extends BaseModel {
   static runner_types = [
     'orquesta',
     'orchestra',
-  ]
+  ];
 
   static minimum = 'version: 1.0\ntasks: {}\n';
 
@@ -184,7 +184,7 @@ class OrquestaModel extends BaseModel {
     // remove any deletions from params.
     deletions.forEach(del => {
       const matchingOldVals = oldVal.map((ov, idx) => {
-        if(ov === del || typeof ov === 'object' && ov.hasOwnProperty(del)) {
+        if(ov === del || typeof ov === 'object' && Object.hasOwn(ov, del)) {
           return idx;
         }
         else {
@@ -385,7 +385,7 @@ class OrquestaModel extends BaseModel {
     const newFromName = newFrom && newFrom.name || oldFrom.name;
     const next = {};
 
-    if(newData.hasOwnProperty('to')) {
+    if(Object.hasOwn(newData, 'to')) {
       if(newTo && newTo.length) {
         const names = newTo.map(t => t.name);
         next.do = getDoValue(names, oldNext);
@@ -396,7 +396,7 @@ class OrquestaModel extends BaseModel {
       }
     }
 
-    if(newData.hasOwnProperty('condition')) {
+    if(Object.hasOwn(newData, 'condition')) {
       if(newCondition) {
         next.when = newCondition;
       }
@@ -406,7 +406,7 @@ class OrquestaModel extends BaseModel {
       }
     }
 
-    if(newData.hasOwnProperty('publish')) {
+    if(Object.hasOwn(newData, 'publish')) {
       next.publish = getPublishValue(newPublish, oldNext);
     }
 

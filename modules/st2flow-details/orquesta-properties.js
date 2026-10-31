@@ -28,7 +28,7 @@ class OrquestaTransition extends Component {
   static propTypes = {
     task: PropTypes.object.isRequired,
     issueModelCommand: PropTypes.func,
-  }
+  };
 
   handleTaskProperty(name, value, noDelete = false) {
     const { task, issueModelCommand } = this.props;
@@ -49,7 +49,7 @@ class OrquestaTransition extends Component {
     return value;
   }
 
-  style = style
+  style = style;
   joinFieldRef = React.createRef();
 
   render() {

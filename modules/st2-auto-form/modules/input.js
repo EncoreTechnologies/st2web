@@ -31,11 +31,11 @@ export default class InputModule extends React.Component {
     spec: PropTypes.object,
     data: PropTypes.string,
     onChange: PropTypes.func,
-  }
+  };
 
   state = {
     error: null,
-  }
+  };
 
   onChange(value) {
     const { spec } = this.props;

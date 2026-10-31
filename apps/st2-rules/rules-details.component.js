@@ -65,12 +65,12 @@ class RulesDetails extends React.Component {
     criteriaSpecs: PropTypes.object,
     actionSpec: PropTypes.object,
     packSpec: PropTypes.object,
-  }
+  };
 
   state = {
     editing: null,
     rulePreview: false,
-  }
+  };
 
   componentDidMount() {
     this.props.onComponentUpdate && this.props.onComponentUpdate();

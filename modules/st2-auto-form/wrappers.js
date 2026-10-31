@@ -23,7 +23,7 @@ export class Label extends React.Component {
     }),
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
-  }
+  };
 
   render() {
     const { spec, className, children } = this.props;
@@ -47,7 +47,7 @@ export class Title extends React.Component {
       required: PropTypes.bool,
     }),
     className: PropTypes.string,
-  }
+  };
 
   render() {
     const { name, spec, className } = this.props;
@@ -69,7 +69,7 @@ export class ErrorMessage extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children } = this.props;
@@ -92,7 +92,7 @@ export class Icon extends React.Component {
     title: PropTypes.string,
     onClick: PropTypes.func,
     className: PropTypes.string,
-  }
+  };
 
   onClick(e) {
     e.preventDefault();
@@ -118,7 +118,7 @@ export class Button extends React.Component {
     title: PropTypes.string,
     onClick: PropTypes.func,
     className: PropTypes.string,
-  }
+  };
 
   onClick(e) {
     e.preventDefault();
@@ -144,7 +144,7 @@ export class Description extends React.Component {
       description: PropTypes.string,
     }),
     className: PropTypes.string,
-  }
+  };
 
   render() {
     const { spec, className } = this.props;
@@ -173,10 +173,10 @@ export class TextFieldWrapper extends React.Component {
     labelClass: PropTypes.string,
     visible: PropTypes.bool,
     visibilityToggle: PropTypes.func,
-  }
+  };
 
   handleVisibilityToggle() {
-    this.props.visibilityToggle && this.props.visibilityToggle()
+    this.props.visibilityToggle && this.props.visibilityToggle();
   }
 
 
@@ -198,13 +198,14 @@ export class TextFieldWrapper extends React.Component {
           <Title {...this.props} />
           { 
             this.props.spec && this.props.spec.secret 
-            ? 
-            <div {...blockProps}>
-              <Button {...buttonProps} />
-              { this.props.children }
-            </div> 
-            :
-            this.props.children
+              ? (
+                <div {...blockProps}>
+                  <Button {...buttonProps} />
+                  { this.props.children }
+                </div>
+              ) 
+              :
+              this.props.children
           }
           <ErrorMessage>{ this.props.invalid }</ErrorMessage>
         </Label>
@@ -224,7 +225,7 @@ export class BooleanFieldWrapper extends React.Component {
     disabled: PropTypes.bool,
     children: PropTypes.element.isRequired,
     onReset: PropTypes.func,
-  }
+  };
 
   handleReset(e) {
     return this.props.onReset && this.props.onReset(e);

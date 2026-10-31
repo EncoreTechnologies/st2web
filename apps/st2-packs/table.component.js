@@ -19,7 +19,7 @@ import { PropTypes } from 'prop-types';
 export default class Table extends React.Component {
   static propTypes = {
     content: PropTypes.objectOf(PropTypes.node),
-  }
+  };
 
   render() {
     const { content, ...props } = this.props;

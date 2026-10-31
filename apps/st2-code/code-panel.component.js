@@ -28,7 +28,7 @@ import UnknownCode from './panels/unknown.component';
 export default class CodePanel extends React.Component {
   static propTypes = {
     type: PropTypes.string,
-  }
+  };
 
   render() {
     const { type } = this.props;

@@ -24,9 +24,9 @@ export default class CollapseButton extends Component {
     state: PropTypes.bool,
     position: PropTypes.string,
     onClick: PropTypes.func.isRequired,
-  }
+  };
 
-  style = style
+  style = style;
 
   handleClick(e) {
     e.stopPropagation();

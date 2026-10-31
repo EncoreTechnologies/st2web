@@ -16,9 +16,9 @@
 import Line from './line';
 
 export class Path {
-  origin
+  origin;
   elements = [];
-  initialDir
+  initialDir;
   constructor(origin, dir) {
     Object.assign(this, { origin, initialDir: dir });
   }

@@ -28,7 +28,7 @@ class MistralProperties extends Component {
   static propTypes = {
     task: PropTypes.object.isRequired,
     issueModelCommand: PropTypes.func,
-  }
+  };
 
   handleTaskProperty(name, value, noDelete = false) {
     const { task, issueModelCommand } = this.props;
@@ -41,7 +41,7 @@ class MistralProperties extends Component {
     }
   }
 
-  style = style
+  style = style;
   joinFieldRef = React.createRef();
 
   render() {

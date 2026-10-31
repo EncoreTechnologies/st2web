@@ -1,17 +1,23 @@
-FROM node:20.8.1
+FROM node:24-alpine
 
 # Create app directory
 WORKDIR /opt/stackstorm/static/webui/st2web
 
-# get files
-COPY . /opt/stackstorm/static/webui/st2web
-RUN rm /opt/stackstorm/static/webui/st2web/yarn.lock
+# git stamps the commit into package.meta
+RUN apk add --no-cache git
 
-# install dependencies
-RUN make build-and-install
+# install dependencies first so they cache separately from the source
+COPY package.json package-lock.json ./
+COPY apps ./apps
+COPY modules ./modules
+RUN npm ci --no-audit --no-fund
+
+# get files and build
+COPY . .
+RUN npm run build
 
 # expose your ports
 EXPOSE 3000
 
-# start it up
+# serve the production build
 CMD [ "npm", "run", "serve" ]

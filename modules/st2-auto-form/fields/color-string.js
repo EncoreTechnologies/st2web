@@ -29,7 +29,7 @@ export default class ColorStringField extends StringField {
     icon: PropTypes.string,
     labelClass: PropTypes.string,
     options: PropTypes.array,
-  }
+  };
   render() {
     const { icon } = this.constructor;
     const { invalid, open, value } = this.state;

@@ -70,21 +70,20 @@ class ActionsDetails extends React.Component {
         section: PropTypes.string,
       }),
     }),
-  }
+  };
 
   state = {
     runPreview: false,
     runValue: null,
     runTrace: null,
     executionsVisible: {},
-    openModel: false,
     isChecked: false,
     destinationPack:'',
     destinationAction:'',
     packs:[],
     isRemoveFiles : false,
     
-  }
+  };
 
   componentDidMount() {
     api.listen().then((source) => {

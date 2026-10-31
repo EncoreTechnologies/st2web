@@ -28,10 +28,10 @@ class MistralTransition extends Component {
     taskNames: PropTypes.arrayOf(PropTypes.string),
     selected: PropTypes.bool,
     onChange: PropTypes.func,
-  }
+  };
 
-  style = style
-  cache = {} // used to cache togglable data
+  style = style;
+  cache = {}; // used to cache togglable data
 
   handleConditionChange(condition) {
     const { transition, onChange } = this.props;
@@ -115,7 +115,7 @@ export default connect(
   null,
   (dispatch) => ({
     onChange: (transition, value) => {
-      if(value.hasOwnProperty('color')) {
+      if(Object.hasOwn(value, 'color')) {
         dispatch({
           type: 'MODEL_ISSUE_COMMAND',
           command: 'setTransitionProperty',

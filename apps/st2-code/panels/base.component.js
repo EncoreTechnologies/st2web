@@ -24,7 +24,7 @@ export default class BaseCode extends React.Component {
   state = {
     code: '',
     backUrl: '/history',
-  }
+  };
 
   componentDidMount() {
     this.fetch(this.props)

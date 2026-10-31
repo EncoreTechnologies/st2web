@@ -27,7 +27,7 @@ export default class TextModule extends React.Component {
     spec: PropTypes.object,
     data: PropTypes.string,
     href: PropTypes.string,
-  }
+  };
 
   render() {
     const { className = '', name, spec, data, href } = this.props;

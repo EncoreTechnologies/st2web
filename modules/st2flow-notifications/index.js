@@ -22,25 +22,25 @@ import style from './style.module.css';
 class Notification extends Component {
   static propTypes = {
     notification: PropTypes.object,
-  }
+  };
 
   state = {
     hide: false,
-  }
+  };
 
   handleRemove = (e) => {
     e.stopPropagation();
 
     this.setState({ hide: true });
-  }
+  };
 
-  style = style
+  style = style;
 
   redirectLinkToParent = (e,newlink) => {
     e.preventDefault();
     const goBack = window.open(newlink, 'parent');
     goBack.focus();
-  }
+  };
 
   render() {
     const { notification } = this.props;
@@ -73,13 +73,13 @@ class Notifications extends Component {
         message: PropTypes.string.isRequired,
       })
     ),
-  }
+  };
 
   static defaultProps = {
     position: 'top',
-  }
+  };
 
-  style = style
+  style = style;
 
   render() {
     return (

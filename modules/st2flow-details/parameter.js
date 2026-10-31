@@ -39,7 +39,7 @@ export default class Parameter extends Component {
     }),
     onEdit: PropTypes.func,
     onDelete: PropTypes.func,
-  }
+  };
 
   handleEdit(e) {
     e.stopPropagation();
@@ -53,7 +53,7 @@ export default class Parameter extends Component {
     this.props.onDelete();
   }
 
-  style = style
+  style = style;
 
   render() {
     const { name, parameter } = this.props;

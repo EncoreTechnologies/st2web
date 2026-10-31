@@ -31,7 +31,7 @@ export default class Rules extends React.Component {
       target: PropTypes.string,
       icon: PropTypes.string,
     })).isRequired,
-  }
+  };
 
   render() {
     return (

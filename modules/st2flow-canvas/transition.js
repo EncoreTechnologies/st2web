@@ -45,7 +45,7 @@ const CONTROLS = {
 class SVGPath extends Component {
   static propTypes = {
     onClick: PropTypes.func,
-  }
+  };
 
   componentDidMount() {
     // React fail: onClick isn't supported for SVG elements, so
@@ -61,7 +61,7 @@ class SVGPath extends Component {
     }
   }
 
-  pathElement = React.createRef()
+  pathElement = React.createRef();
 
   render() {
     return <path ref={this.pathElement} {...this.props} />;
@@ -81,11 +81,11 @@ export default class TransitionGroup extends Component {
     color: PropTypes.string,
     selected: PropTypes.bool,
     onClick: PropTypes.func,
-  }
+  };
 
-  uniqId = 'some'
+  uniqId = 'some';
 
-  style = style
+  style = style;
 
   makePath(from, to) {
     const { taskRefs, graph } = this.props;

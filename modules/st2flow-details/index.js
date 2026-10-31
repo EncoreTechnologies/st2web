@@ -70,7 +70,7 @@ class Details extends Component {
     actions: PropTypes.array,
 
     onChange: PropTypes.func,
-  }
+  };
 
   sections = [{
     title: 'metadata',
@@ -78,24 +78,24 @@ class Details extends Component {
   }, {
     title: 'execution',
     className: 'icon-lan',
-  }]
+  }];
 
-  style = style
+  style = style;
 
   handleTaskSelect = (task) => {
     this.props.navigate({ toTasks: undefined, task: task.name });
-  }
+  };
 
   handleBack = () => {
     this.props.navigate({ toTasks: undefined, task: undefined });
-  }
+  };
 
   toggleAutosave = (autosaveEnabled) => {
     store.dispatch({
       type: 'TOGGLE_AUTOSAVE',
       autosaveEnabled,
     });
-  }
+  };
 
   render() {
     const { actions, navigation, navigate, onChange } = this.props;

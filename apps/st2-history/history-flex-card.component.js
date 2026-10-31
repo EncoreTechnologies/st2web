@@ -34,16 +34,16 @@ export default class HistoryFlexCard extends React.Component {
     onToggleExpand: PropTypes.func.isRequired,
     displayUTC: PropTypes.bool.isRequired,
     handleToggleUTC: PropTypes.func,
-  }
+  };
 
   static contextTypes = {
     scrollIntoView: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     isChild: false,
     displayUTC: false,
-  }
+  };
 
   handleToggleExpand(e) {
     e && e.preventDefault();

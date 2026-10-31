@@ -31,11 +31,11 @@ export default class SelectModule extends React.Component {
     spec: PropTypes.object,
     data: PropTypes.string,
     onChange: PropTypes.func,
-  }
+  };
 
   state = {
     error: null,
-  }
+  };
 
   onChange(value) {
     this.state.error && this.setState({ error: null });

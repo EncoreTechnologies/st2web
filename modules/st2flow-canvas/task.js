@@ -33,14 +33,14 @@ export class Task extends Component {
     onConnect: PropTypes.func,
     onClick: PropTypes.func,
     onDelete: PropTypes.func,
-  }
+  };
 
   state = {
     delta: {
       x: 0,
       y: 0,
     },
-  }
+  };
 
   componentDidMount() {
     const task = this.taskRef.current;
@@ -76,8 +76,8 @@ export class Task extends Component {
     task.removeEventListener('drop', this.handleDrop);
   }
 
-  drag
-  start
+  drag;
+  start;
 
   handleMouseDown = (e) => {
     // Drag should only work on left button press
@@ -96,7 +96,7 @@ export class Task extends Component {
     };
 
     return false;
-  }
+  };
 
   handleMouseUp = (e) => {
     if (!this.drag) {
@@ -129,7 +129,7 @@ export class Task extends Component {
     });
 
     return false;
-  }
+  };
 
   handleMouseMove = (e) => {
     if (!this.drag) {
@@ -147,7 +147,7 @@ export class Task extends Component {
     });
 
     return false;
-  }
+  };
 
   handleClick = (e) => {
     e.stopPropagation();
@@ -155,7 +155,7 @@ export class Task extends Component {
     if (this.props.onClick) {
       this.props.onClick();
     }
-  }
+  };
 
   handleDragStartHandle = (e) => {
     e.stopPropagation();
@@ -170,7 +170,7 @@ export class Task extends Component {
         task,
       }));
     }
-  }
+  };
 
   handleDragOver = (e) => {
     if (e.preventDefault) {
@@ -180,7 +180,7 @@ export class Task extends Component {
     if (e.dataTransfer) {
       e.dataTransfer.dropEffect = 'move';
     }
-  }
+  };
 
   handleDrop = (e) => {
     if (e.preventDefault) {
@@ -199,7 +199,7 @@ export class Task extends Component {
     }
 
     return false;
-  }
+  };
 
   handleImageError() {
     if (this.imgRef.current) {
@@ -207,7 +207,7 @@ export class Task extends Component {
     }
   }
 
-  style = style
+  style = style;
   taskRef = React.createRef();
   handleRef = React.createRef();
   imgRef = React.createRef();

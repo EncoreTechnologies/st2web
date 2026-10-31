@@ -23,9 +23,9 @@ export class Toolbar extends Component {
   static propTypes = {
     secondary: PropTypes.bool,
     children: PropTypes.node,
-  }
+  };
 
-  style = style
+  style = style;
 
   render() {
     const { secondary } = this.props;
@@ -43,9 +43,9 @@ export class ToolbarButton extends Component {
     children: PropTypes.node,
     stretch: PropTypes.bool,
     selected: PropTypes.bool,
-  }
+  };
 
-  style = style
+  style = style;
 
   render() {
     const { className, stretch, selected, ...props } = this.props;
@@ -61,9 +61,9 @@ export class Panel extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
-  style = style
+  style = style;
 
   render() {
     const { className } = this.props;

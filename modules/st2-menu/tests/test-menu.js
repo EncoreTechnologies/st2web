@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import { describe, it, beforeAll } from '@rstest/core';
 import { expect } from 'chai';
 
 import React from 'react';
@@ -24,7 +25,7 @@ import api from '@stackstorm/module-api';
 import Menu from '..';
 
 describe(`${Menu.name} Component`, () => {
-  before(() => {
+  beforeAll(() => {
     api.client = api.connect();
   });
 

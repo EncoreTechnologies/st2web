@@ -28,11 +28,11 @@ class Icon extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     style: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     style: componentStyle,
-  }
+  };
 
   render() {
     const { style, name } = this.props;
@@ -58,11 +58,11 @@ export default class Menu extends React.Component {
       position: PropTypes.number,
     })).isRequired,
     style: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     style: componentStyle,
-  }
+  };
 
   componentDidMount () {
     this.idleLogout();
@@ -74,8 +74,8 @@ export default class Menu extends React.Component {
     window.removeEventListener('storage',this.storageChange());
   }
 
-  docsLink = 'https://docs.stackstorm.com/'
-  supportLink = 'https://github.com/StackStorm/st2/discussions'
+  docsLink = 'https://docs.stackstorm.com/';
+  supportLink = 'https://github.com/StackStorm/st2/discussions';
 
   idleLogout() {
     let t;

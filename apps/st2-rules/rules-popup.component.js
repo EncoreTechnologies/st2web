@@ -47,7 +47,7 @@ class RulesPopup extends React.Component {
 
     onSubmit: PropTypes.func,
     onCancel: PropTypes.func,
-  }
+  };
 
   state = {
     payload: {
@@ -63,7 +63,7 @@ class RulesPopup extends React.Component {
         parameters: {},
       },
     },
-  }
+  };
 
   cacheMethod(key, method) {
     this.methodCache = this.methodCache || {};

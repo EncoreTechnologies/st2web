@@ -24,15 +24,15 @@ export default class Action extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     children: PropTypes.node,
-  }
+  };
 
   state = {
     open: false,
-  }
+  };
 
-  style = style
+  style = style;
 
-  imgRef = React.createRef()
+  imgRef = React.createRef();
 
   handleImageError() {
     if (this.imgRef.current) {

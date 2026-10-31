@@ -50,12 +50,12 @@ class PacksPanel extends React.Component {
 
     id: PropTypes.string,
     pack: PropTypes.object,
-  }
+  };
 
   state = {
     config: null,
     configPreview: false,
-  }
+  };
 
   componentDidMount() {
     const { id } = this.props;

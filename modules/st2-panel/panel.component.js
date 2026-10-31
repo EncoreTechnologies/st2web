@@ -26,7 +26,7 @@ export class Panel extends React.Component {
     className: PropTypes.string,
     detailed: PropTypes.bool,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, detailed = false, ...props } = this.props;
@@ -43,7 +43,7 @@ export class PanelView extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -60,7 +60,7 @@ export class PanelDetails extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -77,7 +77,7 @@ export class PanelNavigation extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -95,7 +95,7 @@ export class Toolbar extends React.Component {
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, title, children, ...props } = this.props;
@@ -113,7 +113,7 @@ export class ToolbarActions extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -129,7 +129,7 @@ export class ToolbarActions extends React.Component {
 export class ToolbarButton extends React.Component {
   static propTypes = {
     className: PropTypes.string,
-  }
+  };
 
   render() {
     const { className, ...props } = this.props;
@@ -144,7 +144,7 @@ export class ToolbarTitle extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -165,7 +165,7 @@ export class ToolbarSearch extends React.Component {
     hidden: PropTypes.bool,
     onChange: PropTypes.func,
     onToggle: PropTypes.func,
-  }
+  };
 
   render() {
     const { className, title, value, onChange, onToggle, hidden, ...props } = this.props;
@@ -195,7 +195,7 @@ export class ToolbarFilters extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -212,7 +212,7 @@ export class ToolbarView extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -229,11 +229,11 @@ export class Content extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   static childContextTypes = {
     scrollIntoView: PropTypes.func,
-  }
+  };
 
   getChildContext() {
     return {
@@ -262,7 +262,7 @@ export class ContentEmpty extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -282,7 +282,7 @@ export class DetailsHeader extends React.Component {
     title: PropTypes.node.isRequired,
     subtitle: PropTypes.node,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, status, title, subtitle, children, ...props } = this.props;
@@ -315,7 +315,7 @@ export class DetailsSwitch extends React.Component {
     })).isRequired,
     current: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-  }
+  };
 
   render() {
     const { className, sections, current, onChange, ...props } = this.props;
@@ -351,7 +351,7 @@ export class DetailsBody extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -372,7 +372,7 @@ export class DetailsCriteriaLine extends React.Component {
     type: PropTypes.string,
     pattern: PropTypes.any,
     condition: PropTypes.string,
-  }
+  };
 
   render() {
     const { name, type, pattern, condition } = this.props;
@@ -421,7 +421,7 @@ export class DetailsFormLine extends React.Component {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.any,
-  }
+  };
 
   render() {
     const { name } = this.props;
@@ -447,7 +447,7 @@ export class DetailsLine extends React.Component {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.any,
-  }
+  };
 
   render() {
     const { name, value } = this.props;
@@ -472,7 +472,7 @@ export class DetailsLine extends React.Component {
 export class DetailsLineNote extends React.Component {
   static propTypes = {
     children: PropTypes.node,
-  }
+  };
 
   render() {
     return (
@@ -489,7 +489,7 @@ export class DetailsPanel extends React.Component {
     title: PropTypes.string,
     children: PropTypes.node,
     stick: PropTypes.bool,
-  }
+  };
 
   render() {
     const { className, title, children, stick, ...props } = this.props;
@@ -509,7 +509,7 @@ export class DetailsPanelEmpty extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -527,7 +527,7 @@ export class DetailsPanelHeading extends React.Component {
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, title, children, ...props } = this.props;
@@ -545,7 +545,7 @@ export class DetailsPanelBody extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -563,7 +563,7 @@ export class DetailsPanelBodyLine extends React.Component {
     className: PropTypes.string,
     label: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
-  }
+  };
 
   render() {
     const { className, label, children, ...props } = this.props;
@@ -581,7 +581,7 @@ export class DetailsButtonsPanel extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -598,7 +598,7 @@ export class DetailsToolbar extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-  }
+  };
 
   render() {
     const { className, children, ...props } = this.props;
@@ -614,7 +614,7 @@ export class DetailsToolbar extends React.Component {
 export class DetailsToolbarSeparator extends React.Component {
   static propTypes = {
     className: PropTypes.string,
-  }
+  };
 
   render() {
     const { className, ...props } = this.props;
@@ -630,11 +630,11 @@ export class ToggleButton extends React.Component {
     className: PropTypes.string,
     collapsed: PropTypes.bool.isRequired,
     onClick: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     collapsed: false,
-  }
+  };
 
   render() {
     const { className, collapsed, onClick, ...props } = this.props;

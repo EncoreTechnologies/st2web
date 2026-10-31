@@ -26,16 +26,16 @@ export default class Filter extends React.Component {
     items: PropTypes.arrayOf(PropTypes.string).isRequired,
     activeItems: PropTypes.arrayOf(PropTypes.string).isRequired,
     onChange: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     multiple: false,
-  }
+  };
 
   state = {
     visible: false,
     search: '',
-  }
+  };
 
   handleToggleItem(item) {
     const { multiple, activeItems, onChange } = this.props;
@@ -88,7 +88,7 @@ export default class Filter extends React.Component {
           { label }
           { activeItems.length > 0 ? (
             <span className={style.labelActiveItems}>
-            : { activeItems.join(', ') }
+              : { activeItems.join(', ') }
             </span>
           ) : null }
         </div>

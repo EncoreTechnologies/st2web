@@ -33,11 +33,11 @@ export default class TextFieldModule extends React.Component {
     spec: PropTypes.object,
     data: PropTypes.string,
     onChange: PropTypes.func,
-  }
+  };
 
   state = {
     error: null,
-  }
+  };
 
   componentDidUpdate() {
     if (!this._textarea) {

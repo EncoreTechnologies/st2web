@@ -27,9 +27,9 @@ export default class Property extends Component {
     value: PropTypes.bool,
     onChange: PropTypes.func,
     children: PropTypes.node,
-  }
+  };
 
-  style = style
+  style = style;
 
   render() {
     const { name, description, value, onChange, children } = this.props;

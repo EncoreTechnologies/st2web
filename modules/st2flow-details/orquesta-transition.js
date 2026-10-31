@@ -30,7 +30,7 @@ class OrquestaTransition extends Component {
     taskNames: PropTypes.arrayOf(PropTypes.string),
     selected: PropTypes.bool,
     onChange: PropTypes.func,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -40,8 +40,8 @@ class OrquestaTransition extends Component {
     };
   }
 
-  style = style
-  cache = {} // used to cache togglable data
+  style = style;
+  cache = {}; // used to cache togglable data
 
   onPublishToggle = (val) => {
     const { onChange } = this.props;
@@ -64,7 +64,7 @@ class OrquestaTransition extends Component {
     }
 
     this.setState({ publishOn: val });
-  }
+  };
 
   handlePublishChange(publish) {
     const { onChange } = this.props;
@@ -91,13 +91,13 @@ class OrquestaTransition extends Component {
     const val = publish && this.state.publishOn ? publish.concat(newVal) : [ newVal ];
 
     onChange && onChange('publish', val);
-  }
+  };
 
   addDoItem = (value) => {
     const { transition: { to }, onChange } = this.props;
     const val = (to || []).map(t => t.name).concat(value);
     onChange && onChange('do', val);
-  }
+  };
 
   removeDoItem = (index) => {
     const { transition: { to }, onChange } = this.props;
@@ -106,7 +106,7 @@ class OrquestaTransition extends Component {
     // make sure to splice the copy!
     val.splice(index, 1);
     onChange && onChange('do', val);
-  }
+  };
 
   render() {
     const { transition, taskNames, selected, onChange } = this.props;

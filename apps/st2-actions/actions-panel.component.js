@@ -81,7 +81,7 @@ class ActionsPanel extends React.Component {
     groups: PropTypes.array,
     filter: PropTypes.string,
     collapsed: PropTypes.bool,
-  }
+  };
 
   componentDidMount() {
     this.fetchGroups();

@@ -612,7 +612,7 @@ function getCollectionTokenByKey(rootTree, key) {
 function getTokenParent(rootTree, token) {
   const result = get(rootTree, token.jpath.slice(0, -1));
 
-  if(Array.isArray(result) || !result.hasOwnProperty('kind')) {
+  if(Array.isArray(result) || !Object.hasOwn(result, 'kind')) {
     return get(rootTree, token.jpath.slice(0, -2));
   }
 

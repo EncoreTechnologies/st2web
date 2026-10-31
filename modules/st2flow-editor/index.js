@@ -43,7 +43,7 @@ export default class Editor extends Component {
     source: PropTypes.string,
     onEditorChange: PropTypes.func,
     onChange: PropTypes.func,
-  }
+  };
 
   componentDidMount() {
     const { source } = this.props;
@@ -141,7 +141,7 @@ export default class Editor extends Component {
         }
       }, DELTA_DEBOUNCE);
     }
-  }
+  };
 
   handleModelChange = (deltas, yaml) => {
     this.clearErrorMarkers();
@@ -153,7 +153,7 @@ export default class Editor extends Component {
     }
 
     this.setTabSize();
-  }
+  };
 
   handleModelError = (err) => {
     const { session } = this.editor;
@@ -176,7 +176,7 @@ export default class Editor extends Component {
     });
 
     session.setAnnotations(annotations);
-  }
+  };
 
   clearErrorMarkers() {
     if(this.errorMarkers && this.errorMarkers.length) {

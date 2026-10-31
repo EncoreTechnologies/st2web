@@ -41,11 +41,11 @@ class InstancePanel extends DetailsPanel {
   static propTypes = {
     instances: PropTypes.array,
     onToggle: PropTypes.func,
-  }
+  };
 
   state = {
     visible: {},
-  }
+  };
 
   async handleToggle(id) {
     const { visible } = this.state;

@@ -25,16 +25,16 @@ export default class InquiryFlexCard extends React.Component {
     inquiry: PropTypes.object.isRequired,
     selected: PropTypes.string,
     onSelect: PropTypes.func.isRequired,
-  }
+  };
 
   static contextTypes = {
     scrollIntoView: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     isChild: false,
     displayUTC: false,
-  }
+  };
 
   handleSelect(e) {
     e && e.preventDefault();

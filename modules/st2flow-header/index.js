@@ -16,7 +16,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
-import url from 'url';
 
 import api from '@stackstorm/module-api';
 
@@ -25,13 +24,13 @@ import style from './style.module.css';
 export default class Header extends Component {
   static propTypes = {
     className: PropTypes.string,
-  }
+  };
 
   state = {
     showDropdown: false,
-  }
+  };
 
-  style = style
+  style = style;
 
   handleToggleDropdown(e) {
     e.stopPropagation();
@@ -59,7 +58,7 @@ export default class Header extends Component {
         {
           api.token && api.server && (
             <div className={this.style.user} onClick={e => this.handleToggleDropdown(e)} >
-              { api.token.user }@{ url.parse(api.server.api).host }
+              { api.token.user }@{ new URL(api.server.api, window.location.href).host }
               <i className={cx('icon-user', this.style.icon)} />
               { showDropdown && (
                 <div className={this.style.dropdown}>

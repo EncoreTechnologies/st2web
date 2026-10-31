@@ -21,7 +21,7 @@ import style from './style.module.css';
 export default class Action extends Component {
   static propTypes = {
     action: PropTypes.object.isRequired,
-  }
+  };
 
   componentDidMount() {
     this.handleDragStart = this.handleDragStart.bind(this);
@@ -56,9 +56,9 @@ export default class Action extends Component {
         },
       }));
     }
-  }
+  };
 
-  style = style
+  style = style;
   actionRef = React.createRef();
 
   render() {
@@ -68,7 +68,7 @@ export default class Action extends Component {
 
     const supportedRunnerTypes = {
       'orquesta': href,
-      'mistral-v2': href
+      'mistral-v2': href,
     };
 
     return (
@@ -78,7 +78,8 @@ export default class Action extends Component {
         ref={this.actionRef}
         href={supportedRunnerTypes[action.runner_type]}
         target="_blank"
-        rel="noopener noreferrer">
+        rel="noopener noreferrer"
+      >
         <div className={this.style.actionName}>{ action.ref }</div>
         <div className={this.style.actionDescription}>{ action.description }</div>
       </div>

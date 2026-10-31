@@ -30,12 +30,12 @@ export default class PackIcon extends React.Component {
     name: PropTypes.string,
     small: PropTypes.bool.isRequired,
     naked: PropTypes.bool.isRequired,
-  }
+  };
 
   static defaultProps = {
     small: false,
     naked: false,
-  }
+  };
 
   componentDidMount() {
     if (Object.keys(icons).length > 0) {

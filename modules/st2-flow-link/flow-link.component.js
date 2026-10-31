@@ -25,7 +25,7 @@ export default class FlowLink extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     action: PropTypes.string,
-  }
+  };
 
   get token() {
     return btoa(JSON.stringify({

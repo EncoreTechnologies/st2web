@@ -48,7 +48,7 @@ export class BaseTextField extends React.Component {
     visible: PropTypes.bool,
     onChange: PropTypes.func,
     'data-test': PropTypes.string,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -108,7 +108,7 @@ export class BaseTextField extends React.Component {
   }
 
   visibilityToggle() {
-    this.setState({visible: !this.state.visible})
+    this.setState({visible: !this.state.visible});
   }
 
   emitChange() {
@@ -145,7 +145,7 @@ export class BaseTextField extends React.Component {
 
     return (
       <TextFieldWrapper icon={icon} {...wrapperProps}>
-            <input {...inputProps} />
+        <input {...inputProps} />
       </TextFieldWrapper>
     );
   }
@@ -184,7 +184,7 @@ export class BaseTextareaField extends BaseTextField {
 
     return (
       <TextFieldWrapper icon={icon} {...wrapperProps}>
-          <Textarea {...inputProps} />
+        <Textarea {...inputProps} />
       </TextFieldWrapper>
     );
   }

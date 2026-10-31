@@ -22,7 +22,7 @@ import BaseCode from './base.component';
 export default class ResultCode extends BaseCode {
   static propTypes = {
     id: PropTypes.string,
-  }
+  };
 
   async fetch({ id }) {
     const def = {

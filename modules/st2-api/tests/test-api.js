@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import { describe, it, beforeAll, afterAll } from '@rstest/core';
 import { expect } from 'chai';
 
 import '@stackstorm/module-test-utils/bootstrap/st2constants';
@@ -26,7 +27,7 @@ process.on('unhandledRejection', (reason) => {
 });
 
 describe('API', () => {
-  describe('inherits host from window', () => {
+  it('inherits host from window', () => {
     const host = window.location.host; // capture initial value
     window.location.host = 'www.example.net:1234'; // set test value
 
@@ -38,7 +39,7 @@ describe('API', () => {
     window.location.host = host; // restore initial value
   });
 
-  describe('can work with http', () => {
+  it('can work with http', () => {
     // capture initial value
     const host = window.location.host;
     const protocol = window.location.protocol;
@@ -60,8 +61,8 @@ describe('API', () => {
   });
 
   describe('connect', () => {
-    before(() => moxios.install());
-    after(() => moxios.uninstall());
+    beforeAll(() => moxios.install());
+    afterAll(() => moxios.uninstall());
 
     it('authenticates', () => {
       moxios.stubRequest('https://example.com/auth/tokens', {
@@ -87,7 +88,7 @@ describe('API', () => {
   });
 
   describe('disconnect', () => {
-    before(() => api.disconnect());
+    beforeAll(() => api.disconnect());
 
     it('doesn\'t have opts or token', () => {
       expect(api.server).to.not.exist;
