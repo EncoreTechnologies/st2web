@@ -14,7 +14,7 @@
 // limitations under the License.
 
 import { describe, it } from '@rstest/core';
-import React from 'react';
+import { act } from 'react';
 import { expect, use as chaiUse } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -85,7 +85,7 @@ describe('AutoForm BooleanField', () => {
     expect(c.value()).to.be.deep.equal(false);
 
     const stopPropagation = sinon.spy();
-    c._instance.node.props.onReset({ stopPropagation });
+    act(() => c._instance.node.props.onReset({ stopPropagation }));
 
     expect(onChange.withArgs(false)).to.be.calledOnce;
     expect(stopPropagation).to.be.calledOnce;

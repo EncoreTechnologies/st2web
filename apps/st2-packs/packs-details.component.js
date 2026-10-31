@@ -14,7 +14,6 @@
 
 import _ from 'lodash';
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import store from './store';
 
@@ -42,16 +41,6 @@ import St2PortionBar from '@stackstorm/module-portion-bar';
 import Table from './table.component';
 
 class PacksPanel extends React.Component {
-  static propTypes = {
-    handleInstall: PropTypes.func.isRequired,
-    handleRemove: PropTypes.func.isRequired,
-    handleSave: PropTypes.func.isRequired,
-    handleFilterChange: PropTypes.func.isRequired,
-
-    id: PropTypes.string,
-    pack: PropTypes.object,
-  };
-
   state = {
     config: null,
     configPreview: false,

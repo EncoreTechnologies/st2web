@@ -13,10 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
 import { mapValues, get } from 'lodash';
 import cx from 'classnames';
 import Menu from '@stackstorm/module-menu';
@@ -34,31 +33,7 @@ import './style.css';
 
 const POLL_INTERVAL = 5000;
 
-class Workflows extends Component {  
-  static propTypes = {
-    pack: PropTypes.string,
-    meta: PropTypes.object,
-    metaSource: PropTypes.string,
-    setMeta: PropTypes.func,  // eslint-disable-line react/no-unused-prop-types
-    input: PropTypes.array,
-    workflowSource: PropTypes.string,
-    dirty: PropTypes.bool,
-    isCollapsed: PropTypes.object,
-    actions: PropTypes.array,
-    fetchActions: PropTypes.func,
-    undo: PropTypes.func,
-    redo: PropTypes.func,
-    layout: PropTypes.func,
-    sendSuccess: PropTypes.func,
-    sendError: PropTypes.func,
-    routes: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      href: PropTypes.string,
-      url: PropTypes.string,
-      target: PropTypes.string,
-      icon: PropTypes.string,
-    })).isRequired,
-  };
+class Workflows extends Component {
   state = {
     runningWorkflow: false,
     showForm: false,

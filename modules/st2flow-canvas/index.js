@@ -15,15 +15,14 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 import fp from 'lodash/fp';
 import { uniqueId, uniq } from 'lodash';
 import isEqual from 'lodash/isEqual';
 
 import Notifications from '@stackstorm/st2flow-notifications';
-import { HotKeys } from 'react-hotkeys';
 
+import HotKeys from './hotkeys';
 import Task from './task';
 import TransitionGroup from './transition';
 import Vector from './vector';
@@ -171,27 +170,6 @@ function constructPathOrdering(
 }
 
 class Canvas extends Component {
-
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    navigation: PropTypes.object,
-    navigate: PropTypes.func,
-    tasks: PropTypes.array,
-    transitions: PropTypes.array,
-    notifications: PropTypes.array,
-    issueModelCommand: PropTypes.func,
-    nextTask: PropTypes.string,
-    isCollapsed: PropTypes.object,
-    toggleCollapse: PropTypes.func,
-    dirtyflag: PropTypes.bool,
-    fetchActionscalled: PropTypes.func,
-    saveData: PropTypes.func,
-    undo: PropTypes.func,
-    redo: PropTypes.func,
-    save: PropTypes.func,
-  };
-
   state = {
     scale: 0,
     copiedTask: null,
@@ -693,8 +671,6 @@ class Canvas extends Component {
     return (
       <HotKeys
         style={{height: '100%'}}
-        focused={true}
-        attach={document.body}
         keyMap={{
           copy: [ 'ctrl+c', 'command+c' ],
           cut: [ 'ctrl+x', 'command+x' ],

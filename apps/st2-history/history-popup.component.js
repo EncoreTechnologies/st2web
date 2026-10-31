@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 
 import setTitle from '@stackstorm/module-title';
 
@@ -29,14 +28,6 @@ import {
 import Popup from '@stackstorm/module-popup';
 
 export default class HistoryPopup extends React.Component {
-  static propTypes = {
-    action: PropTypes.string,
-    spec: PropTypes.object,
-    payload: PropTypes.object,
-    onSubmit: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
-
   state = {
     preview: false,
     disabled: false,

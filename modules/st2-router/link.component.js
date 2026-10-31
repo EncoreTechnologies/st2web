@@ -13,8 +13,7 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
-import { createLocation, createPath } from 'history';
+import { createLocation, createPath } from './history';
 import { connect } from 'react-redux';
 
 import router from '@stackstorm/module-router/methods';
@@ -24,15 +23,6 @@ const isModifiedEvent = event =>
 
 
 class Link extends React.Component {
-  static propTypes = {
-    location: PropTypes.object,
-    onClick: PropTypes.func,
-    replace: PropTypes.bool,
-    target: PropTypes.string,
-    to: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]).isRequired,
-    innerRef: PropTypes.oneOfType([ PropTypes.string, PropTypes.func ]),
-  };
-
   handleClick = event => {
     if (this.props.onClick) {
       this.props.onClick(event);
@@ -50,7 +40,7 @@ class Link extends React.Component {
 
       const targetLocation =
         typeof to === 'string'
-          ? createLocation(to, null, null, location)
+          ? createLocation(to, location)
           : to;
 
       if (replace) {
@@ -69,7 +59,7 @@ class Link extends React.Component {
 
     const targetLocation =
       typeof to === 'string'
-        ? createLocation(to, null, null, location)
+        ? createLocation(to, location)
         : to;
 
     const href = `#${createPath(targetLocation)}`;

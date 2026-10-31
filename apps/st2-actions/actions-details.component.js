@@ -14,7 +14,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import store from './store';
 
@@ -52,26 +51,6 @@ import {
 import Time from '@stackstorm/module-time';
 
 class ActionsDetails extends React.Component {
-  static propTypes = {
-    handleNavigate: PropTypes.func.isRequired,
-    handleRun: PropTypes.func.isRequired,
-    handleDelete: PropTypes.func.isRequired,
-
-    id: PropTypes.string,
-    section: PropTypes.string,
-    action: PropTypes.object,
-    executions: PropTypes.array,
-    entrypoint: PropTypes.string,
-    groups: PropTypes.array,
-    filter: PropTypes.string,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        ref: PropTypes.string,
-        section: PropTypes.string,
-      }),
-    }),
-  };
-
   state = {
     runPreview: false,
     runValue: null,
@@ -84,6 +63,15 @@ class ActionsDetails extends React.Component {
     isRemoveFiles : false,
     
   };
+
+  // The clone dialog offers the packs of the unfiltered action list; keep the last one while a filter is applied.
+  static getDerivedStateFromProps({ groups, filter }) {
+    if (filter) {
+      return null;
+    }
+
+    return { packs: (groups || []).map(({ pack }) => pack) };
+  }
 
   componentDidMount() {
     api.listen().then((source) => {
@@ -140,28 +128,11 @@ class ActionsDetails extends React.Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const {groups, filter} = nextProps;
-    const packs = [];
-    if(!filter) {
-      groups && groups.map(data => {
-        packs.push(data.pack);
-      });
+  componentDidUpdate(prevProps) {
+    const { id } = this.props;
 
-      this.setState({packs : packs});
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { id , filter} = this.props;
-
- 
     if (id && id !== prevProps.id) {
       this.fetchAction(id);
-    }
-
-    if(filter && filter !== prevProps.filter) {
-      this.setState({packs: prevState.packs});
     }
   }
 
@@ -397,7 +368,7 @@ class ActionsDetails extends React.Component {
       this.setState({isRemoveFiles:false});
     }
   }
- 
+
   openDeleteModel (e) {
     this.setState({isRemoveFiles: false});
     const el =  document.getElementById('delete');

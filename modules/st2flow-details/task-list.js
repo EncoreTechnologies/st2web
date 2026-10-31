@@ -13,9 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
 
 import { Panel, Toolbar } from './layout';
 
@@ -24,12 +23,6 @@ import Task from './task';
 import style from './style.module.css';
 
 class TaskList extends Component {
-  static propTypes = {
-    tasks: PropTypes.array,
-
-    navigate: PropTypes.func,
-  };
-
   style = style;
 
   render() {

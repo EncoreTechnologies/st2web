@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 import api from '@stackstorm/module-api';
@@ -39,16 +38,6 @@ import Popup from '@stackstorm/module-popup';
 const emptySpec = { enum: [] };
 
 class RulesPopup extends React.Component {
-  static propTypes = {
-    triggerSpec: PropTypes.object,
-    criteriaSpecs: PropTypes.object,
-    actionSpec: PropTypes.object,
-    packSpec: PropTypes.object,
-
-    onSubmit: PropTypes.func,
-    onCancel: PropTypes.func,
-  };
-
   state = {
     payload: {
       pack: '',

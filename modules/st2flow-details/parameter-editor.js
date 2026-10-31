@@ -13,8 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 
 import ArrayField from '@stackstorm/module-auto-form/fields/array';
 import IntegerField from '@stackstorm/module-auto-form/fields/integer';
@@ -28,12 +27,6 @@ import { specialProperties } from './parameter';
 import style from './style.module.css';
 
 export default class ParameterEditor extends Component {
-  static propTypes = {
-    parameter: PropTypes.object,
-    onChange: PropTypes.func,
-    onCancel: PropTypes.func,
-  };
-
   constructor(props) {
     super(props);
 

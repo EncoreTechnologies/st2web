@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 import cx from 'classnames';
 
 import ace from 'brace';
@@ -34,17 +32,6 @@ const editorConnect = ({ ranges, notifications }) => ({ ranges, notifications })
 export { editorConnect };
 
 export default class Editor extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    ranges: PropTypes.object,
-    notifications: PropTypes.array,
-    selectedTaskName: PropTypes.string,
-    onTaskSelect: PropTypes.func,
-    source: PropTypes.string,
-    onEditorChange: PropTypes.func,
-    onChange: PropTypes.func,
-  };
-
   componentDidMount() {
     const { source } = this.props;
     ace.acequire('ace/ext/language_tools');

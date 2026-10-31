@@ -14,7 +14,6 @@
 // limitations under the License.
 
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
@@ -25,11 +24,6 @@ import Property from './property';
 import style from './style.module.css';
 
 class OrquestaTransition extends Component {
-  static propTypes = {
-    task: PropTypes.object.isRequired,
-    issueModelCommand: PropTypes.func,
-  };
-
   handleTaskProperty(name, value, noDelete = false) {
     const { task, issueModelCommand } = this.props;
 

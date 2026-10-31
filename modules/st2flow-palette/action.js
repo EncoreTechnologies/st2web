@@ -14,15 +14,10 @@
 // limitations under the License.
 
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 
 import style from './style.module.css';
 
 export default class Action extends Component {
-  static propTypes = {
-    action: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     this.handleDragStart = this.handleDragStart.bind(this);
 

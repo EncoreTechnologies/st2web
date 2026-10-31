@@ -14,7 +14,6 @@
 
 import _ from 'lodash';
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
 import ArrayField from './fields/array';
@@ -28,15 +27,6 @@ import EnumField from './fields/enum';
 import './style.css';
 
 export default class AutoForm extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    spec: PropTypes.object,
-    data: PropTypes.object,
-    disabled: PropTypes.bool.isRequired,
-    onChange: PropTypes.func,
-    flat: PropTypes.bool,
-  };
-
   static defaultProps = {
     disabled: false,
   };

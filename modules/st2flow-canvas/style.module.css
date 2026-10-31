@@ -35,6 +35,16 @@ limitations under the License.
    
 }
 
+/* CSS modules only allow `composes` on a top-level class, so the badge icons are set here
+   rather than inside .task's nested &-badge rules below. */
+.task-badge-with-items {
+  composes: icon-repeat from global;
+}
+
+.task-badge-join {
+  composes: icon-merge_type from global;
+}
+
 .task {
   display: block;
 
@@ -123,7 +133,6 @@ limitations under the License.
     border-radius: 2px;
 
     &-with-items {
-      composes: icon-repeat from global;
       &:before {
         margin: 0;
         font-weight: bold !important;
@@ -131,7 +140,6 @@ limitations under the License.
     }
 
     &-join {
-      composes: icon-merge_type from global;
       display: inline-block;
       transform: rotateZ(180deg) translateY(1px);
       &:before {

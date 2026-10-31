@@ -60,11 +60,7 @@ const st2Url = process.env.ST2_URL || 'http://127.0.0.1:8080';
 
 export default defineConfig({
   plugins: [
-    pluginReact({
-      // React 16.8 has no automatic JSX runtime and no fast refresh support.
-      swcReactOptions: { runtime: 'classic' },
-      fastRefresh: false,
-    }),
+    pluginReact(),
     pluginPackageMeta(),
   ],
   source: {
@@ -126,6 +122,8 @@ export default defineConfig({
     cssLoader: {
       url: false,
     },
+    // Only applied when CSS is emitted: Rstest compiles CSS modules for their class names and
+    // skips PostCSS, so stylesheets must be valid CSS modules before nesting is flattened.
     postcss: (config, { addPlugins }) => {
       addPlugins([
         postcssImport(),

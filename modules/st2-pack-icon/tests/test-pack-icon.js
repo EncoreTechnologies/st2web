@@ -15,7 +15,7 @@
 import { describe, it, beforeAll, afterAll } from '@rstest/core';
 import { expect } from 'chai';
 
-import React from 'react';
+import { act } from 'react';
 import { ReactTester } from '@stackstorm/module-test-utils';
 
 import moxios from 'moxios';
@@ -39,24 +39,29 @@ describe(`${PackIcon.name} Component`, () => {
     api.disconnect();
   });
 
+  // PackIcon re-renders once the shared /packs request settles; let that happen inside act().
+  const iconsLoaded = () => act(() => new Promise(resolve => moxios.wait(resolve)));
+
   describe('common functionality', () => {
 
-    it('proxies className', () => {
+    it('proxies className', async () => {
       const instance = ReactTester.create(
         <PackIcon
           className="foobar"
         />
       );
+      await iconsLoaded();
 
       expect(instance.node.classList).to.contain('foobar');
     });
 
-    it('proxies extra props', () => {
+    it('proxies extra props', async () => {
       const instance = ReactTester.create(
         <PackIcon
           foo="bar"
         />
       );
+      await iconsLoaded();
 
       expect(instance.node.props.foo).to.equal('bar');
     });

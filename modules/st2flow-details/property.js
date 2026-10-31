@@ -13,22 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 
 import { Toggle } from '@stackstorm/module-forms/button.component';
 
 import style from './style.module.css';
 
 export default class Property extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    value: PropTypes.bool,
-    onChange: PropTypes.func,
-    children: PropTypes.node,
-  };
-
   style = style;
 
   render() {

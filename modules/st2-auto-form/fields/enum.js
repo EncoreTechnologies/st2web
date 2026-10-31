@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import _ from 'lodash';
-import React from 'react';
 import { BaseTextField } from './base';
 
 import { TextFieldWrapper } from '../wrappers';

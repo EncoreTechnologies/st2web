@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 import get from 'lodash/fp/get';
@@ -42,19 +41,6 @@ import {
 import InstancePanel from './panels/instances';
 
 class TriggersDetails extends React.Component {
-  static propTypes = {
-    handleNavigate: PropTypes.func.isRequired,
-
-    id: PropTypes.string,
-    section: PropTypes.string,
-    trigger: PropTypes.object,
-    sensor: PropTypes.object,
-    instances: PropTypes.array,
-
-    onComponentUpdate: PropTypes.func,
-    onToggleEnable: PropTypes.func,
-  };
-
   componentDidMount() {
     this.props.onComponentUpdate && this.props.onComponentUpdate();
   }

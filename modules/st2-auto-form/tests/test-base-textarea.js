@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import { describe, it } from '@rstest/core';
-import React from 'react';
 import { expect, use as chaiUse } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';

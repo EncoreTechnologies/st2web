@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
 import get from 'lodash/fp/get';
@@ -25,18 +24,6 @@ import { actions } from './flex-table.reducer';
 import './style.css';
 
 export class FlexTable extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    uid: PropTypes.string,
-    title: PropTypes.node,
-    titleType: PropTypes.string,
-    note: PropTypes.node,
-    collapsed: PropTypes.bool.isRequired,
-    children: PropTypes.node,
-    icon: PropTypes.node,
-    onToggle: PropTypes.func,
-  };
-
   static defaultProps = {
     collapsed: false,
   };
@@ -66,16 +53,6 @@ export class FlexTable extends React.Component {
 }
 
 export class FlexTableTitle extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    type: PropTypes.string,
-    icon: PropTypes.node,
-    onToggle: PropTypes.func.isRequired,
-    title: PropTypes.node,
-    note: PropTypes.node,
-  };
-
   render() {
     const { className, children, type, icon, onToggle, title, note, ...props } = this.props;
 
@@ -107,15 +84,6 @@ export class FlexTableTitle extends React.Component {
 }
 
 export class FlexTableRow extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    columns: PropTypes.arrayOf(PropTypes.shape({
-      type: PropTypes.string,
-      children: PropTypes.node,
-    })),
-    children: PropTypes.node,
-  };
-
   static actions = actions;
 
   render() {
@@ -145,12 +113,6 @@ export class FlexTableRow extends React.Component {
 }
 
 export class FlexTableColumn extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    fixed: PropTypes.bool,
-  };
-
   static actions = actions;
 
   render() {
@@ -165,12 +127,6 @@ export class FlexTableColumn extends React.Component {
 }
 
 export class FlexTableInsert extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    visible: PropTypes.bool,
-    children: PropTypes.node,
-  };
-
   static defaultProps = {
     visible: true,
   };
@@ -193,11 +149,6 @@ export class FlexTableInsert extends React.Component {
 }
 
 export class FlexTableInsertColumn extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-  };
-
   render() {
     const { className, children, ...props } = this.props;
 

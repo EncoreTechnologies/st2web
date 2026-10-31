@@ -55,8 +55,41 @@ Changed
 
   Contributed by @bishopbm1
 
+* Upgraded to React 19 (19.3.1), react-redux 9, redux 5 and react-router 8:
+
+  - ``createRoot`` replaces ``ReactDOM.render``; the automatic JSX runtime and fast refresh are on,
+    so files no longer import ``React`` just for JSX.
+  - ``propTypes`` and the ``prop-types`` package are removed (React 19 ignores them).
+  - The panel's legacy ``scrollIntoView`` context is now ``ScrollIntoViewContext``
+    (``React.createContext``), used by the action, pack, rule and trigger cards.
+  - ``UNSAFE_componentWillReceiveProps`` replaced: ``getDerivedStateFromProps`` for the clone
+    dialog's pack list, ``componentDidUpdate`` for auto-form text fields.
+  - ``modules/st2-router`` keeps its Redux-driven design; a small hash history replaces the
+    ``history`` package and route matching uses react-router 8's ``matchPath``.
+  - The store uses redux's ``legacy_createStore``.
+  - ``react-hotkeys`` 1.x (needs ``findDOMNode``, removed in React 19) replaced by
+    ``react-hotkeys-hook`` for the workflow designer shortcuts; keys typed into inputs are still
+    ignored. The per-task ``HotKeys`` wrapper is gone: its only handler had no key bound to it.
+  - ``react-textarea-autosize`` 8 is used directly (no subclass).
+  - Existing tests keep ``react-test-renderer`` 19 (deprecated; its warning is muted) with renders
+    and handler calls wrapped in ``act()``. New tests use ``@testing-library/react``. Added tests
+    for the router's hash history and route matching and for workflow transition clicks.
+  - Coverage now includes untested JSX files, so it reports about 28% of lines, not 45%.
+
+  Contributed by @bishopbm1
+
 Fixed
 ~~~~~
+* Fixed the UI failing to load ("process is not defined") without browserify's ``process``
+  polyfill: ``st2-api`` now only sets ``NODE_TLS_REJECT_UNAUTHORIZED`` under Node, and
+  ``st2flow-perf``'s Node check no longer reads ``process`` when it is undefined.
+* Removed a workflow-transition click listener that never ran (it registered
+  ``() => this.props.onClick``); clicks were already handled through React's ``onClick``.
+* Moved the task badge ``composes`` in ``st2flow-canvas`` to top-level classes, which CSS modules
+  require when nesting isn't flattened first.
+
+  Contributed by @bishopbm1
+
 * Fixed CircleCI tests by pinning lerna@6.0.0. #1008
 
   Contributed by @guzzijones

@@ -14,7 +14,6 @@
 // limitations under the License.
 
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import StringField from '@stackstorm/module-auto-form/fields/string';
 import { BaseTextField } from '@stackstorm/module-auto-form/fields/base';
@@ -34,14 +33,6 @@ class OneLineStringField extends BaseTextField {
 }
 
 export class StringPropertiesPanel extends React.Component {
-  static propTypes = {
-    items: PropTypes.array,
-    onChange: PropTypes.func,
-    inlineAddButton: PropTypes.bool,
-    defaultKey: PropTypes.string,
-    defaultValue: PropTypes.string,
-  };
-
   style = style;
 
   handleChange(index, key, value) {

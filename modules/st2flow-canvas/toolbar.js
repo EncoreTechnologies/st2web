@@ -13,8 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import _ from 'lodash';
@@ -38,18 +37,6 @@ export const ToolbarButton = connect(
       }),
   })
 )(class ToolbarButton extends Component {
-  static propTypes = {
-    icon: PropTypes.string,
-    errorMessage: PropTypes.string,
-    successMessage: PropTypes.string,
-    onClick: PropTypes.func,
-    pushError: PropTypes.func,
-    pushSuccess: PropTypes.func,
-    disabled: PropTypes.bool,
-    title: PropTypes.string,
-    className: PropTypes.string,
-  };
-
   static defaultProps = {
     errorMessage: '',
   };
@@ -122,13 +109,6 @@ export const ToolbarButton = connect(
 });
 
 export class ToolbarDropdown extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    shown: PropTypes.bool,
-    pointerPosition: PropTypes.string,
-    onClose: PropTypes.func,
-  };
-
   componentDidMount() {
     this.boundClickListener = (function(ev) {
       if(ev.target instanceof HTMLElement
@@ -163,11 +143,6 @@ export class ToolbarDropdown extends Component {
 }
 
 export class Toolbar extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    position: PropTypes.string,
-  };
-
   style = style;
 
   render() {

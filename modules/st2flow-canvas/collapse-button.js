@@ -13,19 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 import cx from 'classnames';
 
 import style from './style.module.css';
 
 export default class CollapseButton extends Component {
-  static propTypes = {
-    state: PropTypes.bool,
-    position: PropTypes.string,
-    onClick: PropTypes.func.isRequired,
-  };
-
   style = style;
 
   handleClick(e) {

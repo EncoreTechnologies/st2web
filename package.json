@@ -37,9 +37,9 @@
     "@stackstorm/module-store": "*",
     "@stackstorm/st2-style": "*",
     "lodash": "4.17.21",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
-    "react-redux": "7.0.2"
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-redux": "9.3.1"
   },
   "devDependencies": {
     "@eslint/js": "9.39.5",
@@ -50,6 +50,9 @@
     "@rstest/coverage-istanbul": "0.12.5",
     "@stackstorm/module-test-utils": "*",
     "@stylistic/eslint-plugin": "5.10.0",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/react": "16.3.3",
+    "axios": "0.24.0",
     "chai": "6.3.0",
     "chai-subset": "1.6.0",
     "deep-diff": "1.0.2",

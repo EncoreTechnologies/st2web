@@ -13,8 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
@@ -23,13 +22,6 @@ import { StringField, SelectField, ColorStringField, EnumField} from '@stackstor
 import style from './style.module.css';
 
 class MistralTransition extends Component {
-  static propTypes = {
-    transition: PropTypes.object.isRequired,
-    taskNames: PropTypes.arrayOf(PropTypes.string),
-    selected: PropTypes.bool,
-    onChange: PropTypes.func,
-  };
-
   style = style;
   cache = {}; // used to cache togglable data
 

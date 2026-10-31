@@ -35,6 +35,8 @@ export default [
 
   js.configs.recommended,
   react.configs.flat.recommended,
+  // automatic JSX runtime: JSX no longer needs React in scope
+  react.configs.flat['jsx-runtime'],
 
   {
     files: [ '**/*.{js,mjs}' ],
@@ -144,7 +146,7 @@ export default [
       'react/void-dom-elements-no-children': 'error',
       'react/jsx-key': 'error',
       'react/jsx-no-duplicate-props': 'error',
-      // React 19 no longer checks propTypes at runtime; they are being removed
+      // React 19 no longer checks propTypes at runtime, so the codebase doesn't declare them
       'react/prop-types': 'off',
 
       'react-hooks/rules-of-hooks': 'error',

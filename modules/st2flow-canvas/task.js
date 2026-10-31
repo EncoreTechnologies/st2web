@@ -14,9 +14,7 @@
 // limitations under the License.
 
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
-import {HotKeys} from 'react-hotkeys';
 
 import Vector from './vector';
 import { origin } from './const';
@@ -25,16 +23,6 @@ import style from './style.module.css';
 import api from '@stackstorm/module-api';
 
 export class Task extends Component {
-  static propTypes = {
-    task: PropTypes.object.isRequired,
-    scale: PropTypes.number.isRequired,
-    selected: PropTypes.bool,
-    onMove: PropTypes.func,
-    onConnect: PropTypes.func,
-    onClick: PropTypes.func,
-    onDelete: PropTypes.func,
-  };
-
   state = {
     delta: {
       x: 0,
@@ -223,57 +211,55 @@ export class Task extends Component {
     const coords = new Vector(delta).divide(scale).add(new Vector(task.coords)).add(origin);
 
     return (
-      <HotKeys handlers={{ handleTaskDelete: onDelete }}>
+      <div
+        className={cx(this.style.task, selected && this.style.selected)}
+        style={{
+          transform: `translate(${coords.x}px, ${coords.y}px)`,
+        }}
+        tabIndex='0'
+        onClick={e => this.handleClick(e)}
+      >
         <div
-          className={cx(this.style.task, selected && this.style.selected)}
+          className={cx(this.style.taskBody)}
           style={{
-            transform: `translate(${coords.x}px, ${coords.y}px)`,
+            width: task.size && task.size.x,
+            height: task.size && task.size.y,
           }}
-          tabIndex='0'
-          onClick={e => this.handleClick(e)}
+          ref={this.taskRef}
         >
-          <div
-            className={cx(this.style.taskBody)}
-            style={{
-              width: task.size && task.size.x,
-              height: task.size && task.size.y,
-            }}
-            ref={this.taskRef}
-          >
-            <img
-              ref={this.imgRef}
-              src={api.route({ path: `/packs/views/file/${packName}/icon.png` })}
-              onError={() => this.handleImageError()}
-              width="32"
-              height="32"
-            />
-            <div>
-              <div className={cx(this.style.taskName)}>{task.name}</div>
-              <div className={cx(this.style.taskAction)}>{task.action}</div>
-              <div className={cx(this.style.taskBadges)}>
-                {
-                  !!task.with && (
-                    <span className={cx(this.style.taskBadge)}>
-                      <i className={cx(this.style.taskBadgeWithItems)} />
-                      { task.with && +task.with.concurrency ? task.with.concurrency : ''}
-                    </span>
-                  )
-                }
-                {
-                  !!task.join && (
-                    <span className={cx(this.style.taskBadge)}>
-                      <i className={cx(this.style.taskBadgeJoin)} />
-                      {typeof task.join === 'number' ? task.join : '​\u200B'}
-                    </span>
-                  )
-                }
-              </div>
+          <img
+            ref={this.imgRef}
+            src={api.route({ path: `/packs/views/file/${packName}/icon.png` })}
+            onError={() => this.handleImageError()}
+            width="32"
+            height="32"
+          />
+          <div>
+            <div className={cx(this.style.taskName)}>{task.name}</div>
+            <div className={cx(this.style.taskAction)}>{task.action}</div>
+            <div className={cx(this.style.taskBadges)}>
+              {
+                !!task.with && (
+                  <span className={cx(this.style.taskBadge)}>
+                    <i className={cx(this.style.taskBadgeWithItems)} />
+                    { task.with && +task.with.concurrency ? task.with.concurrency : ''}
+                  </span>
+                )
+              }
+              {
+                !!task.join && (
+                  <span className={cx(this.style.taskBadge)}>
+                    <i className={cx(this.style.taskBadgeJoin)} />
+                    {typeof task.join === 'number' ? task.join : '​\u200B'}
+                  </span>
+                )
+              }
             </div>
           </div>
-          <div className={cx(this.style.taskButton, this.style.delete, 'icon-delete')} onClick={() => onDelete()} />
-          <div className={this.style.taskHandle} style={{ top: '100%', left: '50%' }}  draggable ref={this.handleRef} />
         </div>
-      </HotKeys>
+        <div className={cx(this.style.taskButton, this.style.delete, 'icon-delete')} onClick={() => onDelete()} />
+        <div className={this.style.taskHandle} style={{ top: '100%', left: '50%' }}  draggable ref={this.handleRef} />
+      </div>
     );
   }
 }

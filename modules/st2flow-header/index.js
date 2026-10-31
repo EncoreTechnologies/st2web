@@ -13,8 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 import cx from 'classnames';
 
 import api from '@stackstorm/module-api';
@@ -22,10 +21,6 @@ import api from '@stackstorm/module-api';
 import style from './style.module.css';
 
 export default class Header extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-  };
-
   state = {
     showDropdown: false,
   };

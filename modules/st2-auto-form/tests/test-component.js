@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { describe, it } from '@rstest/core';
-import React from 'react';
+import { act } from 'react';
 import { ReactTester } from '@stackstorm/module-test-utils';
 import { expect } from 'chai';
 import sinon from 'sinon';
@@ -79,7 +79,7 @@ describe(`${AutoForm.name} Component`, () => {
     const output = ReactTester.create(<AutoForm spec={spec} onChange={onChange} />);
 
     const [ field ] = output.node.props.children;
-    field.props.onChange('test');
+    act(() => field.props.onChange('test'));
 
     expect(onChange.withArgs({ test: 'test' }).calledOnce).to.be.true;
   });
@@ -106,7 +106,7 @@ describe(`${AutoForm.name} Component`, () => {
     const output = ReactTester.create(<AutoForm spec={spec} onChange={onChange} />);
 
     const [ , , other ] = output.node.props.children;
-    other.props.onChange('test');
+    act(() => other.props.onChange('test'));
 
     expect(onChange.withArgs({ enumed: 'world', other: 'test' }).calledOnce).to.be.true;
   });

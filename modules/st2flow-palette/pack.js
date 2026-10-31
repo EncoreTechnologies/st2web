@@ -14,18 +14,12 @@
 // limitations under the License.
 
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 
 import api from '@stackstorm/module-api';
 
 import style from './style.module.css';
 
 export default class Action extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    children: PropTypes.node,
-  };
-
   state = {
     open: false,
   };

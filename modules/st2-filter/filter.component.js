@@ -13,21 +13,11 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
 import style from './style.module.css';
 
 export default class Filter extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    label: PropTypes.string.isRequired,
-    multiple: PropTypes.bool.isRequired,
-    items: PropTypes.arrayOf(PropTypes.string).isRequired,
-    activeItems: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onChange: PropTypes.func.isRequired,
-  };
-
   static defaultProps = {
     multiple: false,
   };

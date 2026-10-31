@@ -15,7 +15,6 @@
 
 import _ from 'lodash';
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 import api from '@stackstorm/module-api';
 
@@ -25,11 +24,6 @@ import componentStyle from './style.module.css';
 const APPLICATION_INACTIVITY_TIME = 7200; // 2 hr time here it is in seconds
 
 class Icon extends React.Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    style: PropTypes.object,
-  };
-
   static defaultProps = {
     style: componentStyle,
   };
@@ -44,22 +38,6 @@ class Icon extends React.Component {
 }
 
 export default class Menu extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-    routes: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      href: PropTypes.string,
-      url: PropTypes.string,
-      target: PropTypes.string,
-      icon: PropTypes.string,
-      position: PropTypes.number,
-    })).isRequired,
-    style: PropTypes.object,
-  };
-
   static defaultProps = {
     style: componentStyle,
   };
@@ -69,7 +47,7 @@ export default class Menu extends React.Component {
     window.addEventListener('storage', this.storageChange());
 
   }
- 
+
   componentWillUnmount() {
     window.removeEventListener('storage',this.storageChange());
   }
@@ -108,7 +86,7 @@ export default class Menu extends React.Component {
       }
     });
   }
-  
+
   handleDisconnect() {
     api.disconnect();
     window.location.reload();

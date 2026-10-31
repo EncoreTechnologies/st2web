@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 
 import cx from 'classnames';
 
@@ -21,16 +20,6 @@ import style from './style.module.css';
 import flexStyle from '@stackstorm/module-flex-table/style.module.css';
 
 export default class InquiryFlexCard extends React.Component {
-  static propTypes = {
-    inquiry: PropTypes.object.isRequired,
-    selected: PropTypes.string,
-    onSelect: PropTypes.func.isRequired,
-  };
-
-  static contextTypes = {
-    scrollIntoView: PropTypes.func.isRequired,
-  };
-
   static defaultProps = {
     isChild: false,
     displayUTC: false,

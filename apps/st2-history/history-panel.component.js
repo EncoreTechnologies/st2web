@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import store from './store';
 
@@ -75,25 +74,6 @@ const FlexTableWrapper = connect((state, props) => {
 });
 
 class HistoryPanel extends React.Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-    }).isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        ref: PropTypes.string,
-        section: PropTypes.string,
-      }).isRequired,
-    }).isRequired,
-
-    filter: PropTypes.string,
-    filters: PropTypes.array,
-    childExecutions: PropTypes.object,
-    groups: PropTypes.array,
-    collapsed: PropTypes.bool,
-  };
-
   state = {
     maxPages: 0,
     displayUTC: false,

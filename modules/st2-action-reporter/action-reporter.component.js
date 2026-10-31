@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
 import reporters from './reporters';
@@ -84,13 +83,6 @@ function getMaxExecutionResultSizeForRender() {
 }
 
 export default class ActionReporter extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    runner: PropTypes.string.isRequired,
-    execution: PropTypes.object.isRequired,
-    api: PropTypes.object.isRequired,
-  };
-
   static utils = {
     getMaxExecutionResultSizeForRender: getMaxExecutionResultSizeForRender,
     getBaseAPIUrl: getBaseAPIUrl,

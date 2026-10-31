@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 import api from '@stackstorm/module-api';
 
@@ -21,12 +20,6 @@ import componentStyle from './style.module.css';
 import menuStyle from '@stackstorm/module-menu/style.module.css';
 
 class LoginForm extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    style: PropTypes.object,
-  };
-
   static defaultProps = {
     style: componentStyle,
   };
@@ -43,12 +36,6 @@ class LoginForm extends React.Component {
 }
 
 class LoginLogo extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    style: PropTypes.object,
-  };
-
   static defaultProps = {
     style: componentStyle,
   };
@@ -65,12 +52,6 @@ class LoginLogo extends React.Component {
 }
 
 class LoginError extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    message: PropTypes.string,
-    style: PropTypes.object,
-  };
-
   static defaultProps = {
     style: componentStyle,
   };
@@ -87,12 +68,6 @@ class LoginError extends React.Component {
 }
 
 class LoginRow extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    style: PropTypes.object,
-  };
-
   static defaultProps = {
     style: componentStyle,
   };
@@ -109,12 +84,6 @@ class LoginRow extends React.Component {
 }
 
 class LoginBottomRow extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    style: PropTypes.object,
-  };
-
   static defaultProps = {
     style: componentStyle,
   };
@@ -131,12 +100,6 @@ class LoginBottomRow extends React.Component {
 }
 
 export default class Login extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    onConnect: PropTypes.func.isRequired,
-    style: PropTypes.object,
-  };
-
   static defaultProps = {
     style: {
       ...componentStyle,

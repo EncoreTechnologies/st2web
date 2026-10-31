@@ -15,7 +15,6 @@
 import { describe, it } from '@rstest/core';
 import { expect } from 'chai';
 
-import React from 'react';
 import { ReactTester } from '@stackstorm/module-test-utils';
 
 import { Content } from '..';

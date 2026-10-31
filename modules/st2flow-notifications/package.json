@@ -15,7 +15,6 @@
   "homepage": "https://github.com/stackstorm/st2web#readme",
   "dependencies": {
     "classnames": "^2.2.6",
-    "prop-types": "15.7.2",
-    "react": "16.8.6"
+    "react": "19.3.1"
   }
 }

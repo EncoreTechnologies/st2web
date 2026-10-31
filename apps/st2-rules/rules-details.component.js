@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 import api from '@stackstorm/module-api';
@@ -44,29 +43,6 @@ import RemoteForm from '@stackstorm/module-remote-form';
 import EnforcementPanel from './panels/enforcements';
 
 class RulesDetails extends React.Component {
-  static propTypes = {
-    onComponentUpdate: PropTypes.func,
-
-    onNavigate: PropTypes.func.isRequired,
-    onSave: PropTypes.func,
-    onDelete: PropTypes.func,
-    onToggleEnable: PropTypes.func,
-
-    id: PropTypes.string,
-    section: PropTypes.string,
-    rule: PropTypes.object,
-
-    triggerParameters: PropTypes.object,
-    actionParameters: PropTypes.object,
-
-    enforcements: PropTypes.array,
-
-    triggerSpec: PropTypes.object,
-    criteriaSpecs: PropTypes.object,
-    actionSpec: PropTypes.object,
-    packSpec: PropTypes.object,
-  };
-
   state = {
     editing: null,
     rulePreview: false,

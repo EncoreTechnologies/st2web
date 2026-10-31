@@ -13,8 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 import cx from 'classnames';
 import { get } from 'lodash';
 
@@ -42,47 +41,12 @@ const CONTROLS = {
   right: new Vector(1, 0),
 };
 
-class SVGPath extends Component {
-  static propTypes = {
-    onClick: PropTypes.func,
-  };
-
-  componentDidMount() {
-    // React fail: onClick isn't supported for SVG elements, so
-    // manually set up the click handler here.
-    if(this.pathElement.current && this.pathElement.current instanceof Element) {
-      this.pathElement.current.addEventListener('click', () => this.props.onClick);
-    }
-  }
-
-  componentWillUnmount() {
-    if(this.pathElement.current && this.pathElement.current instanceof Element) {
-      this.pathElement.current.removeEventListener('click', this.props.onClick);
-    }
-  }
-
-  pathElement = React.createRef();
-
-  render() {
-    return <path ref={this.pathElement} {...this.props} />;
-  }
+// React delivers onClick on SVG elements, so the handler goes straight through with the other props.
+function SVGPath(props) {
+  return <path {...props} />;
 }
 
 export default class TransitionGroup extends Component {
-  static propTypes = {
-    transitions: PropTypes.arrayOf(
-      PropTypes.shape({
-        from: PropTypes.object.isRequired,
-        to: PropTypes.object.isRequired,
-      })
-    ),
-    taskRefs: PropTypes.object.isRequired,
-    graph: PropTypes.object.isRequired,
-    color: PropTypes.string,
-    selected: PropTypes.bool,
-    onClick: PropTypes.func,
-  };
-
   uniqId = 'some';
 
   style = style;

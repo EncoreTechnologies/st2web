@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import store from './store';
 import fp from 'lodash/fp';
@@ -50,15 +49,6 @@ function getDeepestParentId(context) {
 }
 
 class InquiryDetails extends React.Component {
-  static propTypes = {
-    handleNavigate: PropTypes.func.isRequired,
-    handleResponse: PropTypes.func,
-
-    id: PropTypes.string,
-    section: PropTypes.string,
-    inquiry: PropTypes.object,
-  };
-
   static defaultProps = {
     displayUTC: false,
   };

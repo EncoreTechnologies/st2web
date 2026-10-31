@@ -13,9 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
 import Editor from '@stackstorm/st2flow-editor';
@@ -61,17 +60,6 @@ const WorkflowEditor = connect(
 )(class WorkflowEditor extends Editor {}));
 
 class Details extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-
-    navigation: PropTypes.object,
-    navigate: PropTypes.func,
-
-    actions: PropTypes.array,
-
-    onChange: PropTypes.func,
-  };
-
   sections = [{
     title: 'metadata',
     className: 'icon-gear gearclass',

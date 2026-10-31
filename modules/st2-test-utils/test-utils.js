@@ -12,7 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import { act } from 'react';
 import TestRenderer from 'react-test-renderer';
+
+// React 19's test renderer always uses a concurrent root: updates only flush inside act().
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+// react-test-renderer is deprecated in React 19 and warns on every create(). The ReactTester-based
+// tests move to @testing-library/react; until then the warning is muted here (it's its only effect).
+globalThis.IS_REACT_NATIVE_TEST_ENVIRONMENT = true;
+
+// Give refs a real (jsdom) element so components that measure or focus their nodes can run.
+function createNodeMock(element) {
+  return typeof document !== 'undefined' && typeof element.type === 'string' ? document.createElement(element.type) : null;
+}
 
 export class ReactInstanceTester {
   static create(instance) {
@@ -86,7 +98,10 @@ for (const method of methods) {
 
 export class ReactTester extends ReactInstanceTester {
   constructor(component) {
-    const render = TestRenderer.create(component);
+    let render;
+    act(() => {
+      render = TestRenderer.create(component, { createNodeMock });
+    });
 
     super(render.root);
 

@@ -13,9 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 import _ from 'lodash';
 
@@ -63,22 +62,6 @@ class EmptyPanel extends Component {
 }
 
 class TaskDetails extends Component {
-  static propTypes = {
-    meta: PropTypes.object,
-
-    tasks: PropTypes.array,
-    transitions: PropTypes.array,
-    issueModelCommand: PropTypes.func,
-
-    navigation: PropTypes.object,
-    navigate: PropTypes.func,
-
-    actions: PropTypes.array,
-
-    selected: PropTypes.string,
-    onBack: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
     this.state = {

@@ -13,9 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
 
 import BooleanField from '@stackstorm/module-auto-form/fields/boolean';
 import StringField from '@stackstorm/module-auto-form/fields/string';
@@ -30,24 +29,6 @@ import store from '../../apps/st2-workflows/store';
 const default_runner_type = 'orquesta';
 
 class Meta extends Component {
-
-  static propTypes = {
-    pack: PropTypes.string,
-    setPack: PropTypes.func,
-
-    meta: PropTypes.object,
-    setMeta: PropTypes.func,
-
-    navigation: PropTypes.object,
-    navigate: PropTypes.func,
-
-    actions: PropTypes.array,
-    vars: PropTypes.array,
-    setVars: PropTypes.func,
-
-    onChange: PropTypes.func,
-  };
-
   componentDidUpdate(prevProps) {
     const { meta, setMeta } = this.props;
 

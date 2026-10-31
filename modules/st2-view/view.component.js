@@ -13,19 +13,11 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
 import style from './style.module.css';
 
 export default class View extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    spec: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-  };
-
   state = {
     visible: false,
   };

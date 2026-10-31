@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import { act } from 'react';
 import { ReactTester } from '@stackstorm/module-test-utils';
 
 export class TestComponent {
@@ -50,7 +51,7 @@ export class TestComponent {
     }
 
     const field = this.field();
-    field.props.onChange(event);
+    act(() => field.props.onChange(event));
   }
 
   fieldType() {

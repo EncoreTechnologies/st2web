@@ -13,18 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 import cx from 'classnames';
 
 import style from './style.module.css';
 
 export class Toolbar extends Component {
-  static propTypes = {
-    secondary: PropTypes.bool,
-    children: PropTypes.node,
-  };
-
   style = style;
 
   render() {
@@ -38,13 +32,6 @@ export class Toolbar extends Component {
 }
 
 export class ToolbarButton extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-    stretch: PropTypes.bool,
-    selected: PropTypes.bool,
-  };
-
   style = style;
 
   render() {
@@ -58,11 +45,6 @@ export class ToolbarButton extends Component {
 }
 
 export class Panel extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node,
-  };
-
   style = style;
 
   render() {

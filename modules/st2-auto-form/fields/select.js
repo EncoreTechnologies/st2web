@@ -14,7 +14,6 @@
 // limitations under the License.
 
 import _ from 'lodash';
-import React from 'react';
 import { BaseTextField } from './base';
 
 export default class SelectField extends BaseTextField {

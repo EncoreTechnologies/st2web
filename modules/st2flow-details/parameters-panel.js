@@ -13,9 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
 
 import Parameter from './parameter';
 import ParameterEditor from './parameter-editor';
@@ -48,11 +47,6 @@ function sortParameters(params) {
 }
 
 class Parameters extends Component {
-  static propTypes = {
-    meta: PropTypes.object,
-    setMeta: PropTypes.func,
-  };
-
   state = {
     edit: false,
   };

@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import store from './store';
 
@@ -64,28 +63,6 @@ const FlexTableWrapper = connect((state, props) => {
 });
 
 class TriggersPanel extends React.Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      search: PropTypes.string,
-    }),
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        ref: PropTypes.string,
-        section: PropTypes.string,
-      }),
-    }),
-
-    groups: PropTypes.array,
-    triggers: PropTypes.array,
-    filter: PropTypes.string,
-    collapsed: PropTypes.bool,
-
-    triggerSpec: PropTypes.object,
-    criteriaSpecs: PropTypes.object,
-    actionSpec: PropTypes.object,
-    packSpec: PropTypes.object,
-  };
-
   componentDidMount() {
     this.fetchGroups();
   }

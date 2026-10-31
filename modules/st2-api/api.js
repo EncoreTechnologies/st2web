@@ -212,11 +212,9 @@ export class API {
       // responseType: 'json',
     };
 
-    if (this.rejectUnauthorized === false) {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-    }
-    else {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
+    // Node only (the client is also used outside the browser); browsers have no `process`.
+    if (typeof process !== 'undefined' && process.env) {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = this.rejectUnauthorized === false ? '0' : '1';
     }
 
     const response = await axios(config);

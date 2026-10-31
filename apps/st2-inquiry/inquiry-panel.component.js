@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import store from './store';
 import fp from 'lodash/fp';
@@ -70,22 +69,6 @@ const FlexTableWrapper = connect((state, props) => {
 });
 
 class InquiryPanel extends React.Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-    }).isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        ref: PropTypes.string,
-        section: PropTypes.string,
-      }).isRequired,
-    }).isRequired,
-
-    inquiries: PropTypes.array,
-    collapsed: PropTypes.bool,
-  };
-
   state = {
     maxPages: 0,
   };

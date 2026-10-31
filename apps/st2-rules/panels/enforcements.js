@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 import cond from 'lodash/fp/cond';
@@ -48,10 +46,6 @@ import Highlight from '@stackstorm/module-highlight';
 
 
 class EnforcementPanel extends DetailsPanel {
-  static propTypes = {
-    enforcements: PropTypes.array,
-  };
-
   state = {
     visible: {},
   };

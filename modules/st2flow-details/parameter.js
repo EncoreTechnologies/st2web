@@ -13,8 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import { Component } from 'react';
 import cx from 'classnames';
 
 import style from './style.module.css';
@@ -31,16 +30,6 @@ export const specialProperties = [{
 }];
 
 export default class Parameter extends Component {
-  static propTypes = {
-    name: PropTypes.string,
-    parameter: PropTypes.shape({
-      type: PropTypes.string,
-      description: PropTypes.string,
-    }),
-    onEdit: PropTypes.func,
-    onDelete: PropTypes.func,
-  };
-
   handleEdit(e) {
     e.stopPropagation();
 

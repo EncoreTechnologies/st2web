@@ -15,7 +15,6 @@
 
 import fp from 'lodash/fp';
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 import api from '@stackstorm/module-api';
@@ -27,12 +26,6 @@ import { updateLocation } from './methods';
 import Redirect from './redirect.component';
 
 class Router extends React.Component {
-  static propTypes = {
-    routes: PropTypes.array,
-    location: PropTypes.object,
-    updateLocation: PropTypes.func,
-  };
-
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.handleStateLocationChange());
     this.unlisten = history.listen((location, action) => this.handleHistoryLocationChange(location, action));

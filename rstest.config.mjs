@@ -27,11 +27,16 @@ const NODE_ONLY = [
 ];
 
 const shared = {
-  // same transforms (JSX, CSS modules, PostCSS) as the app build
+  // same JS transforms and CSS-module class names as the app build (CSS itself isn't emitted)
   extends: withRsbuildConfig({ configPath: './rsbuild.config.mjs' }),
   output: {
     // resolve dependencies the way the app bundle does (CJS/UMD named-import interop)
     bundleDependencies: true,
+  },
+  tools: {
+    // Rsbuild detects JSX in .js files by itself, but coverage re-parses untested files with
+    // only these options, so name the syntax explicitly.
+    swc: { jsc: { parser: { syntax: 'ecmascript', jsx: true } } },
   },
 };
 
