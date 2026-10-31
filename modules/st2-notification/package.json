@@ -13,8 +13,6 @@
   },
   "homepage": "https://github.com/stackstorm/st2web#readme",
   "dependencies": {
-    "@stackstorm/module-router": "*",
-    "escape-html": "^1.0.3",
-    "noty": "^3.1.4"
+    "@stackstorm/module-router": "*"
   }
 }

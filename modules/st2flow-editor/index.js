@@ -16,13 +16,13 @@
 import { Component } from 'react';
 import cx from 'classnames';
 
-import ace from 'brace';
-import 'brace/ext/language_tools';
-import 'brace/mode/yaml';
+import ace from 'ace-builds';
+import 'ace-builds/src-noconflict/ext-language_tools';
+import 'ace-builds/src-noconflict/mode-yaml';
 
 import style from './style.module.css';
 
-const Range = ace.acequire('ace/range').Range;
+const Range = ace.require('ace/range').Range;
 const editorId = 'editor_mount_point';
 const DELTA_DEBOUNCE = 300; // ms
 const DEFAULT_TAB_SIZE = 2;
@@ -34,12 +34,13 @@ export { editorConnect };
 export default class Editor extends Component {
   componentDidMount() {
     const { source } = this.props;
-    ace.acequire('ace/ext/language_tools');
+    ace.require('ace/ext/language_tools');
 
     this.editor = ace.edit(editorId);
-    this.editor.$blockScrolling = Infinity;
     this.editor.setOptions({
       mode: 'ace/mode/yaml',
+      // Ace would load its YAML linter from a worker script we don't ship; the model validates instead.
+      useWorker: false,
       useSoftTabs: true,
       showPrintMargin: false,
       highlightActiveLine: false,

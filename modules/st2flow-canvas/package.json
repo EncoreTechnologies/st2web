@@ -15,10 +15,10 @@
   "dependencies": {
     "@stackstorm/module-api": "*",
     "@stackstorm/st2flow-notifications": "*",
-    "classnames": "^2.2.6",
-    "lodash": "4.17.21",
+    "classnames": "2.5.1",
+    "lodash": "4.18.1",
     "react": "19.3.1",
     "react-hotkeys-hook": "5.3.3",
-    "react-redux": "9.3.1"
+    "react-redux": "9.3.0"
   }
 }

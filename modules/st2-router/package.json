@@ -16,9 +16,9 @@
     "@stackstorm/module-api": "*",
     "@stackstorm/module-login": "*",
     "@stackstorm/module-store": "*",
-    "lodash": "4.17.21",
+    "lodash": "4.18.1",
     "react": "19.3.1",
-    "react-redux": "9.3.1",
-    "react-router": "8.5.1"
+    "react-redux": "9.3.0",
+    "react-router": "8.4.0"
   }
 }

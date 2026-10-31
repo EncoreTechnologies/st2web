@@ -15,7 +15,6 @@
 
 import _ from 'lodash';
 
-import diff from 'deep-diff';
 import { crawler } from '@stackstorm/st2flow-yaml';
 import BaseModel from './base-model';
 
@@ -592,7 +591,7 @@ function getRawTransitionInfo(transition, rawData) {
 
 function getNextItemInfo({ from, to, condition, publish }, next) {
   const nextIndex = next.findIndex(tr => {
-    if(to && to.length && diff(doToTaskRefArray(tr.do), to)) {
+    if(to && to.length && !_.isEqual(doToTaskRefArray(tr.do), to)) {
       return false;
     }
 

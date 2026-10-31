@@ -14,7 +14,6 @@
 
 import _ from 'lodash';
 import axios from 'axios';
-import buildURL from 'axios/lib/helpers/buildURL';
 
 let _source;
 
@@ -183,7 +182,8 @@ export class API {
     const config = {
       method,
       url: this.route(opts),
-      params: query,
+      // The API takes list filters as comma-separated values (?status=failed,canceled).
+      params: query && _.mapValues(query, param => _.isArray(param) ? param.join(',') : param),
       headers,
       transformResponse: [ function transformResponse(data, headers) {
         if (typeof data === 'string' && headers['content-type'] &&
@@ -200,15 +200,6 @@ export class API {
       } ],
       data,
       withCredentials: true,
-      paramsSerializer: params => {
-        params = _.mapValues(params, param => {
-          if (_.isArray(param)) {
-            return param.join(',');
-          }
-          return param;
-        });
-        return buildURL('', params).substr(1);
-      },
       // responseType: 'json',
     };
 
@@ -219,7 +210,8 @@ export class API {
 
     const response = await axios(config);
     const contentType = (response.headers || {})['content-type'] || [];
-    const requestId = (response.headers || {})['X-Request-ID'] || null;
+    // axios lower-cases response header names.
+    const requestId = (response.headers || {})['x-request-id'] || null;
 
     response.headers = response.headers || {};
     response.statusCode = response.status;

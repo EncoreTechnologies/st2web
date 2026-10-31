@@ -26,6 +26,21 @@ st2web nginx in front of a StackStorm install):
 $ ST2_URL=https://my-st2-host npm run develop
 ```
 
+### Adding or upgrading dependencies
+
+[`.npmrc`](./.npmrc) guards against compromised npm releases, which are usually caught and pulled
+within days:
+
+- `min-release-age=14`: npm refuses any version published less than 14 days ago. An install that asks
+  for one fails with `ETARGET ... with a date before ...`; pick an older version or wait.
+- `ignore-scripts=true`: no package's install scripts run (none of our dependencies need one).
+- `allow-git=none`: dependencies come from the registry only.
+
+Pin versions exactly in `package.json`, commit the regenerated `package-lock.json`, and check the result
+with `npm audit` and `npm audit signatures`. If a security fix is too new for the cooldown, review the
+release (publisher, dependencies, and a diff against the previous version), pin it under `overrides`
+and add it to `min-release-age-exclude` in `.npmrc` with a note on when to remove it.
+
 Quick start (docker-compose)
 -----------
 

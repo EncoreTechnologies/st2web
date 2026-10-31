@@ -25,10 +25,10 @@
     "@stackstorm/st2flow-details": "*",
     "@stackstorm/st2flow-model": "*",
     "@stackstorm/st2flow-palette": "*",
-    "classnames": "^2.2.6",
-    "lodash": "4.17.21",
+    "classnames": "2.5.1",
+    "lodash": "4.18.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "react-redux": "9.3.1"
+    "react-redux": "9.3.0"
   }
 }

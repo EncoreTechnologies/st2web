@@ -18,7 +18,7 @@ import { expect } from 'chai';
 import fs from 'fs';
 import path from 'path';
 
-import diff from 'deep-diff';
+import _ from 'lodash';
 import Model from '../model-orquesta';
 
 describe('st2flow-model: Orquesta Model', () => {
@@ -46,7 +46,7 @@ describe('st2flow-model: Orquesta Model', () => {
 
         expect(model.transitions.length).to.equal(4);
         const oldTransition = model.transitions.find(tr =>
-          tr.from.name === origTr.from.name && !diff(tr.to, origTr.to) && tr.condition === origTr.condition
+          tr.from.name === origTr.from.name && _.isEqual(tr.to, origTr.to) && tr.condition === origTr.condition
         );
 
         expect(oldTransition).to.equal(undefined);
@@ -61,8 +61,8 @@ describe('st2flow-model: Orquesta Model', () => {
         model.updateTransition(origTr, data);
 
         const newTr = Object.assign({}, origTr, data);
-        const oldTransition = model.transitions.find(tr => !diff(tr, origTr));
-        const newTransition = model.transitions.find(tr => !diff(tr, newTr));
+        const oldTransition = model.transitions.find(tr => _.isEqual(tr, origTr));
+        const newTransition = model.transitions.find(tr => _.isEqual(tr, newTr));
 
         expect(oldTransition).to.equal(undefined);
         expect(newTransition).to.not.equal(undefined);

@@ -78,6 +78,39 @@ Changed
 
   Contributed by @bishopbm1
 
+* Upgraded third-party dependencies with supply-chain guardrails:
+
+  - New ``.npmrc``: ``min-release-age=14`` (npm only resolves versions published at least 14 days
+    ago), ``ignore-scripts=true`` and ``allow-git=none``. The Dockerfiles copy it before ``npm ci``.
+    All versions are pinned exactly and the lockfile was regenerated under these rules; every
+    package has a verified registry signature, none has an install script, and none is a version
+    from the 2026 axios or Shai-Hulud/ChainDrop (keyv, flat-cache, file-entry-cache) compromises.
+  - Packages pinned in earlier steps that were still inside the cooldown were moved back to the
+    newest release outside it (Rsbuild 2.2.13, Rstest 0.12.3, react-redux 9.3.0, react-router 8.4.0,
+    postcss 8.5.30, postcss-nested 9.0.0, postcss-preset-env 11.6.1).
+  - ``follow-redirects`` 1.16.2 and ``fast-uri`` 3.1.9 are security fixes newer than the cooldown;
+    both were reviewed by hand and pinned through ``overrides`` with a dated exception in ``.npmrc``.
+  - axios 0.24 → 1.20 (``st2-api``): list filters are joined before axios serializes the query
+    instead of deep-importing ``axios/lib/helpers/buildURL``, and the request id is read from
+    ``x-request-id``.
+  - moxios (unmaintained) → axios-mock-adapter in tests.
+  - noty (deprecated) and escape-html → a small built-in toast in ``st2-notification`` with the same
+    look and behaviour. Text is set as text rather than escaped HTML; the timer pauses on hover.
+  - brace (Ace 1.2.9, abandoned) → ace-builds 1.45 in the workflow editor.
+  - ajv 6 → 8 in ``st2flow-model`` (non-strict, no regex ``u`` flag, to accept the generated
+    orquesta/mistral schemas); error marks use Ajv 8's ``instancePath``. Messages now read "must"
+    instead of "should".
+  - deep-diff (deprecated) → ``lodash.isEqual``; the model's ``change`` event now passes only the
+    YAML, since no listener used the deltas.
+  - chai-subset dropped: chai 6 has ``containSubset`` built in.
+  - lodash 4.18.1, moment 2.31.0, eventemitter3 5, validator 13.15.35, prismjs 1.30.0,
+    classnames 2.5.1, debug 4.4.3.
+  - Added tests for the notifier, schema-error formatting and API query serialization.
+  - Production dependencies have no ``npm audit`` findings. The remaining dev-only finding is
+    minimatch (ReDoS) inside ESLint 9, fixed only in minimatch 11, which no ESLint release uses yet.
+
+  Contributed by @bishopbm1
+
 Fixed
 ~~~~~
 * Fixed the UI failing to load ("process is not defined") without browserify's ``process``

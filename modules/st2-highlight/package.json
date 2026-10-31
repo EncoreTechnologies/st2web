@@ -15,8 +15,8 @@
   "dependencies": {
     "@stackstorm/module-router": "*",
     "@stackstorm/st2-style": "*",
-    "classnames": "^2.2.6",
-    "prismjs": "^1.27.0",
+    "classnames": "2.5.1",
+    "prismjs": "1.30.0",
     "react": "19.3.1"
   }
 }

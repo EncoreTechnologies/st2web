@@ -7,7 +7,8 @@ WORKDIR /opt/stackstorm/static/webui/st2web
 RUN apk add --no-cache git
 
 # install dependencies first so they cache separately from the source
-COPY package.json package-lock.json ./
+# .npmrc carries the supply-chain settings (no install scripts, registry-only)
+COPY package.json package-lock.json .npmrc ./
 COPY apps ./apps
 COPY modules ./modules
 RUN npm ci --no-audit --no-fund

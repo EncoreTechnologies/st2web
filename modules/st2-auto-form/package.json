@@ -15,10 +15,10 @@
   "dependencies": {
     "@stackstorm/module-value-format": "*",
     "@stackstorm/st2-style": "*",
-    "classnames": "^2.2.6",
-    "lodash": "4.17.21",
+    "classnames": "2.5.1",
+    "lodash": "4.18.1",
     "react": "19.3.1",
     "react-textarea-autosize": "8.5.9",
-    "validator": "^13.0.0"
+    "validator": "13.15.35"
   }
 }

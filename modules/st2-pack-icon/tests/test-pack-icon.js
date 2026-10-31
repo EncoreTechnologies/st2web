@@ -18,29 +18,29 @@ import { expect } from 'chai';
 import { act } from 'react';
 import { ReactTester } from '@stackstorm/module-test-utils';
 
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 import api from '@stackstorm/module-api';
 
 import PackIcon from '..';
 
 describe(`${PackIcon.name} Component`, () => {
+  let mock;
+
   beforeAll(async () => {
-    moxios.install();
-    moxios.stubRequest(/^https:\/\/example\.com\/api\/v1\/packs/, {
-      status: 200,
-      response: [],
-    });
+    mock = new MockAdapter(axios);
+    mock.onGet('https://example.com/api/v1/packs').reply(200, []);
     // the component loads pack icons from the API on mount
     await api.connect();
   });
   afterAll(() => {
-    moxios.uninstall();
+    mock.restore();
     api.disconnect();
   });
 
   // PackIcon re-renders once the shared /packs request settles; let that happen inside act().
-  const iconsLoaded = () => act(() => new Promise(resolve => moxios.wait(resolve)));
+  const iconsLoaded = () => act(() => new Promise(resolve => setTimeout(resolve)));
 
   describe('common functionality', () => {
 

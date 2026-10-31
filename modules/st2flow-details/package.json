@@ -18,9 +18,9 @@
     "@stackstorm/st2-style": "*",
     "@stackstorm/st2flow-editor": "*",
     "@stackstorm/st2flow-model": "*",
-    "classnames": "^2.2.6",
-    "lodash": "4.17.21",
+    "classnames": "2.5.1",
+    "lodash": "4.18.1",
     "react": "19.3.1",
-    "react-redux": "9.3.1"
+    "react-redux": "9.3.0"
   }
 }
