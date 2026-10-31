@@ -13,11 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
-import type { TaskInterface } from '@stackstorm/st2flow-model/interfaces';
-import type { Node } from 'react';
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
@@ -26,10 +21,9 @@ import { get } from 'lodash';
 import Vector from './vector';
 import { origin, ORBIT_DISTANCE } from './const';
 import Path from './path/';
-import type { Task } from './task';
-import astar, { Graph } from './astar';
+import astar from './astar';
 
-import style from './style.css';
+import style from './style.module.css';
 
 const ANCHORS = {
   top: new Vector(.5, 0),
@@ -48,14 +42,11 @@ const CONTROLS = {
   right: new Vector(1, 0),
 };
 
-type Target = {
-  task: TaskInterface,
-  anchor: string
-}
+class SVGPath extends Component {
+  static propTypes = {
+    onClick: PropTypes.func,
+  }
 
-class SVGPath extends Component<{
-  onClick: Function
-}> {
   componentDidMount() {
     // React fail: onClick isn't supported for SVG elements, so
     // manually set up the click handler here.
@@ -77,17 +68,7 @@ class SVGPath extends Component<{
   }
 }
 
-export default class TransitionGroup extends Component<{
-  transitions: Array<{
-    from: Target,
-    to: Target,
-  }>,
-  color: string,
-  selected: boolean,
-  onClick: Function,
-  taskRefs: {| [taskname: string]: { current: Task } |},
-  graph: Graph
-}> {
+export default class TransitionGroup extends Component {
   static propTypes = {
     transitions: PropTypes.arrayOf(
       PropTypes.shape({
@@ -97,6 +78,7 @@ export default class TransitionGroup extends Component<{
     ),
     taskRefs: PropTypes.object.isRequired,
     graph: PropTypes.object.isRequired,
+    color: PropTypes.string,
     selected: PropTypes.bool,
     onClick: PropTypes.func,
   }
@@ -105,7 +87,7 @@ export default class TransitionGroup extends Component<{
 
   style = style
 
-  makePath(from: Target, to: Target) {
+  makePath(from, to) {
     const { taskRefs, graph } = this.props;
     if (!from.task || !to.task) {
       return '';
@@ -136,8 +118,6 @@ export default class TransitionGroup extends Component<{
     const fromLagrange = lagrangePoint.multiply(lagrangePoint.y > 0 ? VERTICAL_MASK : HORISONTAL_MASK).add(fromOrbit);
     const toLagrange = lagrangePoint.multiply(lagrangePoint.y > 0 ? VERTICAL_MASK : HORISONTAL_MASK).multiply(-1).add(toOrbit);
 
-
-
     // now for the A* algorithm
     if(graph) {
       const pathElements = astar.search(
@@ -161,7 +141,7 @@ export default class TransitionGroup extends Component<{
     return path.toString();
   }
 
-  render(): Array<Node> {
+  render() {
     const { color, transitions, selected, taskRefs, ...props } = this.props; //eslint-disable-line no-unused-vars
 
     const transitionPaths = transitions

@@ -16,7 +16,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
-import style from './style.css';
+import style from './style.module.css';
 
 export class PopupTitle extends React.Component {
   static propTypes = {

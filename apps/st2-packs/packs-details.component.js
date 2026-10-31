@@ -41,11 +41,7 @@ import {
 import St2PortionBar from '@stackstorm/module-portion-bar';
 import Table from './table.component';
 
-@connect((state) => {
-  const { pack } = state;
-  return { pack };
-})
-export default class PacksPanel extends React.Component {
+class PacksPanel extends React.Component {
   static propTypes = {
     handleInstall: PropTypes.func.isRequired,
     handleRemove: PropTypes.func.isRequired,
@@ -238,3 +234,8 @@ export default class PacksPanel extends React.Component {
     );
   }
 }
+
+export default connect((state) => {
+  const { pack } = state;
+  return { pack };
+})(PacksPanel);

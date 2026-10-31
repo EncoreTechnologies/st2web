@@ -13,10 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
-import type { TaskInterface } from '@stackstorm/st2flow-model/interfaces';
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
@@ -26,51 +22,15 @@ import { StringField, ObjectField } from '@stackstorm/module-auto-form/fields';
 
 import Property from './property';
 
-import style from './style.css';
+import style from './style.module.css';
 
-type MistralTaskInterface = {
-  ...TaskInterface,
-  'with-items': string,
-  join: string,
-  concurrency: number | string,
-  'pause-before': number | string,
-  'wait-before': number | string,
-  'wait-after': number | string,
-  timeout: number | string,
-  retry: {
-    count: number | string,
-    delay: number | string,
-    'continue-on': string,
-    'break-on': string,
-  },
-  publish: Object,
-  'publish-on-error': Object,
-}
-
-type TransitionProps = {
-  task: MistralTaskInterface,
-  issueModelCommand?: Function,
-};
-
-@connect(
-  null,
-  (dispatch) => ({
-    issueModelCommand: (command, ...args) => {
-      dispatch({
-        type: 'MODEL_ISSUE_COMMAND',
-        command,
-        args,
-      });
-    },
-  })
-)
-export default class MistralProperties extends Component<TransitionProps, {}> {
+class MistralProperties extends Component {
   static propTypes = {
     task: PropTypes.object.isRequired,
     issueModelCommand: PropTypes.func,
   }
 
-  handleTaskProperty(name: string | Array<string>, value: any, noDelete: boolean = false) {
+  handleTaskProperty(name, value, noDelete = false) {
     const { task, issueModelCommand } = this.props;
 
     if (value || noDelete) {
@@ -80,7 +40,6 @@ export default class MistralProperties extends Component<TransitionProps, {}> {
       issueModelCommand && issueModelCommand('deleteTaskProperty', task, name);
     }
   }
-
 
   style = style
   joinFieldRef = React.createRef();
@@ -201,3 +160,16 @@ export default class MistralProperties extends Component<TransitionProps, {}> {
     ];
   }
 }
+
+export default connect(
+  null,
+  (dispatch) => ({
+    issueModelCommand: (command, ...args) => {
+      dispatch({
+        type: 'MODEL_ISSUE_COMMAND',
+        command,
+        args,
+      });
+    },
+  })
+)(MistralProperties);

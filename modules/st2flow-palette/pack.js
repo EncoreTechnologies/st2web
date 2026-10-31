@@ -13,23 +13,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
-import type { Node } from 'react';
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
 import api from '@stackstorm/module-api';
 
-import style from './style.css';
+import style from './style.module.css';
 
-export default class Action extends Component<{
-  name: string,
-  children?: Node,
-}, {
-  open: bool,
-}> {
+export default class Action extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     children: PropTypes.node,
@@ -49,7 +40,7 @@ export default class Action extends Component<{
     }
   }
 
-  handleTogglePack(e: Event) {
+  handleTogglePack(e) {
     e.stopPropagation();
 
     const { open } = this.state;

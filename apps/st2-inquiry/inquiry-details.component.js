@@ -49,37 +49,7 @@ function getDeepestParentId(context) {
   return getDeepestKey('execution_id', 'parent', context);
 }
 
-@connect(
-  (state) => {
-    const { inquiry } = state;
-    return { inquiry };
-  }, 
-  (dispatch, props) => {
-    return {
-      handleResponse: (inquiry, response) => dispatch({
-        type: 'RESPOND_INQUIRY',
-        promise: api.request({
-          method: 'put',
-          path: `/inquiries/${inquiry.id}`,
-        }, {
-          ...inquiry,
-          response,
-        })
-          .then((execution) => {
-            notification.success(`Inquiry "${inquiry.id}" has been responded successfully.`);
-            return execution;
-          })
-          .catch((err) => {
-            notification.error(`Unable to respond to inquiry "${inquiry.id}".`, {
-              err,
-            });
-            throw err;
-          }),
-      }),
-    };
-  }
-)
-export default class InquiryDetails extends React.Component {
+class InquiryDetails extends React.Component {
   static propTypes = {
     handleNavigate: PropTypes.func.isRequired,
     handleResponse: PropTypes.func,
@@ -214,3 +184,34 @@ export default class InquiryDetails extends React.Component {
     );
   }
 }
+
+export default connect(
+  (state) => {
+    const { inquiry } = state;
+    return { inquiry };
+  }, 
+  (dispatch, props) => {
+    return {
+      handleResponse: (inquiry, response) => dispatch({
+        type: 'RESPOND_INQUIRY',
+        promise: api.request({
+          method: 'put',
+          path: `/inquiries/${inquiry.id}`,
+        }, {
+          ...inquiry,
+          response,
+        })
+          .then((execution) => {
+            notification.success(`Inquiry "${inquiry.id}" has been responded successfully.`);
+            return execution;
+          })
+          .catch((err) => {
+            notification.error(`Unable to respond to inquiry "${inquiry.id}".`, {
+              err,
+            });
+            throw err;
+          }),
+      }),
+    };
+  }
+)(InquiryDetails);

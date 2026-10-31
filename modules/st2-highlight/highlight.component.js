@@ -20,7 +20,7 @@ import Prism from 'prismjs';
 import Link from '@stackstorm/module-router/link.component';
 
 import './editor.css';
-import style from './style.pcss';
+import style from './style.module.css';
 
 (function() {
   // don't include this during testing

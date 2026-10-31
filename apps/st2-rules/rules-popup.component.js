@@ -38,38 +38,7 @@ import Popup from '@stackstorm/module-popup';
 
 const emptySpec = { enum: [] };
 
-@connect(
-  ({
-    triggerSpec, criteriaSpecs, actionSpec, packSpec,
-  }) => ({
-    triggerSpec, criteriaSpecs, actionSpec, packSpec,
-  }),
-  (dispatch, props) => ({
-    onSubmit: (rule) => dispatch({
-      type: 'CREATE_RULE',
-      promise: api.request({
-        method: 'post',
-        path: '/rules',
-      }, rule)
-        .then((rule) => {
-          notification.success(`Rule "${rule.ref}" has been created successfully.`);
-
-          props.onNavigate({
-            id: rule.ref,
-            section: 'general',
-          });
-
-          return rule;
-        })
-        .catch((err) => {
-          notification.error('Unable to create rule.', { err });
-          throw err;
-        }),
-    }),
-    onCancel: () => props.onNavigate({ id: false }),
-  })
-)
-export default class RulesPopup extends React.Component {
+class RulesPopup extends React.Component {
   static propTypes = {
     triggerSpec: PropTypes.object,
     criteriaSpecs: PropTypes.object,
@@ -254,3 +223,35 @@ export default class RulesPopup extends React.Component {
     );
   }
 }
+
+export default connect(
+  ({
+    triggerSpec, criteriaSpecs, actionSpec, packSpec,
+  }) => ({
+    triggerSpec, criteriaSpecs, actionSpec, packSpec,
+  }),
+  (dispatch, props) => ({
+    onSubmit: (rule) => dispatch({
+      type: 'CREATE_RULE',
+      promise: api.request({
+        method: 'post',
+        path: '/rules',
+      }, rule)
+        .then((rule) => {
+          notification.success(`Rule "${rule.ref}" has been created successfully.`);
+
+          props.onNavigate({
+            id: rule.ref,
+            section: 'general',
+          });
+
+          return rule;
+        })
+        .catch((err) => {
+          notification.error('Unable to create rule.', { err });
+          throw err;
+        }),
+    }),
+    onCancel: () => props.onNavigate({ id: false }),
+  })
+)(RulesPopup);

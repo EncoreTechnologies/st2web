@@ -17,7 +17,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
-import style from './style.css';
+import style from './style.module.css';
 
 export default class PortionBar extends React.Component {
   static propTypes = {

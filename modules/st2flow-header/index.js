@@ -13,8 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
@@ -22,13 +20,9 @@ import url from 'url';
 
 import api from '@stackstorm/module-api';
 
-import style from './style.css';
+import style from './style.module.css';
 
-export default class Header extends Component<{
-  className?: string,
-}, {
-  showDropdown: bool,
-}> {
+export default class Header extends Component {
   static propTypes = {
     className: PropTypes.string,
   }
@@ -39,7 +33,7 @@ export default class Header extends Component<{
 
   style = style
 
-  handleToggleDropdown(e: Event) {
+  handleToggleDropdown(e) {
     e.stopPropagation();
 
     const { showDropdown } = this.state;
@@ -47,7 +41,7 @@ export default class Header extends Component<{
     this.setState({ showDropdown: !showDropdown });
   }
 
-  handleLogout(e: Event) {
+  handleLogout(e) {
     e.stopPropagation();
 
     api.disconnect();

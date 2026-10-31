@@ -13,10 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
-import type { TaskInterface } from '@stackstorm/st2flow-model/interfaces';
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
@@ -26,32 +22,15 @@ import { StringField } from '@stackstorm/module-auto-form/fields';
 
 import Property from './property';
 
-import style from './style.css';
+import style from './style.module.css';
 
-type TransitionProps = {
-  task: TaskInterface,
-  issueModelCommand?: Function,
-};
-
-@connect(
-  null,
-  (dispatch) => ({
-    issueModelCommand: (command, ...args) => {
-      dispatch({
-        type: 'MODEL_ISSUE_COMMAND',
-        command,
-        args,
-      });
-    },
-  })
-)
-export default class OrquestaTransition extends Component<TransitionProps, {}> {
+class OrquestaTransition extends Component {
   static propTypes = {
     task: PropTypes.object.isRequired,
     issueModelCommand: PropTypes.func,
   }
 
-  handleTaskProperty(name: string | Array<string>, value: any, noDelete: boolean = false) {
+  handleTaskProperty(name, value, noDelete = false) {
     const { task, issueModelCommand } = this.props;
 
     if (value || noDelete) {
@@ -132,7 +111,7 @@ export default class OrquestaTransition extends Component<TransitionProps, {}> {
                   value={(task.delay)}
                   placeholder="enter expression or integer"
                   onChange={e => this.handleTaskProperty('delay',this.getValue(e.target.value), true)}
-                  onBlur={e => this.handleTaskProperty('delay',this.getValue(e.target.value), true)} 
+                  onBlur={e => this.handleTaskProperty('delay',this.getValue(e.target.value), true)}
                 />
               </label>
             </div>
@@ -153,3 +132,16 @@ export default class OrquestaTransition extends Component<TransitionProps, {}> {
     ];
   }
 }
+
+export default connect(
+  null,
+  (dispatch) => ({
+    issueModelCommand: (command, ...args) => {
+      dispatch({
+        type: 'MODEL_ISSUE_COMMAND',
+        command,
+        args,
+      });
+    },
+  })
+)(OrquestaTransition);

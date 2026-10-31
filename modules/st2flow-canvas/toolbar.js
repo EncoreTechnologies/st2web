@@ -13,17 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import _ from 'lodash';
 
-import style from './style.css';
+import style from './style.module.css';
 
-@connect(
+export const ToolbarButton = connect(
   null,
   dispatch => ({
     pushError: (error, source) =>
@@ -39,23 +37,7 @@ import style from './style.css';
         message,
       }),
   })
-)
-export class ToolbarButton extends Component<
-  {
-    icon: string,
-    errorMessage?: string,
-    successMessage?: string,
-    onClick: Function,
-    pushError: Function,
-    pushSuccess: Function,
-    disabled?: boolean,
-    title: string,
-    className: string,
-  },
-  {
-    status: "initial" | "pending" | "success" | "error"
-  }
-> {
+)(class ToolbarButton extends Component {
   static propTypes = {
     icon: PropTypes.string,
     errorMessage: PropTypes.string,
@@ -76,7 +58,7 @@ export class ToolbarButton extends Component<
     status: 'initial',
   };
 
-  async handleClick(e: Event) {
+  async handleClick(e) {
     e.stopPropagation();
 
     const { onClick, errorMessage, successMessage, pushError, pushSuccess, disabled, icon } = this.props;
@@ -137,14 +119,9 @@ export class ToolbarButton extends Component<
       />
     );
   }
-}
+});
 
-export class ToolbarDropdown extends Component<{
-  children: any,
-  shown: boolean,
-  pointerPosition: string,
-  onClose?: Function,
-}> {
+export class ToolbarDropdown extends Component {
   static propTypes = {
     children: PropTypes.node,
     shown: PropTypes.bool,
@@ -153,7 +130,7 @@ export class ToolbarDropdown extends Component<{
   };
 
   componentDidMount() {
-    this.boundClickListener = (function(ev: Event) {
+    this.boundClickListener = (function(ev) {
       if(ev.target instanceof HTMLElement
           && !ev.target.matches(`.${this.style.dropdown} *`)
           && this.props.onClose
@@ -170,7 +147,7 @@ export class ToolbarDropdown extends Component<{
 
   style = style;
 
-  boundClickListener: (Event) => void;
+  boundClickListener;
 
   render() {
     const { children, pointerPosition, shown } = this.props;
@@ -185,10 +162,7 @@ export class ToolbarDropdown extends Component<{
   }
 }
 
-export class Toolbar extends Component<{
-  children: any,
-  position?: string
-}> {
+export class Toolbar extends Component {
   static propTypes = {
     children: PropTypes.node,
     position: PropTypes.string,

@@ -18,7 +18,7 @@ import cx from 'classnames';
 
 import reporters from './reporters';
 
-import style from './style.css';
+import style from './style.module.css';
 
 // If action execution result is larger than this value (in bytes) we won't try to render it in
 // the code highlighter widget, but display a link to the raw result output instead.

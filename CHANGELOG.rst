@@ -22,6 +22,17 @@ Changed
 * Add support for EL9. Removed support for bionic and el7. #1027
   Contributed by @amanda11
 
+* Prepared the source for the Node 24 / Rsbuild toolchain (no behaviour change):
+
+  - Removed Flow type annotations (``flow-remove-types``); the type-only
+    ``modules/st2flow-model/interfaces.js`` is deleted.
+  - Replaced legacy ``@connect`` class decorators with plain
+    ``connect(...)(Component)`` calls (40 classes in 32 files).
+  - Renamed CSS-module stylesheets (previously selected per package via
+    browserify ``modularize`` and the ``.pcss`` extension) to ``*.module.css``.
+
+  Contributed by @bishopbm1
+
 Fixed
 ~~~~~
 * Fixed CircleCI tests by pinning lerna@6.0.0. #1008

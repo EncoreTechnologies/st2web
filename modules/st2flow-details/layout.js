@@ -13,20 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
-import type { Node } from 'react';
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
-import style from './style.css';
+import style from './style.module.css';
 
-export class Toolbar extends Component<{
-  secondary?: bool,
-  children?: Node,
-}> {
+export class Toolbar extends Component {
   static propTypes = {
     secondary: PropTypes.bool,
     children: PropTypes.node,
@@ -44,12 +37,7 @@ export class Toolbar extends Component<{
   }
 }
 
-export class ToolbarButton extends Component<{
-  className?: string,
-  children?: Node,
-  stretch?: bool,
-  selected?: bool,
-}> {
+export class ToolbarButton extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
@@ -69,10 +57,7 @@ export class ToolbarButton extends Component<{
   }
 }
 
-export class Panel extends Component<{
-  className?: string,
-  children?: Node,
-}> {
+export class Panel extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,

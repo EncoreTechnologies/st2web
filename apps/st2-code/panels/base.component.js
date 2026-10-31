@@ -18,7 +18,7 @@ import React from 'react';
 import Highlight from '@stackstorm/module-highlight';
 import { Link } from '@stackstorm/module-router';
 
-import style from '../style.css';
+import style from '../style.module.css';
 
 export default class BaseCode extends React.Component {
   state = {

@@ -47,14 +47,7 @@ import Label from '@stackstorm/module-label';
 import Highlight from '@stackstorm/module-highlight';
 
 
-@connect(
-  ({
-    enforcements,
-  }) => ({
-    enforcements,
-  })
-)
-export default class EnforcementPanel extends DetailsPanel {
+class EnforcementPanel extends DetailsPanel {
   static propTypes = {
     enforcements: PropTypes.array,
   }
@@ -152,3 +145,11 @@ export default class EnforcementPanel extends DetailsPanel {
     );
   }
 }
+
+export default connect(
+  ({
+    enforcements,
+  }) => ({
+    enforcements,
+  })
+)(EnforcementPanel);

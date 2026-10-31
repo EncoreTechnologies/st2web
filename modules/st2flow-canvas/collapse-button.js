@@ -13,13 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
-import style from './style.css';
+import style from './style.module.css';
 
 export default class CollapseButton extends Component {
   static propTypes = {
@@ -30,7 +28,7 @@ export default class CollapseButton extends Component {
 
   style = style
 
-  handleClick(e: Event) {
+  handleClick(e) {
     e.stopPropagation();
     this.props.onClick();
   }

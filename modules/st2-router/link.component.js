@@ -23,8 +23,7 @@ const isModifiedEvent = event =>
   !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 
 
-@connect(({ location }) => ({ location }))
-export default class Link extends React.Component {
+class Link extends React.Component {
   static propTypes = {
     location: PropTypes.object,
     onClick: PropTypes.func,
@@ -80,3 +79,5 @@ export default class Link extends React.Component {
     );
   }
 }
+
+export default connect(({ location }) => ({ location }))(Link);

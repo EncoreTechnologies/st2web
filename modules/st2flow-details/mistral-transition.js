@@ -13,10 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
-import type { TaskRefInterface, TransitionRefInterface } from '@stackstorm/st2flow-model/interfaces';
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
@@ -24,49 +20,9 @@ import cx from 'classnames';
 
 import { StringField, SelectField, ColorStringField, EnumField} from '@stackstorm/module-auto-form/fields';
 
-import style from './style.css';
+import style from './style.module.css';
 
-type TransitionProps = {
-  transition: {
-    from: TaskRefInterface,
-    to: Array<TaskRefInterface>,
-    condition?: string,
-    color?: string
-  },
-  taskNames: Array<string> | string,
-  selected: boolean,
-  onChange?: Function,
-};
-
-@connect(
-  null,
-  (dispatch) => ({
-    onChange: (transition: TransitionRefInterface, value: any) => {
-      if(value.hasOwnProperty('color')) {
-        dispatch({
-          type: 'MODEL_ISSUE_COMMAND',
-          command: 'setTransitionProperty',
-          args: [
-            transition,
-            'color',
-            value.color,
-          ],
-        });
-      }
-      else {
-        dispatch({
-          type: 'MODEL_ISSUE_COMMAND',
-          command: 'updateTransition',
-          args: [
-            transition,
-            value,
-          ],
-        });
-      }
-    },
-  })
-)
-export default class MistralTransition extends Component<TransitionProps, {}> {
+class MistralTransition extends Component {
   static propTypes = {
     transition: PropTypes.object.isRequired,
     taskNames: PropTypes.arrayOf(PropTypes.string),
@@ -77,27 +33,27 @@ export default class MistralTransition extends Component<TransitionProps, {}> {
   style = style
   cache = {} // used to cache togglable data
 
-  handleConditionChange(condition: string) {
+  handleConditionChange(condition) {
     const { transition, onChange } = this.props;
     const { from, to } = transition;
 
     onChange && onChange(transition, { condition, from, to });
   }
 
-  handleTypeChange(type: string) {
+  handleTypeChange(type) {
     const { transition, onChange } = this.props;
     const { from, to } = transition;
 
     onChange && onChange(transition, { type, from, to });
   }
 
-  handleColorChange(color: string) {
+  handleColorChange(color) {
     const { transition, onChange } = this.props;
 
     onChange && onChange(transition, { color });
   }
 
-  handleDoChange(to: string) {
+  handleDoChange(to) {
     const { transition, onChange } = this.props;
     const { condition, from } = transition;
 
@@ -154,3 +110,32 @@ export default class MistralTransition extends Component<TransitionProps, {}> {
     );
   }
 }
+
+export default connect(
+  null,
+  (dispatch) => ({
+    onChange: (transition, value) => {
+      if(value.hasOwnProperty('color')) {
+        dispatch({
+          type: 'MODEL_ISSUE_COMMAND',
+          command: 'setTransitionProperty',
+          args: [
+            transition,
+            'color',
+            value.color,
+          ],
+        });
+      }
+      else {
+        dispatch({
+          type: 'MODEL_ISSUE_COMMAND',
+          command: 'updateTransition',
+          args: [
+            transition,
+            value,
+          ],
+        });
+      }
+    },
+  })
+)(MistralTransition);

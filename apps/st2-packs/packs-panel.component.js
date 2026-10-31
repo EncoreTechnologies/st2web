@@ -58,7 +58,7 @@ function waitExecution(execution_id, record) {
   return undefined;
 }
 
-@connect((state, props) => {
+const FlexTableWrapper = connect((state, props) => {
   const { uid } = props;
   const { collapsed = state.collapsed } = state.tables[uid] || {};
 
@@ -69,20 +69,15 @@ function waitExecution(execution_id, record) {
   return {
     onToggle: () => store.dispatch(flexActions.toggle(uid)),
   };
-})
-class FlexTableWrapper extends FlexTable {
+})(class FlexTableWrapper extends FlexTable {
   componentDidMount() {
     const { uid } = this.props;
 
     store.dispatch(flexActions.register(uid, false));
   }
-}
+});
 
-@connect((state) => {
-  const { groups, filter, collapsed } = state;
-  return { groups, filter, collapsed };
-})
-export default class PacksPanel extends React.Component {
+class PacksPanel extends React.Component {
   static propTypes = {
     location: PropTypes.shape({
       pathname: PropTypes.string,
@@ -301,3 +296,8 @@ export default class PacksPanel extends React.Component {
     );
   }
 }
+
+export default connect((state) => {
+  const { groups, filter, collapsed } = state;
+  return { groups, filter, collapsed };
+})(PacksPanel);

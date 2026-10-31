@@ -26,11 +26,7 @@ import history from './history';
 import { updateLocation } from './methods';
 import Redirect from './redirect.component';
 
-@connect(
-  ({ location }) => ({ location }),
-  () => ({ updateLocation })
-)
-export default class Router extends React.Component {
+class Router extends React.Component {
   static propTypes = {
     routes: PropTypes.array,
     location: PropTypes.object,
@@ -109,3 +105,8 @@ export default class Router extends React.Component {
     return null;
   }
 }
+
+export default connect(
+  ({ location }) => ({ location }),
+  () => ({ updateLocation })
+)(Router);

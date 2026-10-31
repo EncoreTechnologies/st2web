@@ -41,41 +41,7 @@ import {
 } from '@stackstorm/module-panel';
 import InstancePanel from './panels/instances';
 
-@connect(
-  ({
-    instances,
-    triggers,
-    sensors,
-  }, props) => ({
-    trigger: triggers.find(trigger => props.id === trigger.ref),
-    sensor: sensors[props.id],
-    instances,
-  }),
-  (dispatch, props) => ({
-    onComponentUpdate: () => dispatch({
-      type: 'FETCH_INSTANCES',
-      promise: api.request({ path: '/triggerinstances', query: {
-        trigger_type: props.id,
-        limit: 10,
-      } }),
-    }),
-    onToggleEnable: (sensor) => dispatch({
-      type: 'TOGGLE_ENABLE',
-      promise: api.request({ method: 'put', path: `/sensortypes/${sensor.ref}`}, { ...sensor, enabled: !sensor.enabled }),
-    }).catch((err) => {
-      notification.error(`Unable to retrieve sensor "${sensor.ref}".`, { err });
-      throw err;
-    }),
-  }),
-  (state, dispatch, props) => ({
-    ...props,
-    ...state,
-    ...dispatch,
-    onSelect: () => dispatch.onSelect(state.trigger),
-    onToggleEnable: () => dispatch.onToggleEnable(state.sensor),
-  })
-)
-export default class TriggersDetails extends React.Component {
+class TriggersDetails extends React.Component {
   static propTypes = {
     handleNavigate: PropTypes.func.isRequired,
 
@@ -202,3 +168,38 @@ export default class TriggersDetails extends React.Component {
     );
   }
 }
+
+export default connect(
+  ({
+    instances,
+    triggers,
+    sensors,
+  }, props) => ({
+    trigger: triggers.find(trigger => props.id === trigger.ref),
+    sensor: sensors[props.id],
+    instances,
+  }),
+  (dispatch, props) => ({
+    onComponentUpdate: () => dispatch({
+      type: 'FETCH_INSTANCES',
+      promise: api.request({ path: '/triggerinstances', query: {
+        trigger_type: props.id,
+        limit: 10,
+      } }),
+    }),
+    onToggleEnable: (sensor) => dispatch({
+      type: 'TOGGLE_ENABLE',
+      promise: api.request({ method: 'put', path: `/sensortypes/${sensor.ref}`}, { ...sensor, enabled: !sensor.enabled }),
+    }).catch((err) => {
+      notification.error(`Unable to retrieve sensor "${sensor.ref}".`, { err });
+      throw err;
+    }),
+  }),
+  (state, dispatch, props) => ({
+    ...props,
+    ...state,
+    ...dispatch,
+    onSelect: () => dispatch.onSelect(state.trigger),
+    onToggleEnable: () => dispatch.onToggleEnable(state.sensor),
+  })
+)(TriggersDetails);

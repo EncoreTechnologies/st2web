@@ -51,11 +51,7 @@ import {
 } from '@stackstorm/module-panel';
 import Time from '@stackstorm/module-time';
 
-@connect((state) => {
-  const { action, executions, entrypoint } = state;
-  return { action, executions, entrypoint };
-})
-export default class ActionsDetails extends React.Component {
+class ActionsDetails extends React.Component {
   static propTypes = {
     handleNavigate: PropTypes.func.isRequired,
     handleRun: PropTypes.func.isRequired,
@@ -594,3 +590,8 @@ export default class ActionsDetails extends React.Component {
     );
   }
 }
+
+export default connect((state) => {
+  const { action, executions, entrypoint } = state;
+  return { action, executions, entrypoint };
+})(ActionsDetails);

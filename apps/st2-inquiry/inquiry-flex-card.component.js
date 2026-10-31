@@ -17,8 +17,8 @@ import { PropTypes } from 'prop-types';
 
 import cx from 'classnames';
 
-import style from './style.css';
-import flexStyle from '@stackstorm/module-flex-table/style.pcss';
+import style from './style.module.css';
+import flexStyle from '@stackstorm/module-flex-table/style.module.css';
 
 export default class InquiryFlexCard extends React.Component {
   static propTypes = {

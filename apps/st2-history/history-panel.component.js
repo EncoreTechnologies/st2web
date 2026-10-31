@@ -56,7 +56,7 @@ import './style.css';
 
 const PER_PAGE = 50;
 
-@connect((state, props) => {
+const FlexTableWrapper = connect((state, props) => {
   const { uid } = props;
   const { collapsed = state.collapsed } = state.tables[uid] || {};
 
@@ -67,20 +67,15 @@ const PER_PAGE = 50;
   return {
     onToggle: () => store.dispatch(flexActions.toggle(uid)),
   };
-})
-class FlexTableWrapper extends FlexTable {
+})(class FlexTableWrapper extends FlexTable {
   componentDidMount() {
     const { uid } = this.props;
 
     store.dispatch(flexActions.register(uid, false));
   }
-}
+});
 
-@connect((state) => {
-  const { filter, filters, childExecutions, groups, collapsed } = state;
-  return { filter, filters, childExecutions, groups, collapsed };
-})
-export default class HistoryPanel extends React.Component {
+class HistoryPanel extends React.Component {
   static propTypes = {
     location: PropTypes.shape({
       pathname: PropTypes.string,
@@ -544,6 +539,11 @@ export default class HistoryPanel extends React.Component {
     );
   }
 }
+
+export default connect((state) => {
+  const { filter, filters, childExecutions, groups, collapsed } = state;
+  return { filter, filters, childExecutions, groups, collapsed };
+})(HistoryPanel);
 
 function parseSearch(search='') {
   const { page, ...activeFilters } = qs.parse(search.slice(1));

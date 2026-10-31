@@ -43,12 +43,7 @@ import selectOnClick from '@stackstorm/module-select-on-click';
 import Time from '@stackstorm/module-time';
 import HistoryPopup from './history-popup.component';
 
-@connect((state) => {
-  const { execution } = state;
-  return { execution };
-})
-
-export default class HistoryDetails extends React.Component {
+class HistoryDetails extends React.Component {
   static propTypes = {
     handleNavigate: PropTypes.func.isRequired,
     handleRerun: PropTypes.func.isRequired,
@@ -291,6 +286,11 @@ export default class HistoryDetails extends React.Component {
     );
   }
 }
+
+export default connect((state) => {
+  const { execution } = state;
+  return { execution };
+})(HistoryDetails);
 
 function getExecutionTime(execution) {
   return Math.ceil(

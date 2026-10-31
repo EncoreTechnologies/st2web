@@ -37,22 +37,7 @@ import Highlight from '@stackstorm/module-highlight';
 
 import api from '@stackstorm/module-api';
 
-@connect(
-  ({ instances }) => ({ instances }),
-  (dispatch) => ({
-    onToggle: (id) => dispatch({
-      type: 'FETCH_ENFORCEMENTS',
-      id,
-      promise: api.request({
-        path: '/ruleenforcements/',
-        query: {
-          'trigger_instance': id,
-        },
-      }),
-    }),
-  })
-)
-export default class InstancePanel extends DetailsPanel {
+class InstancePanel extends DetailsPanel {
   static propTypes = {
     instances: PropTypes.array,
     onToggle: PropTypes.func,
@@ -129,3 +114,19 @@ export default class InstancePanel extends DetailsPanel {
     );
   }
 }
+
+export default connect(
+  ({ instances }) => ({ instances }),
+  (dispatch) => ({
+    onToggle: (id) => dispatch({
+      type: 'FETCH_ENFORCEMENTS',
+      id,
+      promise: api.request({
+        path: '/ruleenforcements/',
+        query: {
+          'trigger_instance': id,
+        },
+      }),
+    }),
+  })
+)(InstancePanel);

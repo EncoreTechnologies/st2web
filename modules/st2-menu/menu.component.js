@@ -21,7 +21,7 @@ import api from '@stackstorm/module-api';
 
 import Link from '@stackstorm/module-router/link.component';
 
-import componentStyle from './style.css';
+import componentStyle from './style.module.css';
 const APPLICATION_INACTIVITY_TIME = 7200; // 2 hr time here it is in seconds
 
 class Icon extends React.Component {

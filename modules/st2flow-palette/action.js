@@ -13,16 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
-import style from './style.css';
+import style from './style.module.css';
 
-export default class Action extends Component<{
-  action: Object
-}> {
+export default class Action extends Component {
   static propTypes = {
     action: PropTypes.object.isRequired,
   }
@@ -45,7 +41,7 @@ export default class Action extends Component<{
     el.removeEventListener('dragstart', this.handleDragStart);
   }
 
-  handleDragStart = (e: DragEvent) => {
+  handleDragStart = (e) => {
     this.style.opacity = '0.4';
 
     const { action } = this.props;

@@ -13,10 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// @flow
-
-import type { DeltaInterface, AjvError, GenericError, EditorPoint } from './interfaces';
-
 import Ajv from 'ajv';
 import { diff } from 'deep-diff';
 import EventEmitter from './event-emitter';
@@ -35,13 +31,13 @@ const STR_ERROR_SCHEMA = 'schema-error';
  * schema must be validated.
  */
 class BaseClass {
-  yaml: string;
-  modelName: string;
-  tokenSet: TokenSet;
-  errors: Array<Object>;
-  emitter: EventEmitter;
+  yaml;
+  modelName;
+  tokenSet;
+  errors;
+  emitter;
 
-  constructor(schema: Object, yaml: ?string): void {
+  constructor(schema, yaml) {
     this.modelName = this.constructor.name; // OrquestaModel, MistralModel
     this.emitter = new EventEmitter();
 
@@ -55,7 +51,7 @@ class BaseClass {
     }
   }
 
-  fromYAML(yaml: string): void {
+  fromYAML(yaml) {
     const { oldTree } = this.startMutation();
     this.errors = [];
 
@@ -86,23 +82,23 @@ class BaseClass {
     this.emitChange(oldTree);
   }
 
-  toYAML(): string {
+  toYAML() {
     return this.tokenSet.toYAML();
   }
 
-  on(event: string, callback: Function): void {
+  on(event, callback) {
     this.emitter.on(event, callback);
   }
 
-  removeListener(event: string, callback: Function): void {
+  removeListener(event, callback) {
     this.emitter.removeListener(event, callback);
   }
 
-  get(path: string | Array<string | number>) {
+  get(path) {
     return crawler.getValueByKey(this.tokenSet, path);
   }
 
-  set(path: string | Array<string | number>, value: any) {
+  set(path, value) {
     const oldTree = this.tokenSet ? util.deepClone(this.tokenSet.tree) : {};
 
     crawler.set(this.tokenSet, path, value);
@@ -110,7 +106,7 @@ class BaseClass {
     this.emitChange(oldTree);
   }
 
-  applyDelta(delta: DeltaInterface, yaml: string): void {
+  applyDelta(delta, yaml) {
     // Preliminary tests show that parsing of long/complex YAML files
     // takes less than ~20ms (almost always less than 5ms) - so doing full
     // parsing often is very cheap. In the future we can maybe look into applying
@@ -118,7 +114,7 @@ class BaseClass {
     this.fromYAML(yaml);
   }
 
-  startMutation(): Object {
+  startMutation() {
     return this.tokenSet ? {
       oldTree: util.deepClone(this.tokenSet.tree),
       oldData: this.tokenSet.toObject(),
@@ -128,7 +124,7 @@ class BaseClass {
     };
   }
 
-  endMutation(oldTree: Object): void {
+  endMutation(oldTree) {
     this.emitChange(oldTree);
   }
 
@@ -139,9 +135,9 @@ class BaseClass {
     }
   }
 
-  emitChange(oldTree: Object): void {
+  emitChange(oldTree) {
     const newTree = this.tokenSet.toObject();
-  
+
     this.errors = [];
 
     this.validate();
@@ -153,7 +149,7 @@ class BaseClass {
     }
   }
 
-  emitError(error: GenericError | Array<GenericError>, type: string = 'error') {
+  emitError(error, type = 'error') {
     this.errors = this.errors.concat(error);
 
     // always emit an array of errors
@@ -174,10 +170,10 @@ class BaseClass {
  * Provides nicer formatting for AJV errors. Also appends EditorPoint
  * information for errors so the editor can show errors "in line".
  */
-function formatAjvErrors(errors: Array<AjvError>, tokenSet: TokenSet): Array<GenericError> {
-  const path: string = errors[0].dataPath.slice(1);
-  let mark: EditorPoint = crawler.getRangeForKey(tokenSet, path)[0];
-  let message: string = `${path} - `;
+function formatAjvErrors(errors, tokenSet) {
+  const path = errors[0].dataPath.slice(1);
+  let mark = crawler.getRangeForKey(tokenSet, path)[0];
+  let message = `${path} - `;
 
   switch(errors[errors.length - 1].keyword) {
     case 'type':

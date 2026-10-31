@@ -18,10 +18,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { matchPath } from 'react-router';
 
-@connect(
-  ({ location }) => ({ location })
-)
-export default class Route extends React.Component {
+class Route extends React.Component {
   static propTypes = {
     location: PropTypes.object,
     path: PropTypes.string.isRequired,
@@ -36,3 +33,7 @@ export default class Route extends React.Component {
     return match ? render(props) : null;
   }
 }
+
+export default connect(
+  ({ location }) => ({ location })
+)(Route);

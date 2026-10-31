@@ -19,7 +19,7 @@ import cx from 'classnames';
 import api from '@stackstorm/module-api';
 import { Link } from '@stackstorm/module-router';
 
-import style from './style.css';
+import style from './style.module.css';
 
 export default class FlowLink extends React.Component {
   static propTypes = {

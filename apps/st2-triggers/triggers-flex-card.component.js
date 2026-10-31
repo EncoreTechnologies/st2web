@@ -19,13 +19,7 @@ import cx from 'classnames';
 
 import Label from '@stackstorm/module-label';
 
-@connect(
-  ({ id, sensors }, props) => ({
-    ...props,
-    sensor: sensors[props.trigger.ref],
-  })
-)
-export default class TriggersFlexCard extends React.Component {
+class TriggersFlexCard extends React.Component {
   static get contextTypes() {
     return {
       ...super.contextTypes,
@@ -73,3 +67,10 @@ export default class TriggersFlexCard extends React.Component {
     );
   }
 }
+
+export default connect(
+  ({ id, sensors }, props) => ({
+    ...props,
+    sensor: sensors[props.trigger.ref],
+  })
+)(TriggersFlexCard);

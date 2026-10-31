@@ -13,20 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// @flow
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
-import style from './style.css';
-
-export type NotificationInterface = {
-  type: 'error' | 'warning' | 'info' | 'success',
-  message: string,
-  source?: string,
-  id: string,
-};
+import style from './style.module.css';
 
 class Notification extends Component {
   static propTypes = {
@@ -37,7 +28,7 @@ class Notification extends Component {
     hide: false,
   }
 
-  handleRemove = (e: Event) => {
+  handleRemove = (e) => {
     e.stopPropagation();
 
     this.setState({ hide: true });
@@ -65,7 +56,7 @@ class Notification extends Component {
           <a href={notification.link} onClick={e => this.redirectLinkToParent(e,notification.link)}>
             {notification.link}
           </a>
-          
+
         ) }
       </div>
     );

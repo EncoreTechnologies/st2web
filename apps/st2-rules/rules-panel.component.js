@@ -47,7 +47,7 @@ import router from '@stackstorm/module-router';
 
 import './style.css';
 
-@connect((state, props) => {
+const FlexTableWrapper = connect((state, props) => {
   const { uid } = props;
   const { collapsed = state.collapsed } = state.tables[uid] || {};
 
@@ -58,21 +58,15 @@ import './style.css';
   return {
     onToggle: () => store.dispatch(flexActions.toggle(uid)),
   };
-})
-class FlexTableWrapper extends FlexTable {
+})(class FlexTableWrapper extends FlexTable {
   componentDidMount() {
     const { uid } = this.props;
 
     store.dispatch(flexActions.register(uid, false));
   }
-}
+});
 
-@connect(({
-  rules, groups, filter, collapsed,
-}) => ({
-  rules, groups, filter, collapsed,
-}))
-export default class RulesPanel extends React.Component {
+class RulesPanel extends React.Component {
   static propTypes = {
     location: PropTypes.shape({
       search: PropTypes.string,
@@ -296,3 +290,9 @@ export default class RulesPanel extends React.Component {
     );
   }
 }
+
+export default connect(({
+  rules, groups, filter, collapsed,
+}) => ({
+  rules, groups, filter, collapsed,
+}))(RulesPanel);

@@ -31,31 +31,11 @@ import Button from '@stackstorm/module-forms/button.component';
 import { Route } from '@stackstorm/module-router';
 import globalStore from '@stackstorm/module-store';
 import store from './store';
-import style from './style.css';
+import './style.css';
 
 const POLL_INTERVAL = 5000;
 
-@connect(
-  ({ flow: {
-    panels, actions, meta, metaSource, workflowSource, pack, input, dirty,
-  } }) => ({ isCollapsed: panels, actions, meta, metaSource, workflowSource, pack, input, dirty }),
-  (dispatch) => ({
-    fetchActions: () => dispatch({
-      type: 'FETCH_ACTIONS',
-      promise: api.request({ path: '/actions/views/overview' })
-        .catch(() => fetch('/actions.json').then(res => res.json())),
-    }),
-   
-    sendError: (message, link) => dispatch({ type: 'PUSH_ERROR', error: message, link }),
-    sendSuccess: (message, link) => dispatch({ type: 'PUSH_SUCCESS', message, link }),
-    undo: () => dispatch({ type: 'FLOW_UNDO' }),
-    redo: () => dispatch({ type: 'FLOW_REDO' }),
-    layout: () => dispatch({ type: 'MODEL_LAYOUT' }),
-    setMeta: (attribute, value) => dispatch({ type: 'META_ISSUE_COMMAND', command: 'set', args: [ attribute, value ] }),
-  })
-)
-// class Window extends Component<{
-export default class Workflows extends Component {  
+class Workflows extends Component {  
  static propTypes = {
    pack: PropTypes.string,
    meta: PropTypes.object,
@@ -297,8 +277,6 @@ export default class Workflows extends Component {
     }, 1000);
   }
 
-  style = style
-
   keyHandlers = {
     undo: () => {
       store.dispatch({ type: 'FLOW_UNDO' });
@@ -431,6 +409,26 @@ export default class Workflows extends Component {
    
   }
 }
+
+export default connect(
+  ({ flow: {
+    panels, actions, meta, metaSource, workflowSource, pack, input, dirty,
+  } }) => ({ isCollapsed: panels, actions, meta, metaSource, workflowSource, pack, input, dirty }),
+  (dispatch) => ({
+    fetchActions: () => dispatch({
+      type: 'FETCH_ACTIONS',
+      promise: api.request({ path: '/actions/views/overview' })
+        .catch(() => fetch('/actions.json').then(res => res.json())),
+    }),
+   
+    sendError: (message, link) => dispatch({ type: 'PUSH_ERROR', error: message, link }),
+    sendSuccess: (message, link) => dispatch({ type: 'PUSH_SUCCESS', message, link }),
+    undo: () => dispatch({ type: 'FLOW_UNDO' }),
+    redo: () => dispatch({ type: 'FLOW_REDO' }),
+    layout: () => dispatch({ type: 'MODEL_LAYOUT' }),
+    setMeta: (attribute, value) => dispatch({ type: 'META_ISSUE_COMMAND', command: 'set', args: [ attribute, value ] }),
+  })
+)(Workflows);
 
 globalStore.subscribe(() => {
  

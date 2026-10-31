@@ -13,13 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
-import style from './style.css';
+import style from './style.module.css';
 
 export const specialProperties = [{
   name: 'required',
@@ -32,18 +30,7 @@ export const specialProperties = [{
   description: 'Mark parameter value as sensitive',
 }];
 
-export default class Parameter extends Component<{
-  name: string,
-  parameter: {
-    type: string,
-    description: string,
-    immutable: bool,
-    required: bool,
-    secret: bool,
-  },
-  onEdit: Function,
-  onDelete: Function,
-}> {
+export default class Parameter extends Component {
   static propTypes = {
     name: PropTypes.string,
     parameter: PropTypes.shape({
@@ -54,13 +41,13 @@ export default class Parameter extends Component<{
     onDelete: PropTypes.func,
   }
 
-  handleEdit(e: Event) {
+  handleEdit(e) {
     e.stopPropagation();
 
     this.props.onEdit();
   }
 
-  handleDelete(e: Event) {
+  handleDelete(e) {
     e.stopPropagation();
 
     this.props.onDelete();

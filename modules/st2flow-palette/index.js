@@ -13,29 +13,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
-
 import Action from './action';
 import Pack from './pack';
 
-import style from './style.css';
+import style from './style.module.css';
 
-@connect(
-  ({ flow: { actions }}) => ({ actions })
-)
-// export default class Palette extends Component<{
-//   className?: string,
-//   actions: Array<Object>,
-// }, {
-//   search: string,
-// }> {
-export default class Palette extends Component {
+class Palette extends Component {
   static propTypes = {
     className: PropTypes.string,
     actions: PropTypes.array,
@@ -45,7 +33,7 @@ export default class Palette extends Component {
     search: '',
   }
 
-  handleSearch(e: MouseEvent) {
+  handleSearch(e) {
     if (e.target instanceof window.HTMLInputElement) {
       this.setState({ search: e.target.value });
     }
@@ -101,3 +89,7 @@ export default class Palette extends Component {
     );
   }
 }
+
+export default connect(
+  ({ flow: { actions }}) => ({ actions })
+)(Palette);

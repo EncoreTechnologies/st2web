@@ -19,7 +19,7 @@ import cx from 'classnames';
 import api from '@stackstorm/module-api';
 import notification from '@stackstorm/module-notification';
 
-import style from './style.css';
+import style from './style.module.css';
 
 const icons = {};
 let iconPromise = null;

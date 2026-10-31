@@ -13,29 +13,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//@flow
-
-import type { TaskInterface } from '@stackstorm/st2flow-model/interfaces';
-
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
 
-import style from './style.css';
+import style from './style.module.css';
 
-export default class Task extends Component<{
-  task: TaskInterface,
-  onClick?: Function,
-  onDoubleClick?: Function,
-}> {
+export default class Task extends Component {
   static propTypes = {
     task: PropTypes.object.isRequired,
     onClick: PropTypes.func,
+    onDoubleClick: PropTypes.func,
   }
 
   style = style
 
-  handleClick = (e: Event) => {
+  handleClick = (e) => {
     const { onClick } = this.props;
 
     if (!onClick) {
@@ -47,7 +40,7 @@ export default class Task extends Component<{
     onClick(e);
   }
 
-  handleDoubleClick = (e: Event) => {
+  handleDoubleClick = (e) => {
     const { onDoubleClick } = this.props;
 
     if (!onDoubleClick) {
