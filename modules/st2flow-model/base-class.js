@@ -128,8 +128,14 @@ class BaseClass {
     this.emitChange(oldTree);
   }
 
+  // The object checked against the schema. Models override it to apply the same shorthand
+  // expansion their engine does before it validates.
+  toValidatable(obj) {
+    return obj;
+  }
+
   validate() {
-    if(!ajv.validate(this.modelName, this.tokenSet.toObject())) {
+    if(!ajv.validate(this.modelName, this.toValidatable(this.tokenSet.toObject()))) {
       this.emitError(formatAjvErrors(ajv.errors, this.tokenSet), STR_ERROR_SCHEMA);
       return;
     }
@@ -165,13 +171,29 @@ class BaseClass {
 }
 
 /**
+ * Where an error starts in the YAML. A path can name a key that isn't written out (for example
+ * `with.items` of an expanded `with` shorthand), so fall back to the nearest key that is.
+ */
+function markFor(tokenSet, keys) {
+  for (let length = keys.length; length > 0; length -= 1) {
+    try {
+      return crawler.getRangeForKey(tokenSet, keys.slice(0, length))[0];
+    }
+    catch (e) {
+      // not in the YAML; try the parent
+    }
+  }
+  return undefined;
+}
+
+/**
  * Provides nicer formatting for AJV errors. Also appends EditorPoint
  * information for errors so the editor can show errors "in line".
  */
 function formatAjvErrors(errors, tokenSet) {
   const keys = errorKeys(errors[0]);
   const path = keys.join('.');
-  let mark = crawler.getRangeForKey(tokenSet, keys)[0];
+  let mark = markFor(tokenSet, keys);
   let message = `${path} - `;
 
   switch(errors[errors.length - 1].keyword) {
@@ -187,7 +209,7 @@ function formatAjvErrors(errors, tokenSet) {
     case 'additionalProperties': {
       const prop = errors[0].params.additionalProperty;
       message += `${errors[0].message} ("${prop}")`;
-      mark = crawler.getRangeForKey(tokenSet, keys.concat(prop))[0];
+      mark = markFor(tokenSet, keys.concat(prop));
       return [{ message, mark }];
     }
 
@@ -204,7 +226,7 @@ function formatAjvErrors(errors, tokenSet) {
         if (err) {
           const keys = errorKeys(err);
           const path = keys.join('.');
-          mark = crawler.getRangeForKey(tokenSet, keys)[0];
+          mark = markFor(tokenSet, keys);
           message = `${path} - ${err.message}`;
         }
         else {
@@ -221,7 +243,7 @@ function formatAjvErrors(errors, tokenSet) {
 
         return {
           message: `${keys.join('.')} - ${err.message}`,
-          mark: crawler.getRangeForKey(tokenSet, keys)[0],
+          mark: markFor(tokenSet, keys),
         };
       });
   }

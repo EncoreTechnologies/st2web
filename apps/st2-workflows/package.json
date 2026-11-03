@@ -20,6 +20,7 @@
     "@stackstorm/module-menu": "*",
     "@stackstorm/module-router": "*",
     "@stackstorm/module-store": "*",
+    "@stackstorm/module-title": "*",
     "@stackstorm/st2-style": "*",
     "@stackstorm/st2flow-canvas": "*",
     "@stackstorm/st2flow-details": "*",

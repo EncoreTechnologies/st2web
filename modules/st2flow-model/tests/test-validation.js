@@ -60,6 +60,29 @@ describe('st2flow-model schema validation', () => {
     expect(error.mark.row).to.equal(4);
   });
 
+  it('accepts the with-items shorthand, like orquesta', () => {
+    expect(errorsFor(OrquestaModel, workflow([ '    with: "{{ ctx().xs }}"' ]))).to.deep.equal([]);
+    expect(errorsFor(OrquestaModel, workflow([ '    with: <% ctx(xs) %>' ]))).to.deep.equal([]);
+    expect(errorsFor(OrquestaModel, workflow([ '    with: x in {{ ctx().xs }}' ]))).to.deep.equal([]);
+    expect(errorsFor(OrquestaModel, workflow([ '    with:', '      items: "{{ ctx().xs }}"', '      concurrency: 2' ]))).to.deep.equal([]);
+  });
+
+  it('still checks a with-items shorthand against the items pattern, marking the with line', () => {
+    const [ error, ...rest ] = errorsFor(OrquestaModel, workflow([ '    with: not an expression' ]));
+
+    expect(rest).to.be.empty;
+    expect(error.message).to.match(/^tasks\.task1\.with\.items - must match pattern/);
+    expect(error.mark.row).to.equal(4);
+  });
+
+  it('leaves the workflow YAML in its shorthand form', () => {
+    const model = new OrquestaModel(workflow([ '    with: "{{ ctx().xs }}"' ]));
+
+    expect(model.toYAML()).to.contain('with: "{{ ctx().xs }}"');
+    // the task getter has always expanded it for the details panel
+    expect(model.tasks[0].with).to.deep.equal({ items: '{{ ctx().xs }}' });
+  });
+
   it('reports type errors', () => {
     const [ error ] = errorsFor(OrquestaModel, workflow([ '    action: 5' ]).replace('    action: core.noop\n', ''));
 

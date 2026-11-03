@@ -99,7 +99,8 @@ export const ToolbarButton = connect(
           icon,
           this.style[status],
           disabled && this.style.disabled,
-          ...(this.props.className ? this.props.className.split(' ').map(c => `${this.style.toolbarButton}-${c}`) : [])
+          // CSS modules hash every class separately, so modifiers are looked up, not appended
+          ...(this.props.className ? this.props.className.split(' ').map(c => this.style[`toolbar-button-${c}`]) : [])
         )}
         onClick={e => this.handleClick(e)}
         title={title}
@@ -146,6 +147,6 @@ export class Toolbar extends Component {
   style = style;
 
   render() {
-    return <div className={cx(this.style.toolbar, this.props.position && `${this.style.toolbar}-${this.props.position}`)}>{this.props.children}</div>;
+    return <div className={cx(this.style.toolbar, this.props.position && this.style[`toolbar-${this.props.position}`])}>{this.props.children}</div>;
   }
 }

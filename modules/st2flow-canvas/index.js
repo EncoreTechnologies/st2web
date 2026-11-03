@@ -322,10 +322,12 @@ class Canvas extends Component {
           sampler.prefillPoint(x, y, transitionsTo);
         }
       });
-      // finally, place the unplaced tasks.  using handleTaskMove will also ensure
-      //   that the placement gets set on the model and the YAML.
+      // finally, place the unplaced tasks, which sets the placement on the model and the YAML.
+      //   It isn't the user's edit: opening a workflow saved without positions must not mark it
+      //   changed (or autosave it, or add an undo step).
       needsCoords.forEach(({task, transitionsTo}) => {
-        this.handleTaskMove(task, sampler.getNext(task.name, transitionsTo));
+        const { x, y } = sampler.getNext(task.name, transitionsTo);
+        this.props.placeTask(task, { x, y });
       });
     }
   };
@@ -837,6 +839,14 @@ export default connect(
         type: 'MODEL_ISSUE_COMMAND',
         command,
         args,
+      });
+    },
+    placeTask: (task, coords) => {
+      dispatch({
+        type: 'MODEL_ISSUE_COMMAND',
+        command: 'updateTask',
+        args: [ task, { coords }],
+        automatic: true,
       });
     },
     toggleCollapse: name => dispatch({

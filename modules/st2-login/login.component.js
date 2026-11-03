@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
     const { className, children, style, ...props } = this.props;
 
     return (
-      <form {...props} className={cx(style.from, className)}>
+      <form {...props} className={cx(style.form, className)}>
         { children }
       </form>
     );

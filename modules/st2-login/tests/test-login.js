@@ -49,6 +49,17 @@ describe(`${Login.name} Component`, () => {
     });
   });
 
+  it('styles the form as a box', () => {
+    // a typo (style.from) once left the form without its class
+    const instance = renderNode(
+      <Login
+        onConnect={() => {}}
+      />
+    );
+
+    expect(loginForm(instance).className).to.equal(Login.defaultProps.style.form);
+  });
+
   it('works with no hosts', () => {
     window.st2constants.st2Config = {
       hosts: undefined,

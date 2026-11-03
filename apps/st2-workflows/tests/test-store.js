@@ -144,10 +144,28 @@ describe('workflows store', () => {
       expect(state.dirty).to.equal(true);
     });
 
-    it('moves a task by updating its coordinates', () => {
+    it('moves a task by updating its coordinates, which is only a layout change', () => {
       command('updateTask', { name: 'a' }, { coords: { x: 40.4, y: 60.6 }});
 
-      expect(store.getState().tasks.find(({ name }) => name === 'a').coords).to.deep.equal({ x: 40, y: 61 });
+      const state = store.getState();
+      expect(state.tasks.find(({ name }) => name === 'a').coords).to.deep.equal({ x: 40, y: 61 });
+      expect(state.workflowSource).to.contain('# [40, 61]');
+      expect(state.dirty).to.equal(false);
+      expect(state.layoutDirty).to.equal(true);
+    });
+
+    it('counts a move together with another change as a change', () => {
+      command('updateTask', { name: 'a' }, { coords: { x: 1, y: 2 }, action: 'core.local' });
+
+      expect(store.getState().dirty).to.equal(true);
+    });
+
+    it('lays out every task on Rearrange, as a layout change', () => {
+      store.dispatch({ type: 'MODEL_LAYOUT' });
+
+      const state = store.getState();
+      expect(state.dirty).to.equal(false);
+      expect(state.layoutDirty).to.equal(true);
     });
 
     it('renames a task and the transitions that point to it', () => {

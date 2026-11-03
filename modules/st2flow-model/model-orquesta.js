@@ -76,6 +76,21 @@ class OrquestaModel extends BaseModel {
     super(schema, yaml);
   }
 
+  // Orquesta accepts `with: <expression>` as shorthand for `with: { items: <expression> }` and
+  // expands it before validating (orquesta/specs/native/v1/models.py, WorkflowSpec); the
+  // generated schema only describes the long form.
+  toValidatable(obj) {
+    if (!obj || !obj.tasks || typeof obj.tasks !== 'object') {
+      return obj;
+    }
+
+    const tasks = _.mapValues(obj.tasks, task => (
+      task && typeof task.with === 'string' ? { ...task, with: { items: task.with } } : task
+    ));
+
+    return { ...obj, tasks };
+  }
+
   get input() {
     const inputs = crawler.getValueByKey(this.tokenSet, 'input');
     return inputs;

@@ -22,6 +22,19 @@ test.describe('login', () => {
     await expect(page.locator(dt('login'))).toBeVisible();
   });
 
+  test('draws the form as a box with the links inside it', async ({ page }) => {
+    await page.goto('/');
+    const form = page.locator(dt('login'));
+    await expect(form).toHaveCSS('border-top-style', 'solid');
+    await expect(form).not.toHaveCSS('box-shadow', 'none');
+
+    const box = await form.boundingBox();
+    for (const link of [ 'Documentation', 'Support' ]) {
+      const l = await form.getByText(link).boundingBox();
+      expect(l.y, `${link} is below the box`).toBeLessThan(box.y + box.height);
+    }
+  });
+
   test('logs in and shows the history panel', async ({ loggedIn: page }) => {
     await expect(page).toHaveURL(/#\/history$/);
     await expect(page.locator(dt('history_panel'))).toBeVisible();

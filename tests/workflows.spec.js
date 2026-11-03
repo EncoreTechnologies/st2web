@@ -22,7 +22,7 @@ test.describe('workflow designer', () => {
   let workflow;
 
   test.beforeAll(async ({ st2 }) => {
-    const actions = await st2.get('/actions?include_attributes=ref,name,pack,runner_type,entry_point');
+    const actions = await st2.get('/actions?include_attributes=ref,name,pack,description,runner_type,entry_point');
     action = actions.find(a => a.runner_type === 'orquesta');
     test.skip(!action, 'no Orquesta workflow installed');
 
@@ -43,6 +43,59 @@ test.describe('workflow designer', () => {
     for (const task of Object.keys(workflow.tasks)) {
       await expect(page.getByText(task, { exact: true }).first()).toBeVisible();
     }
+  });
+
+  test('lays out the toolbars without one covering the other', async ({ page }) => {
+    // the zoom buttons sit in their own toolbar on the right; when its modifier class was lost
+    // it was drawn over Redo, Rearrange and Save
+    const titles = [ 'Undo', 'Redo', 'Rearrange tasks', 'Save workflow', 'Run workflow', 'Zoom in', 'Reset zoom', 'Zoom out' ];
+    for (const title of titles) {
+      const button = page.locator(`[title="${title}"]`);
+      await expect(button).toBeVisible();
+      const box = await button.boundingBox();
+      const onTop = await page.evaluate(({ x, y }) => document.elementFromPoint(x, y)?.getAttribute('title'), {
+        x: box.x + box.width / 2,
+        y: box.y + box.height / 2,
+      });
+      expect(onTop, `${title} is covered`).toBe(title);
+    }
+  });
+
+  test.describe('unsaved changes', () => {
+    const title = () => new RegExp(`^${action.ref.replace(/\./g, '\\.')} - Workflow Designer`);
+    let save;
+    let glow;
+
+    test.beforeEach(async ({ page }) => {
+      // opening a workflow is not a change, even one saved without the designer's task positions
+      await expect(page.getByText(Object.keys(workflow.tasks)[0], { exact: true }).first()).toBeVisible();
+      await expect(page.locator('[title="Run workflow"]')).toBeVisible();
+      await expect(page).toHaveTitle(title());
+
+      save = page.locator('[title="Save workflow"]');
+      glow = await save.evaluate(el => getComputedStyle(el).boxShadow);
+    });
+
+    test('a new layout lights up Save but leaves Run alone', async ({ page }) => {
+      // only the "# [x, y]" comments change, nothing is sent until Save
+      await page.click('[title="Rearrange tasks"]');
+
+      await expect.poll(() => save.evaluate(el => getComputedStyle(el).boxShadow)).not.toBe(glow);
+      await expect(page.locator('[title="Run workflow"]')).toBeVisible();
+      await expect(page).toHaveTitle(title());
+    });
+
+    test('an edit lights up Save, blocks Run and marks the title', async ({ page }) => {
+      const description = page.locator('textarea').filter({ hasText: action.description || '' }).first();
+      await description.click();
+      await page.keyboard.press('End');
+      await page.keyboard.type(' (edited)');
+      await page.keyboard.press('Tab');
+
+      await expect(page.locator('[title="Cannot run with unsaved changes"]')).toBeVisible();
+      await expect.poll(() => save.evaluate(el => getComputedStyle(el).boxShadow)).not.toBe(glow);
+      await expect(page).toHaveTitle(new RegExp(`^\\* ${title().source.slice(1)}`));
+    });
   });
 
   test('shows the action metadata and its source', async ({ page }) => {

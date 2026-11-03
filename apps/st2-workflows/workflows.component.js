@@ -27,6 +27,7 @@ import { Toolbar, ToolbarButton, ToolbarDropdown } from '@stackstorm/st2flow-can
 import AutoForm from '@stackstorm/module-auto-form';
 import Button from '@stackstorm/module-forms/button.component';
 import { Route } from '@stackstorm/module-router';
+import setTitle from '@stackstorm/module-title';
 import globalStore from '@stackstorm/module-store';
 import store from './store';
 import './style.css';
@@ -244,8 +245,10 @@ class Workflows extends Component {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       const { autosaveEnabled } = store.getState();
+      const { dirty, layoutDirty } = this.props;
 
-      if (autosaveEnabled) {
+      // the canvas asks for this on any task change, including loading a workflow
+      if (autosaveEnabled && (dirty || layoutDirty)) {
         this.save();
       }
     }, 1000);
@@ -286,7 +289,7 @@ class Workflows extends Component {
 
   render() {
     // const { isCollapsed = {}, toggleCollapse, actions, undo, redo, layout, meta, input, dirty } = this.props;
-    const { isCollapsed = {}, actions, undo, redo, layout, meta, input, dirty} = this.props;
+    const { isCollapsed = {}, actions, undo, redo, layout, meta, input, dirty, layoutDirty } = this.props;
     const { runningWorkflow, showForm } = this.state;
    
     const autoFormData = input && input.reduce((acc, value) => {
@@ -300,6 +303,9 @@ class Workflows extends Component {
       <Route
         path='/action/:ref?/:section?'
         render={({ match, location }) => {
+          // like the other pages ("<item> - <section>"), with a mark while there are unsaved changes
+          setTitle([ `${dirty ? '* ' : ''}${match.params.ref || 'New workflow'}`, 'Workflow Designer' ]);
+
           return (
             <Provider store={globalStore}>
               <div className="component">
@@ -313,7 +319,7 @@ class Workflows extends Component {
                       className="canvas"
                       location={location}
                       match={match}
-                      dirtyflag={this.props.dirty}
+                      dirtyflag={dirty || layoutDirty}
                       fetchActionscalled={e => this.props.fetchActions()}
                       saveData={e => this.autosave(() => null)}
                       save={this.keyHandlers.save}
@@ -333,7 +339,7 @@ class Workflows extends Component {
                         />
                         <ToolbarButton
                           key="save"
-                          className={cx(dirty && 'glow')}
+                          className={cx((dirty || layoutDirty) && 'glow')}
                           icon="icon-save"
                           title="Save workflow"
                           errorMessage="Error saving workflow."
@@ -386,8 +392,8 @@ class Workflows extends Component {
 
 export default connect(
   ({ flow: {
-    panels, actions, meta, metaSource, workflowSource, pack, input, dirty,
-  } }) => ({ isCollapsed: panels, actions, meta, metaSource, workflowSource, pack, input, dirty }),
+    panels, actions, meta, metaSource, workflowSource, pack, input, dirty, layoutDirty,
+  } }) => ({ isCollapsed: panels, actions, meta, metaSource, workflowSource, pack, input, dirty, layoutDirty }),
   (dispatch) => ({
     fetchActions: () => dispatch({
       type: 'FETCH_ACTIONS',

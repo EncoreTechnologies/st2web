@@ -144,6 +144,94 @@ describe('workflows designer', () => {
     expect(document.querySelector('.canvas')).to.exist;
   });
 
+  it('places the tasks of a workflow saved without positions, without marking it changed', async () => {
+    // most workflows are written by hand, with no "# [x, y]" comments for the designer
+    const unplaced = WORKFLOW.replace(/^ {2}# \[\d+, \d+\]\n/gm, '');
+    expect(unplaced).to.not.match(/# \[/);
+    mock.onGet(`${API}/actions/examples.unplaced`).reply(200, { ...ACTION, id: 'act2', ref: 'examples.unplaced', name: 'unplaced', entry_point: 'workflows/unplaced.yaml', metadata_file: 'actions/unplaced.meta.yaml' });
+    mock.onGet(`${API}/packs/views/file/examples/actions/unplaced.meta.yaml`).reply(200, META.replace(/basic/g, 'unplaced'));
+    mock.onGet(`${API}/packs/views/file/examples/actions/workflows/unplaced.yaml`).reply(200, unplaced);
+
+    act(() => {
+      router.push({ pathname: '/action/examples.unplaced' });
+    });
+    await settle();
+    await settle();
+
+    const state = store.getState();
+    expect(state.currentWorkflow).to.equal('examples.unplaced');
+    expect(state.tasks).to.not.be.empty;
+    state.tasks.forEach(({ name, coords }) => {
+      expect(coords.x, name).to.be.at.least(0);
+      expect(coords.y, name).to.be.at.least(0);
+    });
+    expect(state.dirty).to.equal(false);
+    expect(button('Run workflow')).to.exist;
+    expect(document.title).to.match(/^examples\.unplaced - /);
+
+    // and placing them isn't an undo step
+    const placed = state.workflowSource;
+    await click(button('Undo'));
+    expect(store.getState().workflowSource).to.equal(placed);
+    expect(store.getState().dirty).to.equal(false);
+  });
+
+  it('treats rearranging the tasks as a layout change: saved, but no reason to block Run', async () => {
+    await click(button('Rearrange tasks'));
+
+    const state = store.getState();
+    expect(state.dirty).to.equal(false);
+    expect(state.layoutDirty).to.equal(true);
+    state.tasks.forEach(({ name, coords }) => {
+      expect(coords.x, name).to.be.at.least(0);
+    });
+    expect(button('Run workflow')).to.exist;
+    expect(document.title).to.match(/^examples\.basic - /);
+
+    // Save writes the new positions and clears it
+    mock.onPut(`${API}/actions/examples.basic`).reply(200, {});
+    await click(button('Save workflow'));
+
+    const [ put ] = mock.history.put;
+    expect(JSON.parse(put.data).data_files[0].content).to.equal(state.workflowSource);
+    expect(store.getState().layoutDirty).to.equal(false);
+  });
+
+  it('autosaves a layout change but not just opening a workflow', async () => {
+    mock.onPut(`${API}/actions/examples.basic`).reply(200, {});
+    const clock = sinon.useFakeTimers({ toFake: [ 'setTimeout', 'clearTimeout' ]});
+    try {
+      act(() => {
+        store.dispatch({ type: 'TOGGLE_AUTOSAVE', autosaveEnabled: true });
+      });
+      // what the canvas does whenever the task list changes, as it does on load
+      act(() => {
+        router.push({ pathname: '/' });
+        store.dispatch({ type: 'LOAD_WORKFLOW', currentWorkflow: 'none.none' });
+        router.push({ pathname: '/action/examples.basic' });
+      });
+      await settle();
+      act(() => {
+        clock.tick(1500);
+      });
+      await settle();
+      expect(mock.history.put).to.have.length(0);
+
+      await click(button('Rearrange tasks'));
+      act(() => {
+        clock.tick(1500);
+      });
+      await settle();
+      expect(mock.history.put).to.have.length(1);
+    }
+    finally {
+      act(() => {
+        store.dispatch({ type: 'TOGGLE_AUTOSAVE', autosaveEnabled: false });
+      });
+      clock.restore();
+    }
+  });
+
   it('saves an existing action with PUT, including both files', async () => {
     mock.onPut(`${API}/actions/examples.basic`).reply(200, {});
     await edit({ type: 'MODEL_ISSUE_COMMAND', command: 'addTask', args: [{ name: 'task1', action: 'core.noop' }]});
@@ -234,6 +322,14 @@ describe('workflows designer', () => {
     expect(button('Run workflow')).to.be.null;
     await click(button('Cannot run with unsaved changes'));
     expect(document.body.textContent).to.not.contain('Execute Workflow');
+  });
+
+  it('names the workflow in the page title and marks unsaved changes', async () => {
+    expect(document.title).to.match(/^examples\.basic - Workflow Designer \| /);
+
+    await edit({ type: 'MODEL_ISSUE_COMMAND', command: 'addTask', args: [{ name: 'task1', action: 'core.noop' }]});
+
+    expect(document.title).to.match(/^\* examples\.basic - Workflow Designer \| /);
   });
 
   describe('running', () => {

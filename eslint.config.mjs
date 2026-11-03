@@ -52,6 +52,9 @@ export default [
       'js/**',
       'css/**',
       'package.meta.js',
+      // Playwright output (bundled report viewer)
+      'test-results/**',
+      'playwright-report/**',
     ],
   },
 

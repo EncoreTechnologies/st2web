@@ -150,6 +150,31 @@ Fixed
 * The workflow designer could not place a YAML error on the first line of the file in the editor.
 * Workflow metadata errors in the designer were listed without keys (React warning, and the list
   could mix up entries when it changed).
+* The workflow designer's zoom buttons were drawn over Undo/Redo/Rearrange/Save, and Save no longer
+  glowed on unsaved changes (so Run looked disabled for no visible reason). The toolbar appended
+  ``-right``/``-glow`` to a CSS-module class name, which only worked with browserify's naming; it now
+  looks the modifier class up. Playwright checks that no toolbar button is covered and that Save glows.
+* The workflow designer reported ``tasks.<task>.with - must be object`` for orquesta's
+  ``with: <expression>`` shorthand. The model now expands it to ``with: {items: ...}`` before
+  validating, as orquesta does; the YAML keeps the shorthand. A schema error on a key the YAML doesn't
+  spell out is marked on its nearest parent instead of throwing. (Also in upstream st2web.)
+* ESLint no longer lints Playwright's ``test-results/`` and ``playwright-report/``.
+* The workflow designer now sets the page title like the other pages, ``<pack.action> - Workflow
+  Designer`` (``New workflow`` before the first save), prefixed with ``*`` while there are unsaved
+  changes. It never set one, so the tab kept the previous page's title (e.g. ``core.ask - History``).
+* Opening a workflow saved without the designer's ``# [x, y]`` task positions (most hand-written
+  workflows) no longer marks it as changed. The canvas placing those tasks counted as an edit, so
+  Run was disabled ("Cannot run with unsaved changes"), autosave would rewrite the file, and the first
+  Undo only un-placed the tasks. Placement now leaves the changed flag and the undo history alone.
+  (Also in upstream st2web.)
+* Rearranging or dragging tasks in the workflow designer is now a layout change, separate from an
+  edit: Save glows and saves the new positions (and autosave saves them), but Run stays enabled and
+  the title gets no ``*``, since positions are only ``# [x, y]`` comments and don't change what runs.
+  Any other change still blocks Run until it is saved. Autosave no longer saves a workflow just
+  because it was opened.
+* The login form is drawn as a box on a light grey page, with the Documentation and Support links
+  inside it rather than pinned to the bottom of the window. A typo (``style.from``) had kept the
+  form's own styles from ever applying.
 
   Contributed by @bishopbm1
 
