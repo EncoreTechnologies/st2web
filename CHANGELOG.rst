@@ -135,6 +135,9 @@ Changed
     place of ``eslint-plugin-notice``. Fixed what the new rules found: ``setState`` reading
     ``this.state``, a key placed after a spread, ``<Context.Provider>``, unused class members.
   - Removed the unused ``st2flow-header`` package.
+  - ``make rpm`` works again: the Makefile's ``build`` target runs ``npm ci`` and ``npm run build``
+    instead of the removed lerna, and the RPM is ``noarch`` (static files only), so it builds the
+    same on any host. Builds on RHEL 9 with the ``nodejs:24`` module stream.
 
   Contributed by @bishopbm1
 
