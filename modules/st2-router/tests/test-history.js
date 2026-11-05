@@ -112,6 +112,41 @@ describe('st2-router history', () => {
       expect(listener.firstCall.args).to.deep.equal([{ pathname: '/packs', search: '', hash: '' }, 'POP' ]);
     });
 
+    it('decodes the pathname the browser keeps encoded, as on a reload or bookmark', () => {
+      // a rule ref with a space: pushes keep it decoded, but location.hash reads back %20
+      window.history.replaceState(null, '', '/#/rules/core.my%20rule/general?q=a%20b');
+      const history = createHashHistory(window);
+
+      expect(history.location).to.deep.equal({ pathname: '/rules/core.my rule/general', search: '?q=a%20b', hash: '' });
+    });
+
+    it('decodes on Back and forward too, and leaves a malformed escape as it is', () => {
+      const history = createHashHistory(window);
+      const listener = sinon.spy();
+      history.listen(listener);
+
+      window.history.replaceState(null, '', '/#/rules/core.my%20rule');
+      window.dispatchEvent(new window.PopStateEvent('popstate'));
+      window.history.replaceState(null, '', '/#/rules/100%');
+      window.dispatchEvent(new window.PopStateEvent('popstate'));
+
+      expect(listener.args.map(([ location, action ]) => [ location.pathname, action ])).to.deep.equal([
+        [ '/rules/core.my rule', 'POP' ],
+        [ '/rules/100%', 'POP' ],
+      ]);
+    });
+
+    it('does not announce a push of a decoded path as a change when the browser re-encodes it', () => {
+      const history = createHashHistory(window);
+      history.push('/rules/core.my rule');
+      const listener = sinon.spy();
+      history.listen(listener);
+
+      window.dispatchEvent(new window.HashChangeEvent('hashchange'));
+
+      expect(listener).to.have.property('called', false);
+    });
+
     it('stops notifying after unlisten', () => {
       const history = createHashHistory(window);
       const listener = sinon.spy();

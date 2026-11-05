@@ -175,6 +175,11 @@ Fixed
   the title gets no ``*``, since positions are only ``# [x, y]`` comments and don't change what runs.
   Any other change still blocks Run until it is saved. Autosave no longer saves a workflow just
   because it was opened.
+* A rule (or any other ref) containing a space could be opened by clicking it, but not after a
+  reload, from a bookmark or with Back. The browser keeps the hash percent-encoded (``%20``), and
+  the router's new hash history read it without decoding, so nothing matched and the panel navigated
+  away. The pathname is decoded again, as the ``history`` package did, and a malformed escape is
+  left as it is. Relates to st2#3834.
 * The login form is drawn as a box on a light grey page, with the Documentation and Support links
   inside it rather than pinned to the bottom of the window. A typo (``style.from``) had kept the
   form's own styles from ever applying.

@@ -60,9 +60,20 @@ export function createLocation(to, currentLocation) {
   return location;
 }
 
+// Browsers keep the hash percent-encoded (a space reads back as %20), so decode the pathname the
+// way the `history` package did; refs with spaces must match after a reload, bookmark or Back.
+function decodePathname(location) {
+  try {
+    return { ...location, pathname: decodeURI(location.pathname) };
+  }
+  catch (e) {
+    return location;
+  }
+}
+
 export function createHashHistory(win = window) {
   const listeners = new Set();
-  const read = () => parsePath(win.location.hash.replace(/^#/, ''));
+  const read = () => decodePathname(parsePath(win.location.hash.replace(/^#/, '')));
 
   const history = {
     action: 'POP',
