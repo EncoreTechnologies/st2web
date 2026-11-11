@@ -35,7 +35,7 @@ test.describe('actions', () => {
 
     const cards = page.locator(dt('action'));
     await expect(cards.first()).toBeVisible();
-    // the filter matches anywhere in the ref (email_encore.* too)
+    // the filter matches anywhere in the ref, not just the pack name
     for (const id of await cards.evaluateAll(els => els.map(el => el.getAttribute('data-test')))) {
       expect(id.toLowerCase()).toMatch(/action:\S*core\./);
     }
